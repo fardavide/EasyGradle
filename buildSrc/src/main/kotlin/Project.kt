@@ -4,7 +4,7 @@
  */
 object Project {
 
-    const val version = "0.2-SNAPSHOT"
+    const val version = "0.1"
 
     /* Publishing */
     const val bintrayGroup =    "studio.forface"

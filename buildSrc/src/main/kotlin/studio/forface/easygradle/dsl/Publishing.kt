@@ -12,6 +12,7 @@ import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.*
 import java.util.*
+import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.jvm.javaGetter
@@ -34,7 +35,7 @@ import kotlin.reflect.jvm.javaGetter
  * @param block Lambda for setup [PublishConfig]
  */
 fun Project.publish(
-        config: PublishConfig = PublishConfig(),
+        config: PublishConfig = PublishConfig(this),
         baseBlock: PublishConfigBuilder? = null,
         artifact: String = config.artifact,
         block: PublishConfigBuilder = {}
@@ -51,29 +52,59 @@ fun Project.publish(
 
 /**
  * @return [PublishConfigBuilder]
- *
- * @param config Optional [PublishConfig] to start from
  * @param block Lambda for setup [PublishConfig]
  */
 fun publishConfig(block: PublishConfigBuilder): PublishConfigBuilder = { apply { this.block(it) } }
 
-class PublishConfig internal constructor() {
+class PublishConfig internal constructor(project: Project) {
     // region Params
-    var username: String =                              ""
-    var apiKey: String =                                ""
-    var bintrayGroup: String =                          ""
-    var groupId: String =                               ""
-    var artifact: String =                              ""
-    var name: String =                                  artifact
-    var version: String =                               ""
-    var description: String =                           ""
-    var siteUrl: String =                               ""
-    var gitUrl: String =                                ""
-    internal val developers: MutableList<Developer> =   mutableListOf() // TODO include in `studio.forface.easygradle.dsl.publish`
-    internal val licenses: MutableList<License> =       mutableListOf()
-    var override: Boolean =                             false
-    var publicDownloadNumber: Boolean =                 true
+    var username                by project("", propertyName = "bintray.user")
+    var apiKey                  by project("", propertyName = "bintray.apikey")
+    var bintrayGroup            by project("")
+    var groupId                 by project("")
+    var artifact                by project("")
+    var groupName               by project(artifact)
+    var version                 by project("")
+    var description             by project("")
+    var siteUrl                 by project("")
+    var gitUrl                  by project("")
+    internal val developers     by project(mutableListOf<Developer>()) // TODO include in `studio.forface.easygradle.dsl.publish`
+    internal val licenses       by project(mutableListOf<License>())
+    var override                by project(false, propertyName = "publish.override")
+    var publicDownloadNumber    by project(true)
     // endregion
+
+    private operator fun <T: Any> Project.invoke(
+            default: T,
+            propertyName: String? = null
+    ) = object : ReadWriteProperty<PublishConfig, T> {
+        private var backValue: T? = null
+
+        /** @see ReadWriteProperty.getValue */
+        override fun getValue(thisRef: PublishConfig, property: KProperty<*>) =
+                backValue ?: prop(propertyName ?: property.name) ?: default
+
+        /** @see ReadWriteProperty.setValue */
+        override fun setValue(thisRef: PublishConfig, property: KProperty<*>, value: T) {
+            backValue = value
+        }
+
+        private fun prop(name: String): T? {
+             val stringValue = findProperty(name)?.toString() ?: return null
+            @Suppress("UNCHECKED_CAST") // Cast is checked because of safe operator `as?`
+            return when(default) {
+                is String -> stringValue as? T
+                is Boolean -> stringValue.toBoolean() as? T
+                is List<*> -> stringValue.toList()
+                else -> throw IllegalArgumentException("'${default::class.simpleName}' is not a supported type")
+            }
+        }
+
+        private fun String.toList(): T? {
+            // FIXME
+            return null
+        }
+    }
 
     // region Dsl functions
     // region Licenses
@@ -133,7 +164,7 @@ class PublishConfig internal constructor() {
     internal fun validate() {
         licenses.forEach { it.validate() }
         developers.forEach { it.validate() }
-        assertStringsNotEmpty(::username, ::apiKey, ::bintrayGroup, ::groupId, ::artifact, ::name)
+        assertStringsNotEmpty(::username, ::apiKey, ::bintrayGroup, ::groupId, ::artifact, ::groupName)
     }
     // endregion
 
@@ -201,7 +232,7 @@ private fun Project.publish(c: PublishConfig) = with(project(":${c.artifact}")) 
         key = c.apiKey
 
         pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
-            repo =                  c.name
+            repo =                  c.groupName
             name =                  "${c.bintrayGroup}.${c.artifact}"
             desc =                  c.description
             websiteUrl =            c.siteUrl

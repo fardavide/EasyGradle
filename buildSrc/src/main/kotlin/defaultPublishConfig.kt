@@ -1,19 +1,8 @@
-import studio.forface.easygradle.dsl.publishConfig
 import studio.forface.easygradle.dsl.PublishConfigBuilder
+import studio.forface.easygradle.dsl.publishConfig
 
 /** Default [PublishConfigBuilder] for the Project */
 val defaultPublishConfig = publishConfig {
-    username = it.typedProperty("bintray.user")
-    apiKey = it.typedProperty("bintray.apikey")
-    bintrayGroup = Project.bintrayGroup
-    groupId = Project.groupId
-    // artifact set later
-    name = Project.name
-    version = Project.version
-    description = Project.description
-    siteUrl = Project.siteUrl
-    gitUrl = Project.gitUrl
-    override = true
     + developer {
         id = Project.developerId
         name = Project.developerName
