@@ -68,3 +68,6 @@ fastlane/readme.md
 
 # Mac
 .DS_Store
+
+# Credentials
+gradle.properties
