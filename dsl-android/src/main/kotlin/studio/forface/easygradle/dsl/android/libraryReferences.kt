@@ -134,6 +134,26 @@ val DependencyHandler.`lifecycle-viewModel` get() = androidxLifecycle("viewmodel
 var `lifecycle version` = "2.2.0-alpha03"
 
 /**
+ * Builds the dependency notation for Material.
+ * @see android
+ *
+ * You can also use `` `material` version "1.0.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`material` get() = android("material", version = `material version`)
+
+var `material version` = "1.1.0-alpha09"
+
+/**
+ * Builds the dependency notation for the named Androidx group at the given [version].
+ *
+ * @param groupName simple name of the Android group, for example "material"
+ * @param module simple name of the Android module, for example "appcompat-resources". Default is [groupName]
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.android(groupName: String, module: String = groupName, version: String? = null): Any =
+        "com.google.android.$groupName:$module${version?.let { ":$version" } ?: "" }"
+
+/**
  * Builds the dependency notation for the named Androidx group at the given [version].
  *
  * @param groupName simple name of the Androidx group, for example "appcompat"
