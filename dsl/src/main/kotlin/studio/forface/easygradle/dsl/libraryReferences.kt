@@ -250,6 +250,35 @@ var `serialization version` = defaultSerializationVersion
 var `ktor version` = defaultKtorVersion
 // endregion
 
+// region MockK
+/**
+ * Builds the dependency notation for MockK.
+ * @see mockK
+ *
+ * You can also use `` `mockk` version "0.12.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`mockk` get() = mockK("mockk", version = `mockK version`)
+
+/**
+ * Builds the dependency notation for MockK-android.
+ * @see mockK
+ *
+ * You can also use `` `mockk`-android version "0.12.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`mockk-android` get() = mockK("mockk-android", version = `mockK version`)
+
+/**
+ * Builds the dependency notation for the named MockK [module] at the given [version].
+ *
+ * @param module simple name of the Mockk module, for example "mockk-android".
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.mockK(module: String, version: String? = null): Any =
+        "io.mockk:$module${version?.let { ":$version" } ?: ""}"
+
+var `mockK version` = defaultMockkVersion
+// endregion
+
 /**
  * Builds the dependency notation for the named Kotlinx [module] at the given [version].
  *
