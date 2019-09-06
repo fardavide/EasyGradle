@@ -15,7 +15,7 @@ import org.gradle.kotlin.dsl.kotlin
  *
  * You can also use `` `kotlin` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin` get() = kotlin("stdlib")
+val DependencyHandler.`kotlin` get() = kotlin("stdlib", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-stdlib-common.
@@ -23,7 +23,7 @@ val DependencyHandler.`kotlin` get() = kotlin("stdlib")
  *
  * You can also use `` `kotlin-common` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-common` get() = kotlin("stdlib-common")
+val DependencyHandler.`kotlin-common` get() = kotlin("stdlib-common", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-stdlib-jdk7.
@@ -31,7 +31,7 @@ val DependencyHandler.`kotlin-common` get() = kotlin("stdlib-common")
  *
  * You can also use `` `kotlin-jdk7` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-jdk7` get() = kotlin("stdlib-jdk7")
+val DependencyHandler.`kotlin-jdk7` get() = kotlin("stdlib-jdk7", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-stdlib-jdk8.
@@ -39,7 +39,7 @@ val DependencyHandler.`kotlin-jdk7` get() = kotlin("stdlib-jdk7")
  *
  * You can also use `` `kotlin-jdk8` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-jdk8` get() = kotlin("stdlib-jdk8")
+val DependencyHandler.`kotlin-jdk8` get() = kotlin("stdlib-jdk8", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-stdlib-js.
@@ -47,7 +47,7 @@ val DependencyHandler.`kotlin-jdk8` get() = kotlin("stdlib-jdk8")
  *
  * You can also use `` `kotlin-js` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-js` get() = kotlin("stdlib-js")
+val DependencyHandler.`kotlin-js` get() = kotlin("stdlib-js", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-kapt.
@@ -55,7 +55,7 @@ val DependencyHandler.`kotlin-js` get() = kotlin("stdlib-js")
  *
  * You can also use `` `kotlin-kapt` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-kapt` get() = kotlin("kapt")
+val DependencyHandler.`kotlin-kapt` get() = kotlin("kapt", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-reflect.
@@ -63,7 +63,7 @@ val DependencyHandler.`kotlin-kapt` get() = kotlin("kapt")
  *
  * You can also use `` `kotlin-reflect` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-reflect` get() = kotlin("reflect")
+val DependencyHandler.`kotlin-reflect` get() = kotlin("reflect", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-test.
@@ -71,7 +71,7 @@ val DependencyHandler.`kotlin-reflect` get() = kotlin("reflect")
  *
  * You can also use `` `kotlin-test` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-test` get() = kotlin("test")
+val DependencyHandler.`kotlin-test` get() = kotlin("test", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-test-common.
@@ -79,7 +79,7 @@ val DependencyHandler.`kotlin-test` get() = kotlin("test")
  *
  * You can also use `` `kotlin-test-common` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-test-common` get() = kotlin("test-common")
+val DependencyHandler.`kotlin-test-common` get() = kotlin("test-common", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-test-js.
@@ -87,7 +87,7 @@ val DependencyHandler.`kotlin-test-common` get() = kotlin("test-common")
  *
  * You can also use `` `kotlin-test-js` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-test-js` get() = kotlin("test-js")
+val DependencyHandler.`kotlin-test-js` get() = kotlin("test-js", version = `kotlin version`)
 
 /**
  * Builds the dependency notation for Kotlin-test-junit.
@@ -95,7 +95,9 @@ val DependencyHandler.`kotlin-test-js` get() = kotlin("test-js")
  *
  * You can also use `` `kotlin-test-junit` version "1.3.50" `` if you want to use an explicit version.
  */
-val DependencyHandler.`kotlin-test-junit` get() = kotlin("test-junit")
+val DependencyHandler.`kotlin-test-junit` get() = kotlin("test-junit", version = `kotlin version`)
+
+var `kotlin version` = defaultKotlinVersion
 // endregion
 
 // region Coroutines
@@ -105,7 +107,7 @@ val DependencyHandler.`kotlin-test-junit` get() = kotlin("test-junit")
  *
  * You can also use `` `coroutines-android` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-android` get() = kotlinx("coroutines-android")
+val DependencyHandler.`coroutines-android` get() = kotlinx("coroutines-android", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core.
@@ -113,7 +115,7 @@ val DependencyHandler.`coroutines-android` get() = kotlinx("coroutines-android")
  *
  * You can also use `` `coroutines-core` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core` get() = kotlinx("coroutines-core")
+val DependencyHandler.`coroutines-core` get() = kotlinx("coroutines-core", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-common.
@@ -121,7 +123,7 @@ val DependencyHandler.`coroutines-core` get() = kotlinx("coroutines-core")
  *
  * You can also use `` `coroutines-core-common` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-common` get() = kotlinx("coroutines-core-common")
+val DependencyHandler.`coroutines-core-common` get() = kotlinx("coroutines-core-common", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-iosx64.
@@ -129,7 +131,7 @@ val DependencyHandler.`coroutines-core-common` get() = kotlinx("coroutines-core-
  *
  * You can also use `` `coroutines-core-iosx64` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-iosx64` get() = kotlinx("coroutines-core-iosx64")
+val DependencyHandler.`coroutines-core-iosx64` get() = kotlinx("coroutines-core-iosx64", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-iosarm64.
@@ -137,7 +139,7 @@ val DependencyHandler.`coroutines-core-iosx64` get() = kotlinx("coroutines-core-
  *
  * You can also use `` `coroutines-core-iosarm64` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-iosarm64` get() = kotlinx("coroutines-core-iosarm64")
+val DependencyHandler.`coroutines-core-iosarm64` get() = kotlinx("coroutines-core-iosarm64", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-iosarm32.
@@ -145,7 +147,7 @@ val DependencyHandler.`coroutines-core-iosarm64` get() = kotlinx("coroutines-cor
  *
  * You can also use `` `coroutines-core-iosarm32` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-iosarm32` get() = kotlinx("coroutines-core-iosarm32")
+val DependencyHandler.`coroutines-core-iosarm32` get() = kotlinx("coroutines-core-iosarm32", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-linuxx64.
@@ -153,7 +155,7 @@ val DependencyHandler.`coroutines-core-iosarm32` get() = kotlinx("coroutines-cor
  *
  * You can also use `` `coroutines-core-linuxx64` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-linuxx64` get() = kotlinx("coroutines-core-linuxx64")
+val DependencyHandler.`coroutines-core-linuxx64` get() = kotlinx("coroutines-core-linuxx64", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-macosx64.
@@ -161,7 +163,7 @@ val DependencyHandler.`coroutines-core-linuxx64` get() = kotlinx("coroutines-cor
  *
  * You can also use `` `coroutines-core-macosx64` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-macosx64` get() = kotlinx("coroutines-core-macosx64")
+val DependencyHandler.`coroutines-core-macosx64` get() = kotlinx("coroutines-core-macosx64", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-native.
@@ -169,7 +171,7 @@ val DependencyHandler.`coroutines-core-macosx64` get() = kotlinx("coroutines-cor
  *
  * You can also use `` `coroutines-core-native` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-native` get() = kotlinx("coroutines-core-native")
+val DependencyHandler.`coroutines-core-native` get() = kotlinx("coroutines-core-native", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-js.
@@ -177,7 +179,7 @@ val DependencyHandler.`coroutines-core-native` get() = kotlinx("coroutines-core-
  *
  * You can also use `` `coroutines-core-js` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-js` get() = kotlinx("coroutines-core-js")
+val DependencyHandler.`coroutines-core-js` get() = kotlinx("coroutines-core-js", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-core-windowsx64.
@@ -185,7 +187,7 @@ val DependencyHandler.`coroutines-core-js` get() = kotlinx("coroutines-core-js")
  *
  * You can also use `` `coroutines-core-windowsx64` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-core-windowsx64` get() = kotlinx("coroutines-core-windowsx64")
+val DependencyHandler.`coroutines-core-windowsx64` get() = kotlinx("coroutines-core-windowsx64", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-jdk8.
@@ -193,7 +195,7 @@ val DependencyHandler.`coroutines-core-windowsx64` get() = kotlinx("coroutines-c
  *
  * You can also use `` `coroutines-jdk8` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-jdk8` get() = kotlinx("coroutines-jdk8")
+val DependencyHandler.`coroutines-jdk8` get() = kotlinx("coroutines-jdk8", version = `coroutines version`)
 
 /**
  * Builds the dependency notation for Coroutines-test.
@@ -201,7 +203,9 @@ val DependencyHandler.`coroutines-jdk8` get() = kotlinx("coroutines-jdk8")
  *
  * You can also use `` `coroutines-test` version "1.3.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`coroutines-test` get() = kotlinx("coroutines-test")
+val DependencyHandler.`coroutines-test` get() = kotlinx("coroutines-test", version = `coroutines version`)
+
+var `coroutines version` = defaultCoroutinesVersion
 // endregion
 
 // region Serialization
@@ -211,7 +215,7 @@ val DependencyHandler.`coroutines-test` get() = kotlinx("coroutines-test")
  *
  * You can also use `` `serialization` version "0.12.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`serialization` get() = kotlinx("serialization-runtime")
+val DependencyHandler.`serialization` get() = kotlinx("serialization-runtime", version = `serialization version`)
 
 /**
  * Builds the dependency notation for Serialization-runtime-common.
@@ -219,7 +223,7 @@ val DependencyHandler.`serialization` get() = kotlinx("serialization-runtime")
  *
  * You can also use `` `serialization-common` version "0.12.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`serialization-common` get() = kotlinx("serialization-runtime-common")
+val DependencyHandler.`serialization-common` get() = kotlinx("serialization-runtime-common", version = `serialization version`)
 
 /**
  * Builds the dependency notation for Serialization-runtime-js.
@@ -227,7 +231,7 @@ val DependencyHandler.`serialization-common` get() = kotlinx("serialization-runt
  *
  * You can also use `` `serialization-js` version "0.12.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`serialization-js` get() = kotlinx("serialization-runtime-js")
+val DependencyHandler.`serialization-js` get() = kotlinx("serialization-runtime-js", version = `serialization version`)
 
 /**
  * Builds the dependency notation for Serialization-runtime-native.
@@ -235,11 +239,15 @@ val DependencyHandler.`serialization-js` get() = kotlinx("serialization-runtime-
  *
  * You can also use `` `serialization-native` version "0.12.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`serialization-native` get() = kotlinx("serialization-runtime-native")
+val DependencyHandler.`serialization-native` get() = kotlinx("serialization-runtime-native", version = `serialization version`)
+
+var `serialization version` = defaultSerializationVersion
 // endregion
 
 // region Ktor
 // TODO
+
+var `ktor version` = defaultKtorVersion
 // endregion
 
 /**
