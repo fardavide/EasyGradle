@@ -20,6 +20,12 @@ dependencies {
 
     // Dokka Android
     implementation(Lib.dokkaAndroidGradlePlugin)
+
+    // Test
+    testImplementation(Lib.jUnit)
+    testImplementation(Lib.kotlinTest)
+    testImplementation(Lib.kotlinTestJunit)
+    testImplementation(Lib.mockk)
 }
 
 publish(baseBlock = defaultPublishConfig, artifact = "dsl-android")
