@@ -9,7 +9,7 @@ import org.gradle.kotlin.dsl.exclude
  * @return receiver string ( usually a dependency notation ) with version
  * E.g. `` `kotlin-jvm` version "1.3.50" ``
  */
-infix fun String.version(version: String) = "$this:$version"
+infix fun Any.version(version: String) = "$this:$version"
 
 // region exclude utils
 fun ModuleDependency.exclude(vararg any: Any) {

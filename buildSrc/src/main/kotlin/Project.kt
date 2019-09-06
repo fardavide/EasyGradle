@@ -3,10 +3,6 @@
  * An object containing params for the Library.
  */
 object Project {
-
-    const val version = "0.1"
-
-    /* Publishing */
     const val developerId =     "4face-studi0"
     const val developerName =   "4face Studio"
     const val developerEmail =  "mail@4face.studio"
