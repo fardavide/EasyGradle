@@ -5,7 +5,8 @@
 
 package studio.forface.easygradle.dsl
 
-import studio.forface.easygradle.dsl.Dependency.SourceType.*
+import studio.forface.easygradle.dsl.Dependency.SourceType.Local
+import studio.forface.easygradle.dsl.Dependency.SourceType.Remote
 
 /**
  * A generic dependency
@@ -69,13 +70,13 @@ interface Library : Dependency
  * A [Library] hosted locally
  * @see LocalDependency
  */
-interface LocalLibrary : LocalDependency
+interface LocalLibrary : Library, LocalDependency
 
 /**
  * A [Library] hosted remotely
  * @see RemoteDependency
  */
-interface RemoteLibrary : RemoteDependency
+interface RemoteLibrary : Library, RemoteDependency
 fun RemoteLibrary(group: String, module: String, version: String) = object : RemoteLibrary {
     override val group = group
     override val module = module

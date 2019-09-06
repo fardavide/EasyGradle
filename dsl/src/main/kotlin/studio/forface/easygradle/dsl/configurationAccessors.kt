@@ -1,6 +1,6 @@
-@file:Suppress("unused")
-
-// Public APIs
+@file:Suppress(
+        "unused" // Public APIs
+)
 
 package studio.forface.easygradle.dsl
 
@@ -66,4 +66,43 @@ fun DependencyHandler.add(
         module: LocalLibrary,
         dependencyConfiguration: ProjectDependency.() -> Unit
 ) = add(configuration, project(module.path()), dependencyConfiguration)
+// endregion
+
+// region Multi declarations
+fun DependencyHandler.api(vararg modules: Library) {
+    modules.forEach {
+        when(it) {
+            is LocalLibrary -> api(it)
+            is RemoteLibrary -> api(it)
+            else -> throw AssertionError()
+        }
+    }
+}
+fun DependencyHandler.compileOnly(vararg modules: Library) {
+    modules.forEach {
+        when(it) {
+            is LocalLibrary -> compileOnly(it)
+            is RemoteLibrary -> compileOnly(it)
+            else -> throw AssertionError()
+        }
+    }
+}
+fun DependencyHandler.implementation(vararg modules: Library) {
+    modules.forEach {
+        when(it) {
+            is LocalLibrary -> implementation(it)
+            is RemoteLibrary -> implementation(it)
+            else -> throw AssertionError()
+        }
+    }
+}
+fun DependencyHandler.testImplementation(vararg modules: Library) {
+    modules.forEach {
+        when(it) {
+            is LocalLibrary -> testImplementation(it)
+            is RemoteLibrary -> testImplementation(it)
+            else -> throw AssertionError()
+        }
+    }
+}
 // endregion
