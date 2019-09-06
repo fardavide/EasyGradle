@@ -15,7 +15,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
  */
 val DependencyHandler.`android-ktx` get() = androidx("core", "core-ktx", version = `ktx version`)
 
-var `ktx version` = "1.1.0-rc03"
+var `ktx version` = defaultKtxVersion
 
 /**
  * Builds the dependency notation for Androidx-test-core.
@@ -49,7 +49,7 @@ val DependencyHandler.`android-test-rules` get() = androidxTest("rules", version
  */
 val DependencyHandler.`android-test-runner` get() = androidxTest("runner", version = `android-test version`)
 
-var `android-test version` = "1.2.0"
+var `android-test version` = defaultTestVersion
 
 /**
  * Builds the dependency notation for Annotation.
@@ -59,7 +59,7 @@ var `android-test version` = "1.2.0"
  */
 val DependencyHandler.`android-annotation` get() = androidx("annotation", version = `android-annotation version`)
 
-var `android-annotation version` = "1.1.0"
+var `android-annotation version` = defaultAnnotationVersion
 
 /**
  * Builds the dependency notation for AppCompat.
@@ -69,7 +69,7 @@ var `android-annotation version` = "1.1.0"
  */
 val DependencyHandler.`appcompat` get() = androidx("appcompat", version = `appcompat version`)
 
-var `appcompat version` = "1.1.0-rc01"
+var `appcompat version` = defaultSupportVersion
 
 /**
  * Builds the dependency notation for ConstraintLayout.
@@ -79,7 +79,7 @@ var `appcompat version` = "1.1.0-rc01"
  */
 val DependencyHandler.`constraint-layout` get() = androidx("constraintlayout", version = `constraint-layout version`)
 
-var `constraint-layout version` = "2.0.0-beta2"
+var `constraint-layout version` = defaultConstraintLayoutVersion
 
 /**
  * Builds the dependency notation for Espresso-core.
@@ -89,7 +89,7 @@ var `constraint-layout version` = "2.0.0-beta2"
  */
 val DependencyHandler.`espresso` get() = androidx("test.espresso", "espresso-core", version = `espresso version`)
 
-var `espresso version` = "3.2.0"
+var `espresso version` = defaultEspressoVersion
 
 /**
  * Builds the dependency notation for Lifecycle-compiler.
@@ -131,7 +131,7 @@ val DependencyHandler.`lifecycle-runtime` get() = androidxLifecycle("runtime-ktx
  */
 val DependencyHandler.`lifecycle-viewModel` get() = androidxLifecycle("viewmodel-ktx", version = `lifecycle version`)
 
-var `lifecycle version` = "2.2.0-alpha03"
+var `lifecycle version` = defaultLifecycleVersion
 
 /**
  * Builds the dependency notation for Material.
@@ -141,7 +141,7 @@ var `lifecycle version` = "2.2.0-alpha03"
  */
 val DependencyHandler.`material` get() = android("material", version = `material version`)
 
-var `material version` = "1.1.0-alpha09"
+var `material version` = defaultMaterialVersion
 
 /**
  * Builds the dependency notation for the named Androidx group at the given [version].
