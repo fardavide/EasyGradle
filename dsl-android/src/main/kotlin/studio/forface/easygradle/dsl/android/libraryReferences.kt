@@ -13,7 +13,9 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
  *
  * You can also use `` `android-ktx` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`android-ktx` get() = androidx("core", "core-ktx")
+val DependencyHandler.`android-ktx` get() = androidx("core", "core-ktx", version = `ktx version`)
+
+var `ktx version` = "1.1.0-rc03"
 
 /**
  * Builds the dependency notation for Androidx-test-core.
@@ -21,7 +23,7 @@ val DependencyHandler.`android-ktx` get() = androidx("core", "core-ktx")
  *
  * You can also use `` `android-test-core` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`android-test-core` get() = androidxTest("core")
+val DependencyHandler.`android-test-core` get() = androidxTest("core", version = `android-test version`)
 
 /**
  * Builds the dependency notation for Androidx-test-junit.
@@ -29,7 +31,7 @@ val DependencyHandler.`android-test-core` get() = androidxTest("core")
  *
  * You can also use `` `android-test-junit` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`android-test-junit` get() = androidx("test.ext", "junit")
+val DependencyHandler.`android-test-junit` get() = androidx("test.ext", "junit", version = `android-test version`)
 
 /**
  * Builds the dependency notation for Androidx-test-rules.
@@ -37,7 +39,7 @@ val DependencyHandler.`android-test-junit` get() = androidx("test.ext", "junit")
  *
  * You can also use `` `android-test-rules` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`android-test-rules` get() = androidxTest("rules")
+val DependencyHandler.`android-test-rules` get() = androidxTest("rules", version = `android-test version`)
 
 /**
  * Builds the dependency notation for Androidx-test-runner.
@@ -45,7 +47,9 @@ val DependencyHandler.`android-test-rules` get() = androidxTest("rules")
  *
  * You can also use `` `android-test-runner` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`android-test-runner` get() = androidxTest("runner")
+val DependencyHandler.`android-test-runner` get() = androidxTest("runner", version = `android-test version`)
+
+var `android-test version` = "1.2.0"
 
 /**
  * Builds the dependency notation for Annotation.
@@ -53,7 +57,9 @@ val DependencyHandler.`android-test-runner` get() = androidxTest("runner")
  *
  * You can also use `` `annotation` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`annotation` get() = androidx("annotation")
+val DependencyHandler.`android-annotation` get() = androidx("annotation", version = `android-annotation version`)
+
+var `android-annotation version` = "1.1.0"
 
 /**
  * Builds the dependency notation for AppCompat.
@@ -61,7 +67,9 @@ val DependencyHandler.`annotation` get() = androidx("annotation")
  *
  * You can also use `` `appcompat` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`appcompat` get() = androidx("appcompat")
+val DependencyHandler.`appcompat` get() = androidx("appcompat", version = `appcompat version`)
+
+var `appcompat version` = "1.1.0-rc01"
 
 /**
  * Builds the dependency notation for ConstraintLayout.
@@ -69,7 +77,9 @@ val DependencyHandler.`appcompat` get() = androidx("appcompat")
  *
  * You can also use `` `constraint-layout` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`constraint-layout` get() = androidx("constraintlayout")
+val DependencyHandler.`constraint-layout` get() = androidx("constraintlayout", version = `constraint-layout version`)
+
+var `constraint-layout version` = "2.0.0-beta2"
 
 /**
  * Builds the dependency notation for Espresso-core.
@@ -77,7 +87,9 @@ val DependencyHandler.`constraint-layout` get() = androidx("constraintlayout")
  *
  * You can also use `` `espresso` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`espresso` get() = androidx("test.espresso", "espresso-core")
+val DependencyHandler.`espresso` get() = androidx("test.espresso", "espresso-core", version = `espresso version`)
+
+var `espresso version` = "3.2.0"
 
 /**
  * Builds the dependency notation for Lifecycle-compiler.
@@ -85,7 +97,7 @@ val DependencyHandler.`espresso` get() = androidx("test.espresso", "espresso-cor
  *
  * You can also use `` `lifecycle-compiler` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`lifecycle-compiler` get() = androidxLifecycle("compiler")
+val DependencyHandler.`lifecycle-compiler` get() = androidxLifecycle("compiler", version = `lifecycle version`)
 
 /**
  * Builds the dependency notation for Lifecycle-extensions.
@@ -93,7 +105,7 @@ val DependencyHandler.`lifecycle-compiler` get() = androidxLifecycle("compiler")
  *
  * You can also use `` `lifecycle-extensions` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`lifecycle-extensions` get() = androidxLifecycle("extensions")
+val DependencyHandler.`lifecycle-extensions` get() = androidxLifecycle("extensions", version = `lifecycle version`)
 
 /**
  * Builds the dependency notation for Lifecycle-livedata.
@@ -101,7 +113,7 @@ val DependencyHandler.`lifecycle-extensions` get() = androidxLifecycle("extensio
  *
  * You can also use `` `lifecycle-liveData` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`lifecycle-liveData` get() = androidxLifecycle("livedata-ktx")
+val DependencyHandler.`lifecycle-liveData` get() = androidxLifecycle("livedata-ktx", version = `lifecycle version`)
 
 /**
  * Builds the dependency notation for Lifecycle-runtime.
@@ -109,7 +121,7 @@ val DependencyHandler.`lifecycle-liveData` get() = androidxLifecycle("livedata-k
  *
  * You can also use `` `lifecycle-runtime` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`lifecycle-runtime` get() = androidxLifecycle("runtime-ktx")
+val DependencyHandler.`lifecycle-runtime` get() = androidxLifecycle("runtime-ktx", version = `lifecycle version`)
 
 /**
  * Builds the dependency notation for Lifecycle-viewmodel.
@@ -117,7 +129,9 @@ val DependencyHandler.`lifecycle-runtime` get() = androidxLifecycle("runtime-ktx
  *
  * You can also use `` `lifecycle-viewModel` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`lifecycle-viewModel` get() = androidxLifecycle("viewmodel-ktx")
+val DependencyHandler.`lifecycle-viewModel` get() = androidxLifecycle("viewmodel-ktx", version = `lifecycle version`)
+
+var `lifecycle version` = "2.1.0-rc01"
 
 /**
  * Builds the dependency notation for the named Androidx group at the given [version].
