@@ -131,7 +131,7 @@ val DependencyHandler.`lifecycle-runtime` get() = androidxLifecycle("runtime-ktx
  */
 val DependencyHandler.`lifecycle-viewModel` get() = androidxLifecycle("viewmodel-ktx", version = `lifecycle version`)
 
-var `lifecycle version` = "2.1.0-rc01"
+var `lifecycle version` = "2.2.0-alpha03"
 
 /**
  * Builds the dependency notation for the named Androidx group at the given [version].
