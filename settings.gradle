@@ -1,5 +1,4 @@
 rootProject.name = 'EasyGradle'
 
-include 'buildSrc'
 include 'dsl'
 include 'dsl-android'

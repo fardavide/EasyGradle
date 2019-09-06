@@ -1,5 +1,3 @@
-import studio.forface.easygradle.dsl.publish
-
 plugins {
     `kotlin-dsl`
 }
@@ -10,9 +8,6 @@ repositories {
 }
 
 dependencies {
-
-    // buildSrc utils
-    api(project(":buildSrc"))
 
     // Bintray
     implementation(Lib.bintrayGradlePlugin)
