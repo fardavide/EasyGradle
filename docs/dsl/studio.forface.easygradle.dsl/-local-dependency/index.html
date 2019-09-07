@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>LocalDependency - dsl</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">dsl</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.easygradle.dsl</a>&nbsp;/&nbsp;<a href="./index.html">LocalDependency</a><br/>
+<br/>
+<h1>LocalDependency</h1>
+<code><span class="keyword">interface </span><span class="identifier">LocalDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-dependency/index.html"><span class="identifier">Dependency</span></a></code>
+<p>A <a href="../-dependency/index.html">Dependency</a> hosted locally.
+It is generally a module</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="name.html">name</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Name of this module <a href="../-dependency/index.html">Dependency</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="parent.html">parent</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">parent</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">LocalDependency</span></a><span class="symbol">?</span></code>
+<p>Optional parent module <a href="./index.html">LocalDependency</a> for this Dependency</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="source-type.html">sourceType</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">sourceType</span><span class="symbol">: </span><a href="../-dependency/-source-type/index.html"><span class="identifier">Dependency.SourceType</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="path.html">path</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">path</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../kotlin.-any/version.html">version</a></p>
+</td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">.</span><span class="identifier">version</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$version(kotlin.Any, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-local-library.html">LocalLibrary</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">LocalLibrary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-library.html"><span class="identifier">Library</span></a><span class="symbol">, </span><a href="./index.html"><span class="identifier">LocalDependency</span></a></code>
+<p>A <a href="../-library.html">Library</a> hosted locally</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

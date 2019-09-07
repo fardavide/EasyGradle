@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Domain - dsl</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">dsl</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.easygradle.dsl</a>&nbsp;/&nbsp;<a href="./index.html">Domain</a><br/>
+<br/>
+<h1>Domain</h1>
+<code><span class="keyword">interface </span><span class="identifier">Domain</span></code>
+<p>TODO</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="version.html">version</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Version of the dependency</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="all-groups.html">allGroups</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">allGroups</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-group/index.html"><span class="identifier">Group</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="all-modules.html">allModules</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">allModules</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-remote-dependency/index.html"><span class="identifier">RemoteDependency</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="library.html">library</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><a href="../-group/index.html"><span class="identifier">Group</span></a><span class="symbol">.</span><span class="identifier">library</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl.Domain$library(studio.forface.easygradle.dsl.Group, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-remote-library.html"><span class="identifier">RemoteLibrary</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="module-plugin.html">modulePlugin</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">modulePlugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl.Domain$modulePlugin(kotlin.String)/pluginId">pluginId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-remote-module-plugin/index.html"><span class="identifier">RemoteModulePlugin</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="plugin.html">plugin</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><a href="../-group/index.html"><span class="identifier">Group</span></a><span class="symbol">.</span><span class="identifier">plugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl.Domain$plugin(studio.forface.easygradle.dsl.Group, kotlin.String, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl.Domain$plugin(studio.forface.easygradle.dsl.Group, kotlin.String, kotlin.String)/pluginId">pluginId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-remote-gradle-plugin/index.html"><span class="identifier">RemoteGradlePlugin</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="project-plugin.html">projectPlugin</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><a href="../-group/index.html"><span class="identifier">Group</span></a><span class="symbol">.</span><span class="identifier">projectPlugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl.Domain$projectPlugin(studio.forface.easygradle.dsl.Group, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-remote-project-plugin.html"><span class="identifier">RemoteProjectPlugin</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../kotlin.-any/version.html">version</a></p>
+</td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">.</span><span class="identifier">version</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$version(kotlin.Any, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

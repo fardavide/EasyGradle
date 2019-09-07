@@ -28,4 +28,5 @@ dependencies {
     testImplementation(Lib.mockk)
 }
 
+dokkaAndroid()
 publish(artifact = "dsl-android")

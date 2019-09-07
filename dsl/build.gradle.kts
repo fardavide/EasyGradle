@@ -25,4 +25,5 @@ dependencies {
     testImplementation(Lib.mockk)
 }
 
+dokka()
 publish(artifact = "dsl")

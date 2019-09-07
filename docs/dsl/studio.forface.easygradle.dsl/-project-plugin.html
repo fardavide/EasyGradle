@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProjectPlugin - dsl</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">dsl</a>&nbsp;/&nbsp;<a href="index.html">studio.forface.easygradle.dsl</a>&nbsp;/&nbsp;<a href="./-project-plugin.html">ProjectPlugin</a><br/>
+<br/>
+<h1>ProjectPlugin</h1>
+<code><span class="keyword">interface </span><span class="identifier">ProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-plugin.html"><span class="identifier">Plugin</span></a></code>
+<p>A <a href="-plugin.html">Plugin</a> that can be applied to the whole project</p>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="kotlin.-any/version.html">version</a></p>
+</td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">.</span><span class="identifier">version</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$version(kotlin.Any, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-gradle-plugin.html">GradlePlugin</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">GradlePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-module-plugin/index.html"><span class="identifier">ModulePlugin</span></a><span class="symbol">, </span><a href="./-project-plugin.html"><span class="identifier">ProjectPlugin</span></a></code>
+<p>A <a href="-plugin.html">Plugin</a> that works as <a href="-module-plugin/index.html">ModulePlugin</a> and <a href="./-project-plugin.html">ProjectPlugin</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-local-project-plugin.html">LocalProjectPlugin</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">LocalProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./-project-plugin.html"><span class="identifier">ProjectPlugin</span></a></code>
+<p>A <a href="./-project-plugin.html">ProjectPlugin</a> hosted locally</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-remote-project-plugin.html">RemoteProjectPlugin</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">RemoteProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./-project-plugin.html"><span class="identifier">ProjectPlugin</span></a><span class="symbol">, </span><a href="-remote-dependency/index.html"><span class="identifier">RemoteDependency</span></a></code>
+<p>A <a href="./-project-plugin.html">ProjectPlugin</a> hosted remotely</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

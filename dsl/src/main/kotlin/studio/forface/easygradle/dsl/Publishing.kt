@@ -14,11 +14,10 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.*
+import studio.forface.easygradle.dsl.internal.ConfigReadWriteProperty
+import studio.forface.easygradle.dsl.internal.assertStringsNotEmpty
 import java.util.*
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
-import kotlin.reflect.jvm.javaGetter
 
 /*
  * A file containing params for publishing on Bintray
@@ -86,30 +85,9 @@ class PublishConfig internal constructor(project: Project) {
     private operator fun <T: Any> Project.invoke(
             default: T,
             propertyName: String? = null
-    ) = object : ReadWriteProperty<PublishConfig, T> {
-        private var backValue: T? = null
+    ) = object : ConfigReadWriteProperty<PublishConfig, T>(this, default, propertyName = propertyName) {
 
-        /** @see ReadWriteProperty.getValue */
-        override fun getValue(thisRef: PublishConfig, property: KProperty<*>) =
-                backValue ?: prop(propertyName ?: property.name, property) ?: default
-
-        /** @see ReadWriteProperty.setValue */
-        override fun setValue(thisRef: PublishConfig, property: KProperty<*>, value: T) {
-            backValue = value
-        }
-
-        private fun prop(name: String, property: KProperty<*>): T? {
-            val stringValue = findProperty(name)?.toString() ?: return null
-            @Suppress("UNCHECKED_CAST") // Cast is checked because of safe operator `as?`
-            return when(default) {
-                is String -> stringValue as? T
-                is Boolean -> stringValue.toBoolean() as? T
-                is List<*> -> stringValue.toList(property)
-                else -> throw IllegalArgumentException("'${default::class.simpleName}' is not a supported type")
-            }
-        }
-
-        private fun String.toList(property: KProperty<*>): T? {
+        override fun String.toList(property: KProperty<*>): T? {
             @Suppress("UNCHECKED_CAST")
             return when(property) {
                 PublishConfig::devs -> Json.parseList<Developer>(this) as? T?
@@ -122,55 +100,55 @@ class PublishConfig internal constructor(project: Project) {
     // region Dsl functions
     // region Licenses
     /** @return [License], use `unaryPlus` for add it to the current [PublishConfig] */
-    @PublishConfig.Marker
+    @Marker
     fun license(block: License.() -> Unit) = License().apply(block)
 
     /** Add receiver [License] to [PublishConfig.licenses] */
-    @PublishConfig.Marker
+    @Marker
     operator fun License.unaryPlus() {
         lics.add(this)
     }
     
     /** Scope for [LicensesBuilder.license] */
-    @PublishConfig.Marker
+    @Marker
     class LicensesBuilder internal constructor()
 
     /** Add a set of [License]s to the current [PublishConfig] */
-    @PublishConfig.Marker
+    @Marker
     fun licenses(block: LicensesBuilder.() -> Unit) {
         LicensesBuilder().apply(block)
     }
     
     /** Create and add a [License] to the current [PublishConfig] */
     @Suppress("unused") // Receiver as scope
-    @PublishConfig.Marker
+    @Marker
     fun LicensesBuilder.license(block: License.() -> Unit) = +License().apply(block)
     // endregion
 
     // region Developers
     /** @return [Developer], use `unaryPlus` for add it to the current [PublishConfig] */
-    @PublishConfig.Marker
+    @Marker
     fun developer(block: Developer.() -> Unit) = Developer().apply(block)
     
     /** Add receiver [Developer] to [PublishConfig.devs] */
-    @PublishConfig.Marker
+    @Marker
     operator fun Developer.unaryPlus() {
         devs.add(this)
     }
     
     /** Scope for [DevelopersBuilder.developer] */
-    @PublishConfig.Marker
+    @Marker
     class DevelopersBuilder internal constructor()
 
     /** Create and add a [License] to the current [PublishConfig] */
-    @PublishConfig.Marker
+    @Marker
     fun developers(block: DevelopersBuilder.() -> Unit) {
         DevelopersBuilder().apply(block)
     }
 
     /** Add a set of [Developer]s to the current [PublishConfig] */
     @Suppress("unused") // Receiver as scope
-    @PublishConfig.Marker
+    @Marker
     fun DevelopersBuilder.developer(block: Developer.() -> Unit) = +Developer().apply(block)
     // endregion
 
@@ -182,7 +160,7 @@ class PublishConfig internal constructor(project: Project) {
     // endregion
 
     // region Children
-    @PublishConfig.Marker
+    @Marker
     class Developer internal constructor() {
         var id: String =        ""
         var name: String =      id
@@ -194,7 +172,7 @@ class PublishConfig internal constructor(project: Project) {
 
         override fun toString() = "id: $id, name: $name, email: $email"
     }
-    @PublishConfig.Marker
+    @Marker
     class License internal constructor() {
         var name: String =      ""
         var url: String =       ""
@@ -265,29 +243,6 @@ private fun Project.publish(c: PublishConfig) = with(project(":${c.artifact}")) 
 }
 
 // region Private Utils
-/**
- * Assert that all of the given [KProperty]s do not refer to an empty string
- *
- * @throws IllegalArgumentException
- * @see paramNotSet
- */
-private fun Any.assertStringsNotEmpty(vararg prop: KProperty<String>) = prop.forEach(::assertStringNotEmpty)
-
-/**
- * Assert that the given [KProperty] does not refer to an empty string
- *
- * @throws IllegalArgumentException
- * @see paramNotSet
- */
-private fun Any.assertStringNotEmpty(prop: KProperty<String>) {
-    val string = prop.javaGetter!!.invoke(this) as String
-    if (string.isEmpty()) paramNotSet(this::class, prop)
-}
-
-/** @throws IllegalArgumentException */
-private fun paramNotSet(kclass: KClass<*>, prop: KProperty<*>): Nothing =
-        throw IllegalArgumentException("`${kclass.simpleName}.${prop.name}` has not being set")
-
 /** Configures the [publishing][org.gradle.api.publish.PublishingExtension] extension */
 @Suppress("UnstableApiUsage")
 fun Project.publishing(configure: PublishingExtension.() -> Unit): Unit =
