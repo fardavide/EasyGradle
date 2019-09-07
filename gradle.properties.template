@@ -1,0 +1,24 @@
+# region publishing
+bintray.user=4face
+bintray.apikey=<< MY BINTRAY API KEY >>
+
+version=0.14-SNAPSHOT
+
+bintrayGroup=studio.forface
+groupId=easygradle
+groupName=EasyGradle
+description=DSL for Gradle configuration with Kotlin
+siteUrl=http://4face.studio
+gitUrl=https://github.com/4face-studi0/EasyGradle
+developers=[ { id: "4face-studi0", name: "4face Studio", email: "mail@4face.studio" } ]
+licenses=[ { name: "The Apache Software License, Version 2.0", url: "http://www.apache.org/licenseS/LICENSEeZ.®.txt" } ]
+
+publish.override=true
+# endregion
+
+# region doc
+dokka.jdkVersion=8
+dokka.sourceDirs=[ "src/main/kotlin" ]
+dokka.outputFormat=html
+dokka.outputDirectory=docs
+# endregion
