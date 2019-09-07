@@ -15,6 +15,9 @@ dependencies {
     // Dokka
     implementation(Lib.dokkaGradlePlugin)
 
+    // Accessors
+    implementation(Lib.serialization)
+
     // Test
     testImplementation(Lib.jUnit)
     testImplementation(Lib.kotlinTest)
@@ -22,4 +25,4 @@ dependencies {
     testImplementation(Lib.mockk)
 }
 
-publish(baseBlock = defaultPublishConfig, artifact = "dsl")
+publish(artifact = "dsl")

@@ -7,6 +7,7 @@ private object Version {
     const val junit =                   "4.13-beta-3"   // Updated: May 05, 2019
     const val kotlin =                  "1.3.50"        // Updated: Aug 22, 2019
     const val mockk =                   "1.9.3"         // Updated: Mar 25, 2019
+    const val serialization =           "0.12.0"        // Updated: Aug 23, 2019
 }
 
 object Lib {
@@ -19,4 +20,5 @@ object Lib {
     const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${Version.kotlin}"
     const val kotlinTestJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Version.kotlin}"
     const val mockk = "io.mockk:mockk:${Version.mockk}"
+    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Version.serialization}"
 }

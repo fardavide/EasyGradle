@@ -28,4 +28,4 @@ dependencies {
     testImplementation(Lib.mockk)
 }
 
-publish(baseBlock = defaultPublishConfig, artifact = "dsl-android")
+publish(artifact = "dsl-android")
