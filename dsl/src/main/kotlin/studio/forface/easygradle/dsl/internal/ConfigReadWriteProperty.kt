@@ -8,7 +8,7 @@ import kotlin.reflect.KProperty
  * [ReadWriteProperty] for delegate to variables of Configuration classes
  * @author Davide Farella
  */
-internal abstract class ConfigReadWriteProperty<Scope: Any, PropType: Any>(
+abstract class ConfigReadWriteProperty<Scope: Any, PropType: Any>(
         private val project: Project,
         private val default: PropType,
         private val propertyName: String? = null,
@@ -46,5 +46,5 @@ internal abstract class ConfigReadWriteProperty<Scope: Any, PropType: Any>(
      * @param [property] [KProperty] which will be used for match the type;
      * e.g. `` if(property == SomeClass::property) { Json.parseList... } ``
      */
-    protected abstract fun String.toList(property: KProperty<*>): PropType?
+    protected open fun String.toList(property: KProperty<*>): PropType? = throw AssertionError()
 }
