@@ -15,8 +15,11 @@ object Lib {
     const val bintrayGradlePlugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Version.bintrayGradlePlugin}"
     const val dokkaGradlePlugin = "org.jetbrains.dokka:dokka-gradle-plugin:${Version.dokkaGradlePlugin}"
     const val dokkaAndroidGradlePlugin = "org.jetbrains.dokka:dokka-android-gradle-plugin:${Version.dokkaGradlePlugin}"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"
+    const val serializationGradlePlugin = "org.jetbrains.kotlin:kotlin-serialization:${Version.kotlin}"
 
     const val jUnit = "junit:junit:${Version.junit}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Version.kotlin}"
     const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${Version.kotlin}"
     const val kotlinTestJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Version.kotlin}"
     const val mockk = "io.mockk:mockk:${Version.mockk}"

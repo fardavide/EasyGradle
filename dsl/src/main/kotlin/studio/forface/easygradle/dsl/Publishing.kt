@@ -5,6 +5,7 @@ package studio.forface.easygradle.dsl
 
 import com.jfrog.bintray.gradle.BintrayExtension
 import kotlinx.serialization.ImplicitReflectionSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.parseList
 import org.gradle.api.Project
@@ -161,6 +162,7 @@ class PublishConfig internal constructor(project: Project) {
 
     // region Children
     @Marker
+    @Serializable
     class Developer internal constructor() {
         var id: String =        ""
         var name: String =      id
@@ -173,6 +175,7 @@ class PublishConfig internal constructor(project: Project) {
         override fun toString() = "id: $id, name: $name, email: $email"
     }
     @Marker
+    @Serializable
     class License internal constructor() {
         var name: String =      ""
         var url: String =       ""

@@ -1,5 +1,7 @@
 plugins {
     `kotlin-dsl`
+    id("kotlin")
+    id("kotlinx-serialization")
 }
 
 repositories {
@@ -16,6 +18,7 @@ dependencies {
     implementation(Lib.dokkaGradlePlugin)
 
     // Accessors
+    implementation(Lib.kotlin)
     implementation(Lib.serialization)
 
     // Test
