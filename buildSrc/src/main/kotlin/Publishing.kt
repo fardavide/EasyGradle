@@ -6,7 +6,7 @@ import com.jfrog.bintray.gradle.BintrayExtension
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.serializer
+import kotlinx.serialization.parseList
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.publish.PublishingExtension
@@ -88,8 +88,8 @@ class PublishConfig internal constructor(project: Project) {
         override fun String.toList(property: KProperty<*>): T? {
             @Suppress("UNCHECKED_CAST")
             return when(property) {
-                PublishConfig::devs -> Json.parseList(Developer::class.serializer(), this) as? T?
-                PublishConfig::lics -> Json.parseList(License::class.serializer(), this) as? T?
+                PublishConfig::devs -> Json.parseList<Developer>(this) as? T?
+                PublishConfig::lics -> Json.parseList<License>(this) as? T?
                 else -> throw AssertionError()
             }
         }

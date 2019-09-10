@@ -1,15 +1,6 @@
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.StringFormat
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.jvm.javaGetter
-
-/**
- * Parse a list with an explicit [DeserializationStrategy]
- * @return [List] of [T]
- */
-fun <T> StringFormat.parseList(deserializer: DeserializationStrategy<T>, objects: String) =
-        objects.removeSurrounding("[", "]").split(',').map { parse(deserializer, it) }
 
 /**
  * Assert that all of the given [KProperty]s do not refer to an empty string
