@@ -78,6 +78,7 @@ class PublishConfig internal constructor(project: Project) {
     var gitUrl                                  by project("")
     internal val devs: MutableList<Developer>   by project(mutableListOf<Developer>(), propertyName = "developers") // TODO include in `studio.forface.easygradle.dsl.publish`
     internal val lics: MutableList<License>     by project(mutableListOf<License>(), propertyName = "licenses")
+    var projectName                             by project(artifact)
     var override                                by project(false, propertyName = "publish.override")
     var publicDownloadNumber                    by project(true)
     // endregion
@@ -196,7 +197,7 @@ class PublishConfig internal constructor(project: Project) {
 typealias PublishConfigBuilder = PublishConfig.(Project) -> Unit
 
 @Suppress("UnstableApiUsage")
-private fun Project.publish(c: PublishConfig) = with(project(":${c.artifact}")) {
+private fun Project.publish(c: PublishConfig) = with(project(":${c.projectName}")) {
     apply(plugin = "com.jfrog.bintray")
     apply(plugin = "maven-publish")
 
