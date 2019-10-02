@@ -101,7 +101,7 @@ val DependencyHandler.`kotlin-test-junit` get() = kotlin("test-junit", version =
  * Builds the dependency notation for Kotlin-gradle-plugin.
  * @see org.gradle.kotlin.dsl.kotlin
  *
- * You can also use `` `kotlin-test-junit` version "1.3.50" `` if you want to use an explicit version.
+ * You can also use `` `kotlin-gradle-plugin` version "1.3.50" `` if you want to use an explicit version.
  */
 val DependencyHandler.`kotlin-gradle-plugin` get() = kotlin("gradle-plugin", version = `kotlin version`)
 
@@ -250,6 +250,14 @@ val DependencyHandler.`serialization-js` get() = kotlinx("serialization-runtime-
 val DependencyHandler.`serialization-native` get() = kotlinx("serialization-runtime-native", version = `serialization version`)
 
 var `serialization version` = defaultSerializationVersion
+
+/**
+ * Builds the dependency notation for Serialization-gradle-plugin.
+ * @see org.gradle.kotlin.dsl.kotlin
+ *
+ * You can also use `` `serialization-gradle-plugin` version "1.3.50" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`serialization-gradle-plugin` get() = kotlin("serialization", version = `kotlin version`)
 // endregion
 
 // region Ktor
