@@ -207,23 +207,25 @@ private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
     group = "${c.bintrayGroup}.${c.groupId}"
     version = c.version
 
-    val sourcesJar = tasks.create("sourcesJar", Jar::class) {
-        archiveClassifier.set("sources")
-        if ("main" in sourceSets.names)
-            from(sourceSets["main"].allSource)
-        // Android
-        else if ("release" in components.names)
-            from(components["release"])
-    }
-
     publishing {
         publications.create<MavenPublication>(c.artifact) {
             groupId = "${c.bintrayGroup}.${c.groupId}"
             artifactId = c.artifact
             version = c.version
 
-            from(components["java"])
-            artifact(sourcesJar)
+            // Plain Java
+            if ("main" in sourceSets.names) {
+                val sourcesJar = tasks.create("sourcesJar", Jar::class) {
+                    archiveClassifier.set("sources")
+                    from(sourceSets["main"].allSource)
+                }
+                from(components["java"])
+                artifact(sourcesJar)
+
+            // Android
+            } else if ("release" in components.names) {
+                from(components["release"])
+            }
         }
     }
 
