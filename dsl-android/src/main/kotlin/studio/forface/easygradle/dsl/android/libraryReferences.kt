@@ -62,6 +62,32 @@ val DependencyHandler.`android-annotation` get() = androidx("annotation", versio
 var `android-annotation version` = defaultAnnotationVersion
 
 /**
+ * Builds the dependency notation for Arch-core-common.
+ * @see androidxArch
+ *
+ * You can also use `` `android-arch-common` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`android-arch-common` get() = androidxArch("common", version = `android-arch version`)
+
+/**
+ * Builds the dependency notation for Arch-core-runtime.
+ * @see androidxArch
+ *
+ * You can also use `` `android-arch-runtime` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`android-arch-runtime` get() = androidxArch("runtime", version = `android-arch version`)
+
+/**
+ * Builds the dependency notation for Arch-core-testing.
+ * @see androidxArch
+ *
+ * You can also use `` `android-arch-testing` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`android-arch-testing` get() = androidxArch("testing", version = `android-arch version`)
+
+var `android-arch version` = defaultArchVersion
+
+/**
  * Builds the dependency notation for AppCompat.
  * @see androidx
  *
@@ -134,6 +160,24 @@ val DependencyHandler.`lifecycle-viewModel` get() = androidxLifecycle("viewmodel
 var `lifecycle version` = defaultLifecycleVersion
 
 /**
+ * Builds the dependency notation for Paging-common.
+ * @see androidxLifecycle
+ *
+ * You can also use `` `paging-common` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`paging-common` get() = androidxPaging("common-ktx", version = `android-paging version`)
+
+/**
+ * Builds the dependency notation for Paging-runtime.
+ * @see androidxLifecycle
+ *
+ * You can also use `` `paging-runtime` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`paging-runtime` get() = androidxPaging("runtime-ktx", version = `android-paging version`)
+
+var `android-paging version` = defaultPaginglVersion
+
+/**
  * Builds the dependency notation for Material.
  * @see android
  *
@@ -142,6 +186,7 @@ var `lifecycle version` = defaultLifecycleVersion
 val DependencyHandler.`material` get() = android("material", version = `material version`)
 
 var `material version` = defaultMaterialVersion
+
 
 /**
  * Builds the dependency notation for the named Androidx group at the given [version].
@@ -164,13 +209,31 @@ fun DependencyHandler.androidx(groupName: String, module: String = groupName, ve
         "androidx.$groupName:$module${version?.let { ":$version" } ?: "" }"
 
 /**
- * Builds the dependency notation for the named Androidx-lifecycle at the given [version].
+ * Builds the dependency notation for the named Androidx arch-core group at the given [version].
  *
- * @param module simple name of the Androidx-lifecycle module, for example "livedata".
+ * @param module simple name of the Androidx arch-core module, for example "testing".
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.androidxArch(module: String, version: String? = null): Any =
+        androidx("arch.core", "core-$module", version)
+
+/**
+ * Builds the dependency notation for the named Androidx lifecycle at the given [version].
+ *
+ * @param module simple name of the Androidx lifecycle module, for example "livedata".
  * @param version optional desired version, unspecified if null.
  */
 fun DependencyHandler.androidxLifecycle(module: String, version: String? = null): Any =
         androidx("lifecycle", "lifecycle-$module", version)
+
+/**
+ * Builds the dependency notation for the named Androidx paging at the given [version].
+ *
+ * @param module simple name of the Androidx paging module, for example "runtime".
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.androidxPaging(module: String, version: String? = null): Any =
+        androidx("paging", "paging-$module", version)
 
 /**
  * Builds the dependency notation for the named Androidx-test at the given [version].

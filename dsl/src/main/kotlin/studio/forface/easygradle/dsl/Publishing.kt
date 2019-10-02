@@ -196,8 +196,11 @@ class PublishConfig internal constructor(project: Project) {
 /** Lambda for build a [PublishConfig] within a [Project] */
 typealias PublishConfigBuilder = PublishConfig.(Project) -> Unit
 
+private fun PublishConfig.projectFor(project: Project) =
+        if (projectName?.isBlank() == false) project.project(":$projectName") else project
+
 @Suppress("UnstableApiUsage")
-private fun Project.publish(c: PublishConfig) = with(c.projectName?.let { project(":$it") } ?: this) {
+private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
     apply(plugin = "com.jfrog.bintray")
     apply(plugin = "maven-publish")
 
