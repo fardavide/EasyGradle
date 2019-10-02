@@ -97,6 +97,14 @@ val DependencyHandler.`kotlin-test-js` get() = kotlin("test-js", version = `kotl
  */
 val DependencyHandler.`kotlin-test-junit` get() = kotlin("test-junit", version = `kotlin version`)
 
+/**
+ * Builds the dependency notation for Kotlin-gradle-plugin.
+ * @see org.gradle.kotlin.dsl.kotlin
+ *
+ * You can also use `` `kotlin-test-junit` version "1.3.50" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`kotlin-gradle-plugin` get() = kotlin("gradle-plugin", version = `kotlin version`)
+
 var `kotlin version` = defaultKotlinVersion
 // endregion
 
