@@ -175,7 +175,7 @@ val DependencyHandler.`paging-common` get() = androidxPaging("common-ktx", versi
  */
 val DependencyHandler.`paging-runtime` get() = androidxPaging("runtime-ktx", version = `android-paging version`)
 
-var `android-paging version` = defaultPaginglVersion
+var `android-paging version` = defaultPagingVersion
 
 /**
  * Builds the dependency notation for Material.
