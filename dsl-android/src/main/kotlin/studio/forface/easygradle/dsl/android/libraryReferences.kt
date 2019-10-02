@@ -179,23 +179,44 @@ var `android-paging version` = defaultPagingVersion
 
 /**
  * Builds the dependency notation for Material.
- * @see android
+ * @see googleAndroid
  *
  * You can also use `` `material` version "1.0.0" `` if you want to use an explicit version.
  */
-val DependencyHandler.`material` get() = android("material", version = `material version`)
+val DependencyHandler.`material` get() = googleAndroid("material", version = `material version`)
 
 var `material version` = defaultMaterialVersion
 
 
 /**
- * Builds the dependency notation for the named Androidx group at the given [version].
+ * Builds the dependency notation for Android Gradle plugin.
+ * @see android
  *
- * @param groupName simple name of the Android group, for example "material"
- * @param module simple name of the Android module, for example "appcompat-resources". Default is [groupName]
+ * You can also use `` `android-gradle-plugin` version "3.5.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`android-gradle-plugin` get() = android("tools.build", module = "gradle", version = `android-gradle-plugin version`)
+
+var `android-gradle-plugin version` = defaultAGPVersion
+
+
+/**
+ * Builds the dependency notation for the named Android group at the given [version].
+ *
+ * @param groupName simple name of the Android group, for example "tools.build"
+ * @param module simple name of the Android module, for example "gradle". Default is [groupName]
  * @param version optional desired version, unspecified if null.
  */
 fun DependencyHandler.android(groupName: String, module: String = groupName, version: String? = null): Any =
+        "com.android.$groupName:$module${version?.let { ":$version" } ?: "" }"
+
+/**
+ * Builds the dependency notation for the named Android group at the given [version].
+ *
+ * @param groupName simple name of the Google-android group, for example "material"
+ * @param module simple name of the Google-android module, for example "appcompat-resources". Default is [groupName]
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.googleAndroid(groupName: String, module: String = groupName, version: String? = null): Any =
         "com.google.android.$groupName:$module${version?.let { ":$version" } ?: "" }"
 
 /**
