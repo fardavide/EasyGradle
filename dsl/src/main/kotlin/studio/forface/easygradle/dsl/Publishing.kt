@@ -209,7 +209,10 @@ private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
 
     val sourcesJar = tasks.create("sourcesJar", Jar::class) {
         archiveClassifier.set("sources")
-        from(sourceSets["main"].allSource)
+        if ("main" in sourceSets.names)
+            from(sourceSets["main"].allSource)
+        else if ("release" in components.names)
+            from(components["release"])
     }
 
     publishing {
