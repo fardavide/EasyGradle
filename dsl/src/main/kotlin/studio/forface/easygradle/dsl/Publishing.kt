@@ -211,6 +211,7 @@ private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
         archiveClassifier.set("sources")
         if ("main" in sourceSets.names)
             from(sourceSets["main"].allSource)
+        // Android
         else if ("release" in components.names)
             from(components["release"])
     }
