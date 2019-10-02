@@ -1,6 +1,6 @@
 package studio.forface.easygradle.dsl.android
 
-internal const val defaultAGPVersion =              "3.5.0"             // Updated: Aug 20, 2019
+internal const val defaultAgpVersion =              "3.5.0"             // Updated: Aug 20, 2019
 internal const val defaultAnnotationVersion =       "1.1.0"             // Updated:
 internal const val defaultArchVersion =             "2.1.0"             // Updated: Sep 05, 2019
 internal const val defaultConstraintLayoutVersion = "2.0.0-beta2"       // Updated:

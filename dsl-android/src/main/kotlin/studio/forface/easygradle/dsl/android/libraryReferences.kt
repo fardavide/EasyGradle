@@ -196,7 +196,7 @@ var `material version` = defaultMaterialVersion
  */
 val DependencyHandler.`android-gradle-plugin` get() = android("tools.build", module = "gradle", version = `android-gradle-plugin version`)
 
-var `android-gradle-plugin version` = defaultAGPVersion
+var `android-gradle-plugin version` = defaultAgpVersion
 
 
 /**
