@@ -5,6 +5,10 @@
 It's mean to be included in the `buildSrc` module in the following way:
 
 ```kotlin
+api("studio.forface.easygradle:dsl:$easyGradle")
+```
+**or**
+```kotlin
 api("studio.forface.easygradle:dsl-android:$easyGradle")
 ```
 
