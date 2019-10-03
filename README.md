@@ -40,8 +40,8 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
     `kotlin version` =        "1.3.50"        // Updated: Aug 22, 2019
     `espresso version` =     	"3.2.0"         // Updated: May 30, 2019
     `lifecycle version` =     "2.2.0-alpha03" // Updated: Aug 09, 2019
-  	`material version` =      "1.1.0-alpha07" // Updated: May 31, 2019
-  	`android-test version` =	"1.2.0"         // Updated: May 31, 2019
+    `material version` =      "1.1.0-alpha07" // Updated: May 31, 2019
+    `android-test version` =	"1.2.0"         // Updated: May 31, 2019
   }
   ```
 
