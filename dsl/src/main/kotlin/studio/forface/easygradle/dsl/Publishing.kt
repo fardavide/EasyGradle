@@ -26,14 +26,12 @@ import kotlin.reflect.KProperty
  */
 
 /**
- * Apply studio.forface.easygradle.dsl.publish script to the given module
+ * Apply publish script to the given module
  *
  * Params for [PublishConfig] can be set in `gradle.properties`
  * @see PublishConfig params for names and format
  * Objects and lists will respect the JSON standard format
  *
- *
- * @param config Optional [PublishConfig] to start from
  *
  * @param artifact Optional [PublishConfig.artifact] for the [PublishConfig], this is useful when we have a stored
  * common [PublishConfig] for the project and we want to apply it for a single module
@@ -43,17 +41,27 @@ import kotlin.reflect.KProperty
  * @param block Lambda for setup [PublishConfig]
  */
 fun Project.publish(
-        config: PublishConfig = PublishConfig(this),
         baseBlock: PublishConfigBuilder? = null,
-        artifact: String = config.artifact,
+        artifact: String? = null,
         block: PublishConfigBuilder = {}
 ) {
+    _publish(baseBlock, artifact, block) { sourceSets["main"].allSource }
+}
+
+@Suppress("FunctionName") // This is meant to be internal, but needed from Android artifact
+fun Project._publish(
+        baseBlock: PublishConfigBuilder?,
+        artifact: String?,
+        block: PublishConfigBuilder,
+        sources: Project.() -> Any
+) {
     val project = this
-    val validConfig = config.apply {
+    val validConfig = PublishConfig(this).apply {
         baseBlock?.let { this.baseBlock(project) }
-        this.artifact = artifact
+        artifact?.let { this.artifact = it }
         this.block(project)
         validate()
+        _sources = sources
     }
     publish(validConfig)
 }
@@ -76,12 +84,15 @@ class PublishConfig internal constructor(project: Project) {
     var description                             by project("")
     var siteUrl                                 by project("")
     var gitUrl                                  by project("")
-    internal val devs: MutableList<Developer>   by project(mutableListOf<Developer>(), propertyName = "developers") // TODO include in `studio.forface.easygradle.dsl.publish`
+    internal val devs: MutableList<Developer>   by project(mutableListOf<Developer>(), propertyName = "developers")
     internal val lics: MutableList<License>     by project(mutableListOf<License>(), propertyName = "licenses")
     var projectName: String? =                  artifact
     var override                                by project(false, propertyName = "publish.override")
     var publicDownloadNumber                    by project(true)
     // endregion
+
+    @Suppress("PropertyName") // This is meant to be internal, but needed from Android artifact
+    lateinit var _sources: Project.() -> Any
 
     @UseExperimental(ImplicitReflectionSerializer::class)
     private operator fun <T: Any> Project.invoke(
@@ -213,19 +224,26 @@ private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
             artifactId = c.artifact
             version = c.version
 
-            // Plain Java
-            if ("main" in sourceSets.names) {
-                val sourcesJar = tasks.create("sourcesJar", Jar::class) {
-                    archiveClassifier.set("sources")
-                    from(sourceSets["main"].allSource)
-                }
-                from(components["java"])
-                artifact(sourcesJar)
-
-            // Android
-            } else if ("release" in components.names) {
-                from(components["release"])
+            val sourcesJar = tasks.create("sourcesJar", Jar::class) {
+                archiveClassifier.set("sources")
+                from(c._sources(this@with))
             }
+//            from(components["java"])
+            artifact(sourcesJar)
+
+//            // Plain Java
+//            if ("main" in sourceSets.names) {
+//                val sourcesJar = tasks.create("sourcesJar", Jar::class) {
+//                    archiveClassifier.set("sources")
+//                    from(sourceSets["main"].allSource)
+//                }
+//                from(components["java"])
+//                artifact(sourcesJar)
+//
+//            // Android
+//            } else if ("release" in components.names) {
+//                from(components["release"])
+//            }
         }
     }
 
