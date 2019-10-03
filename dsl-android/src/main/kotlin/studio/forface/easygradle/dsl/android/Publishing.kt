@@ -1,6 +1,7 @@
 @file:Suppress(
         "MemberVisibilityCanBePrivate", "unused" // Public APIs
 )
+
 package studio.forface.easygradle.dsl.android
 
 import com.android.build.gradle.LibraryExtension
@@ -9,7 +10,8 @@ import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.get
 import studio.forface.easygradle.dsl.PublishConfig
 import studio.forface.easygradle.dsl.PublishConfigBuilder
-import studio.forface.easygradle.dsl._publish
+import studio.forface.easygradle.dsl.internal.PublicationsBundle
+import studio.forface.easygradle.dsl.internal._publish
 import studio.forface.easygradle.dsl.publishConfig
 
 /**
@@ -32,7 +34,9 @@ fun Project.publishAndroid(
         artifact: String? = null,
         block: PublishConfigBuilder = {}
 ) {
-    _publish(baseBlock, artifact, block) { android.sourceSets["main"].java.srcDirs }
+    _publish(baseBlock, artifact, block) {
+        PublicationsBundle(android.sourceSets["main"].java.srcDirs)
+    }
 }
 
 private val Project.android get() = (this as ExtensionAware).extensions["android"] as LibraryExtension

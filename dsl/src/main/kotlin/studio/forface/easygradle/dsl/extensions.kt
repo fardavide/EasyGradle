@@ -2,8 +2,25 @@
 
 package studio.forface.easygradle.dsl
 
+import org.gradle.api.Project
 import org.gradle.api.artifacts.ModuleDependency
+import org.gradle.api.plugins.ExtensionAware
+import org.gradle.api.publish.PublishingExtension
+import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.kotlin.dsl.exclude
+
+/** Configures the [publishing][org.gradle.api.publish.PublishingExtension] extension */
+@Suppress("UnstableApiUsage")
+fun Project.publishing(configure: PublishingExtension.() -> Unit): Unit =
+        (this as ExtensionAware).extensions.configure("publishing", configure)
+
+/** Retrieves the [sourceSets][org.gradle.api.tasks.SourceSetContainer] extension */
+val Project.sourceSets: SourceSetContainer get() =
+    (this as ExtensionAware).extensions.getByName("sourceSets") as SourceSetContainer
+
+/** @return `true` if [Project] has any Android plugin */
+val Project.isAndroid get() =
+    plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")
 
 /**
  * @return receiver string ( usually a dependency notation ) with version
