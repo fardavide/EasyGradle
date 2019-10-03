@@ -58,12 +58,14 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
 
   ```kotlin
   api(
-    `kotlin-jdk7`
-    `serialization`
+    `kotlin-jdk7`,
+    `serialization`,
+    // etc
   )
   implementation(
-    `kotlin-reflect`
-    `coroutines-android`
+    `kotlin-reflect`,
+    `coroutines-android`,
+    // etc
   )
   ```
 
