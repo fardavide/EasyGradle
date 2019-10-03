@@ -112,7 +112,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   ```kotlin
   // build.gradle.kts
   ...
-  publish()
+  publish() // or `publishAndroid()`
   ```
 
   * It has default params
@@ -143,7 +143,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
       ...
     }
     
-    publish(baseBlock = defaultPublishConfig) {
+    publishAndroid(defaultPublishConfig) {
       ...
     }
     ```
