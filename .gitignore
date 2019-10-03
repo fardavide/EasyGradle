@@ -65,3 +65,4 @@ fastlane/readme.md
 
 # Credentials
 gradle.properties
+*.hprof
