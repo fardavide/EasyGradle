@@ -7,8 +7,7 @@ package studio.forface.easygradle.dsl.android
 
 import com.android.build.gradle.internal.dsl.DefaultConfig
 import studio.forface.easygradle.dsl.PublishConfig
-import studio.forface.easygradle.dsl.android.Version.Channel.Build
-import studio.forface.easygradle.dsl.android.Version.Channel.Stable
+import studio.forface.easygradle.dsl.android.Version.Channel.*
 
 /**
  * Class for easily generate [versionCode] and [versionName] for Android
@@ -17,10 +16,12 @@ import studio.forface.easygradle.dsl.android.Version.Channel.Stable
 class Version(
         private val major:      Int,
         private val minor:      Int,
-        private val channel:    Channel,
-        private val patch:      Int,
-        private val build:      Int
+        private val channel:    Channel =   None,
+        private val patch:      Int =       1,
+        private val build:      Int =       0
 ) {
+
+    constructor(major: Int, minor: Int, patch: Int) : this(major, minor, None, patch)
 
     /** @return the [Int] version code of the App, resolved from [major], [minor], [channel], [patch] and [build] */
     val versionCode: Int get() {
@@ -94,14 +95,15 @@ class Version(
         }
     }
 
-    /** A sealed class for the Channel of the Version of the App */
-    @Suppress("unused")
+    /** A sealed class for the Channel of the Version of the Module */
     sealed class Channel(val value: Int, val suffix: String) {
-        object Build :      Channel(0, "-build")
-        object Alpha :      Channel(1, "-alpha")
-        object Beta :       Channel(2, "-beta")
-        object RC :         Channel(3, "-rc")
-        object Stable :     Channel(4, "")
+        object Build :          Channel(1, "-build")
+        object Alpha :          Channel(2, "-alpha")
+        object Beta :           Channel(3, "-beta")
+        object RC :             Channel(4, "-rc")
+        object Stable :         Channel(5, "")
+
+        internal object None:   Channel(0, "")
     }
 }
 
