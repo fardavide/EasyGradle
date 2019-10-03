@@ -5,6 +5,10 @@
 It's mean to be included in the `buildSrc` module in the following way:
 
 ```kotlin
+api("studio.forface.easygradle:dsl:$easyGradle")
+```
+**or**
+```kotlin
 api("studio.forface.easygradle:dsl-android:$easyGradle")
 ```
 
@@ -112,7 +116,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   ```kotlin
   // build.gradle.kts
   ...
-  publish()
+  publish() // or `publishAndroid()`
   ```
 
   * It has default params
@@ -143,7 +147,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
       ...
     }
     
-    publish(baseBlock = defaultPublishConfig) {
+    publishAndroid(defaultPublishConfig) {
       ...
     }
     ```
