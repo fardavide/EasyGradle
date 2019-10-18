@@ -12,6 +12,7 @@ internal const val defaultMaterialVersion =             "1.1.0-alpha09"     // U
 internal const val defaultPagingVersion =               "2.1.0"             // Updated: Jan 26, 2019
 internal const val defaultSupportVersion =              "1.1.0-rc01"        // Updated:
 internal const val defaultTestVersion =                 "1.2.0"             // Updated:
+internal const val defaultWorkVersion =                 "2.2.0"             // Updated: Aug 16, 2019
 
 // 4face
 internal const val defaultFluentNotificationsVersion =  "0.1-beta-6"        // Updated: May 26, 2019

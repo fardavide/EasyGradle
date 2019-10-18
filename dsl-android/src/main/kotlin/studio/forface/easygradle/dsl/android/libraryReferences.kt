@@ -8,6 +8,8 @@ package studio.forface.easygradle.dsl.android
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 // region Jetpack
+
+// region Ktx
 /**
  * Builds the dependency notation for Core-ktx.
  * @see androidx
@@ -17,7 +19,9 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 val DependencyHandler.`android-ktx` get() = androidx("core", "core-ktx", version = `ktx version`)
 
 var `ktx version` = defaultKtxVersion
+// endregion
 
+// region Test
 /**
  * Builds the dependency notation for Androidx-test-core.
  * @see androidxTest
@@ -51,7 +55,9 @@ val DependencyHandler.`android-test-rules` get() = androidxTest("rules", version
 val DependencyHandler.`android-test-runner` get() = androidxTest("runner", version = `android-test version`)
 
 var `android-test version` = defaultTestVersion
+// endregion
 
+// region Annotation
 /**
  * Builds the dependency notation for Annotation.
  * @see androidx
@@ -61,7 +67,9 @@ var `android-test version` = defaultTestVersion
 val DependencyHandler.`android-annotation` get() = androidx("annotation", version = `android-annotation version`)
 
 var `android-annotation version` = defaultAnnotationVersion
+// endregion
 
+// region Arch
 /**
  * Builds the dependency notation for Arch-core-common.
  * @see androidxArch
@@ -87,7 +95,9 @@ val DependencyHandler.`android-arch-runtime` get() = androidxArch("runtime", ver
 val DependencyHandler.`android-arch-testing` get() = androidxArch("testing", version = `android-arch version`)
 
 var `android-arch version` = defaultArchVersion
+// endregion
 
+// region AppCompat
 /**
  * Builds the dependency notation for AppCompat.
  * @see androidx
@@ -97,7 +107,9 @@ var `android-arch version` = defaultArchVersion
 val DependencyHandler.`appcompat` get() = androidx("appcompat", version = `appcompat version`)
 
 var `appcompat version` = defaultSupportVersion
+// endregion
 
+// region Constraint Layout
 /**
  * Builds the dependency notation for ConstraintLayout.
  * @see androidx
@@ -107,7 +119,9 @@ var `appcompat version` = defaultSupportVersion
 val DependencyHandler.`constraint-layout` get() = androidx("constraintlayout", version = `constraint-layout version`)
 
 var `constraint-layout version` = defaultConstraintLayoutVersion
+// endregion
 
+// region Espresso
 /**
  * Builds the dependency notation for Espresso-core.
  * @see androidx
@@ -117,7 +131,9 @@ var `constraint-layout version` = defaultConstraintLayoutVersion
 val DependencyHandler.`espresso` get() = androidx("test.espresso", "espresso-core", version = `espresso version`)
 
 var `espresso version` = defaultEspressoVersion
+// endregion
 
+// region Lifecycle
 /**
  * Builds the dependency notation for Lifecycle-compiler.
  * @see androidxLifecycle
@@ -159,25 +175,9 @@ val DependencyHandler.`lifecycle-runtime` get() = androidxLifecycle("runtime-ktx
 val DependencyHandler.`lifecycle-viewModel` get() = androidxLifecycle("viewmodel-ktx", version = `lifecycle version`)
 
 var `lifecycle version` = defaultLifecycleVersion
+// endregion
 
-/**
- * Builds the dependency notation for Paging-common.
- * @see androidxLifecycle
- *
- * You can also use `` `paging-common` version "2.1.0" `` if you want to use an explicit version.
- */
-val DependencyHandler.`paging-common` get() = androidxPaging("common-ktx", version = `android-paging version`)
-
-/**
- * Builds the dependency notation for Paging-runtime.
- * @see androidxLifecycle
- *
- * You can also use `` `paging-runtime` version "2.1.0" `` if you want to use an explicit version.
- */
-val DependencyHandler.`paging-runtime` get() = androidxPaging("runtime-ktx", version = `android-paging version`)
-
-var `android-paging version` = defaultPagingVersion
-
+// region Material
 /**
  * Builds the dependency notation for Material.
  * @see googleAndroid
@@ -187,8 +187,49 @@ var `android-paging version` = defaultPagingVersion
 val DependencyHandler.`material` get() = googleAndroid("material", version = `material version`)
 
 var `material version` = defaultMaterialVersion
+// endregion
 
+// region Paging
+/**
+ * Builds the dependency notation for Paging-common.
+ * @see androidxPaging
+ *
+ * You can also use `` `paging-common` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`paging-common` get() = androidxPaging("common-ktx", version = `android-paging version`)
 
+/**
+ * Builds the dependency notation for Paging-runtime.
+ * @see androidxPaging
+ *
+ * You can also use `` `paging-runtime` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`paging-runtime` get() = androidxPaging("runtime-ktx", version = `android-paging version`)
+
+var `android-paging version` = defaultPagingVersion
+// endregion
+
+// region WorkManager
+/**
+ * Builds the dependency notation for Android-work-runtime.
+ * @see androidxWork
+ *
+ * You can also use `` `android-work-runtime` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`android-work-runtime` get() = androidxWork("runtime-ktx", version = `android-work version`)
+
+/**
+ * Builds the dependency notation for Android-work-testing.
+ * @see androidxWork
+ *
+ * You can also use `` `android-work-testing` version "2.1.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`android-work-testing` get() = androidxWork("testing", version = `android-work version`)
+
+var `android-work version` = defaultWorkVersion
+// endregion
+
+// region AGP
 /**
  * Builds the dependency notation for Android Gradle plugin.
  * @see android
@@ -198,6 +239,8 @@ var `material version` = defaultMaterialVersion
 val DependencyHandler.`android-gradle-plugin` get() = android("tools.build", module = "gradle", version = `android-gradle-plugin version`)
 
 var `android-gradle-plugin version` = defaultAgpVersion
+// endregion
+
 
 // region Groups
 /**
@@ -265,6 +308,15 @@ fun DependencyHandler.androidxPaging(module: String, version: String? = null): A
  */
 fun DependencyHandler.androidxTest(module: String, version: String? = null): Any =
         androidx("test", module, version)
+
+/**
+ * Builds the dependency notation for the named Androidx-work at the given [version].
+ *
+ * @param module simple name of the Androidx-work module, for example "runtime".
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.androidxWork(module: String, version: String? = null): Any =
+        androidx("work", "work-$module", version)
 // endregion
 // endregion
 
