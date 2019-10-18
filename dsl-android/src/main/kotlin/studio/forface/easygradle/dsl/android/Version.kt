@@ -90,8 +90,9 @@ class Version(
             if (build > 0) throw  IllegalArgumentException("'Stable channel' can't have a `build number` greater " +
                     "than 0, increase the 'minor' for the next build")
         } else {
-            if (build < 1 && patch < 1) throw  IllegalArgumentException("A `patch number` greater than 0, is " +
-                    "required for '${channel.suffix.replace( "-", "" )}' channel")
+            if (channel !is None && build < 1 && patch < 1)
+                throw  IllegalArgumentException("A `patch number` greater than 0, is required for " +
+                        "'${channel.suffix.replace( "-", "" )}' channel")
         }
     }
 
