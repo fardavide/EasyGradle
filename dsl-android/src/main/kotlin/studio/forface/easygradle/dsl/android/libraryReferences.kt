@@ -7,6 +7,7 @@ package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
+// region Jetpack
 /**
  * Builds the dependency notation for Core-ktx.
  * @see androidx
@@ -198,7 +199,7 @@ val DependencyHandler.`android-gradle-plugin` get() = android("tools.build", mod
 
 var `android-gradle-plugin version` = defaultAgpVersion
 
-
+// region Groups
 /**
  * Builds the dependency notation for the named Android group at the given [version].
  *
@@ -264,3 +265,49 @@ fun DependencyHandler.androidxPaging(module: String, version: String? = null): A
  */
 fun DependencyHandler.androidxTest(module: String, version: String? = null): Any =
         androidx("test", module, version)
+// endregion
+// endregion
+
+// region 4face
+/**
+ * Builds the dependency notation for FluentNotifications.
+ * @see forface
+ *
+ * You can also use `` `fluentNotifications` version "1.0.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`fluentNotifications` get() = forface("fluentnotifications", version = `fluentNotifications version`)
+
+
+var `fluentNotifications version` = defaultFluentNotificationsVersion
+
+
+/**
+ * Builds the dependency notation for ViewStateStore.
+ * @see forface
+ *
+ * You can also use `` `viewStateStore` version "1.0.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`viewStateStore` get() = forface("viewstatestore", version = `viewStateStore version`)
+
+/**
+ * Builds the dependency notation for ViewStateStore-paging.
+ * @see forface
+ *
+ * You can also use `` `viewStateStore-paging` version "1.0.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`viewStateStore-paging` get() = forface("viewstatestore", module = "viewstatestore-paging", version = `viewStateStore version`)
+
+
+var `viewStateStore version` = defaultViewStateStoreVersion
+
+
+/**
+ * Builds the dependency notation for the named 4face group at the given [version].
+ *
+ * @param groupName simple name of the 4face group, for example "viewStateStore"
+ * @param module simple name of the 4face module, for example "viewStateStore-paging". Default is [groupName]
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.forface(groupName: String, module: String = groupName, version: String? = null): Any =
+        "studio.forface.$groupName:$module${version?.let { ":$version" } ?: "" }"
+// endregion

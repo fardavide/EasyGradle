@@ -260,6 +260,15 @@ var `serialization version` = defaultSerializationVersion
 val DependencyHandler.`serialization-gradle-plugin` get() = kotlin("serialization", version = `kotlin version`)
 // endregion
 
+/**
+ * Builds the dependency notation for the named Kotlinx [module] at the given [version].
+ *
+ * @param module simple name of the Kotlinx module, for example "coroutines".
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.kotlinx(module: String, version: String? = null): Any =
+        "org.jetbrains.kotlinx:kotlinx-$module${version?.let { ":$version" } ?: ""}"
+
 // region Ktor
 // TODO
 
@@ -295,11 +304,14 @@ fun DependencyHandler.mockK(module: String, version: String? = null): Any =
 var `mockK version` = defaultMockkVersion
 // endregion
 
+// region 4face
 /**
- * Builds the dependency notation for the named Kotlinx [module] at the given [version].
+ * Builds the dependency notation for the named 4face group at the given [version].
  *
- * @param module simple name of the Kotlinx module, for example "coroutines".
+ * @param groupName simple name of the 4face group, for example "viewStateStore"
+ * @param module simple name of the 4face module, for example "viewStateStore-paging". Default is [groupName]
  * @param version optional desired version, unspecified if null.
  */
-fun DependencyHandler.kotlinx(module: String, version: String? = null): Any =
-        "org.jetbrains.kotlinx:kotlinx-$module${version?.let { ":$version" } ?: ""}"
+fun DependencyHandler.forface(groupName: String, module: String = groupName, version: String? = null): Any =
+        "studio.forface.$groupName:$module${version?.let { ":$version" } ?: "" }"
+// endregion
