@@ -17,7 +17,7 @@ class Version(
         private val major:      Int,
         private val minor:      Int,
         private val channel:    Channel =   None,
-        private val patch:      Int =       1,
+        private val patch:      Int =       if (channel is None) 0 else 1,
         private val build:      Int =       0
 ) {
 
@@ -74,7 +74,7 @@ class Version(
 
     /** @return a [String] representing the number of the version */
     private fun channelNumberString(number: Int) =
-            if (number > 0) "-$number" else ""
+            if (number == 0) "" else if (channel is None) ".$number" else "-$number"
 
     /**
      * Check the version's numbers are valid.
