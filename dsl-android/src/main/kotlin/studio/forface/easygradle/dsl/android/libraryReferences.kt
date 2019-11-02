@@ -6,6 +6,7 @@
 package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import studio.forface.easygradle.dsl.squareup
 
 // region Jetpack
 
@@ -320,6 +321,19 @@ fun DependencyHandler.androidxWork(module: String, version: String? = null): Any
 // endregion
 // endregion
 
+// region Square
+/**
+ * Builds the dependency notation for Retrofit 2.
+ * @see squareup
+ *
+ * You can also use `` `retrofit` version "1.0.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`retrofit` get() = squareup("retrofit2", "retrofit", version = `retrofit version`)
+
+
+var `retrofit version` = defaultRetrofitVersion
+// endregion
+
 // region 4face
 /**
  * Builds the dependency notation for FluentNotifications.
@@ -354,10 +368,10 @@ var `viewStateStore version` = defaultViewStateStoreVersion
 
 
 /**
- * Builds the dependency notation for the named 4face group at the given [version].
+ * Builds the dependency notation for the named `studio.forface` group at the given [version].
  *
- * @param groupName simple name of the 4face group, for example "viewStateStore"
- * @param module simple name of the 4face module, for example "viewStateStore-paging". Default is [groupName]
+ * @param groupName simple name of the `studio.forface` group, for example "viewStateStore"
+ * @param module simple name of the `studio.forface` module, for example "viewStateStore-paging". Default is [groupName]
  * @param version optional desired version, unspecified if null.
  */
 fun DependencyHandler.forface(groupName: String, module: String = groupName, version: String? = null): Any =

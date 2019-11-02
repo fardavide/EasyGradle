@@ -14,6 +14,9 @@ internal const val defaultSupportVersion =              "1.1.0-rc01"        // U
 internal const val defaultTestVersion =                 "1.2.0"             // Updated:
 internal const val defaultWorkVersion =                 "2.2.0"             // Updated: Aug 16, 2019
 
+// Square
+internal const val defaultRetrofitVersion =             "2.6.2"             // Updated: Sep 24, 2019
+
 // 4face
 internal const val defaultFluentNotificationsVersion =  "0.1-beta-6"        // Updated: May 26, 2019
 internal const val defaultViewStateStoreVersion =       "1.3-beta-3"        // Updated: Oct 03, 2019

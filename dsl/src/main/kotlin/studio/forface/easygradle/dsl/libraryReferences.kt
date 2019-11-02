@@ -9,6 +9,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.kotlin
 
 // region Kotlin
+// region StdLib
 /**
  * Builds the dependency notation for Kotlin-stdlib.
  * @see org.gradle.kotlin.dsl.kotlin
@@ -274,6 +275,39 @@ fun DependencyHandler.kotlinx(module: String, version: String? = null): Any =
 
 var `ktor version` = defaultKtorVersion
 // endregion
+// endregion
+
+// region Square
+/**
+ * Builds the dependency notation for Kotlin Poet.
+ * @see squareup
+ *
+ * You can also use `` `kotlinPoet` version "1.0.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`kotlinPoet` get() = squareup("", "kotlinpoet", version = `kotlinPoet version`)
+
+/**
+ * Builds the dependency notation for Kotlin Poet Metadata Specs.
+ * @see squareup
+ *
+ * You can also use `` `kotlinPoet` version "1.0.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`kotlinPoet-metadata-specs` get() = squareup("", "kotlinpoet-metadata-specs", version = `kotlinPoet version`)
+
+
+var `kotlinPoet version` = defaultKotlinPoetVersion
+
+
+/**
+ * Builds the dependency notation for the named `com.squareup` group at the given [version].
+ *
+ * @param groupName simple name of the `com.squareup` group, for example "retrofit2"
+ * @param module simple name of the `com.squareup` module, for example "retrofit". Default is [groupName]
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.squareup(groupName: String, module: String = groupName, version: String? = null): Any =
+        "com.squareup.$groupName:$module${version?.let { ":$version" } ?: "" }"
+// endregion
 
 // region MockK
 /**
@@ -292,6 +326,10 @@ val DependencyHandler.`mockk` get() = mockK("mockk", version = `mockK version`)
  */
 val DependencyHandler.`mockk-android` get() = mockK("mockk-android", version = `mockK version`)
 
+
+var `mockK version` = defaultMockkVersion
+
+
 /**
  * Builds the dependency notation for the named MockK [module] at the given [version].
  *
@@ -300,8 +338,6 @@ val DependencyHandler.`mockk-android` get() = mockK("mockk-android", version = `
  */
 fun DependencyHandler.mockK(module: String, version: String? = null): Any =
         "io.mockk:$module${version?.let { ":$version" } ?: ""}"
-
-var `mockK version` = defaultMockkVersion
 // endregion
 
 // region 4face
