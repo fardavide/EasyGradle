@@ -244,7 +244,7 @@ val DependencyHandler.`room-ktx` get() = androidxRoom("ktx", version = `android-
 val DependencyHandler.`room-testing` get() = androidxRoom("testing", version = `android-room version`)
 
 
-var `android-room version` = defaultPagingVersion
+var `android-room version` = defaultRoomVersion
 // endregion
 
 // region WorkManager
