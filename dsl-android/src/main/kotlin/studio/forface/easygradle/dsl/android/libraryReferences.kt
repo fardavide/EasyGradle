@@ -210,6 +210,43 @@ val DependencyHandler.`paging-runtime` get() = androidxPaging("runtime-ktx", ver
 var `android-paging version` = defaultPagingVersion
 // endregion
 
+// region Room
+/**
+ * Builds the dependency notation for Room-runtime.
+ * @see androidxRoom
+ *
+ * You can also use `` `room-runtime` version "2.2.1" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`room-runtime` get() = androidxRoom("runtime", version = `android-room version`)
+
+/**
+ * Builds the dependency notation for Room-compiler.
+ * @see androidxRoom
+ *
+ * You can also use `` `room-compiler` version "2.2.1" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`room-compiler` get() = androidxRoom("compiler", version = `android-room version`)
+
+/**
+ * Builds the dependency notation for Room-ktx.
+ * @see androidxRoom
+ *
+ * You can also use `` `room-ktx` version "2.2.1" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`room-ktx` get() = androidxRoom("ktx", version = `android-room version`)
+
+/**
+ * Builds the dependency notation for Room-testing.
+ * @see androidxRoom
+ *
+ * You can also use `` `room-testing` version "2.2.1" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`room-testing` get() = androidxRoom("testing", version = `android-room version`)
+
+
+var `android-room version` = defaultPagingVersion
+// endregion
+
 // region WorkManager
 /**
  * Builds the dependency notation for Android-work-runtime.
@@ -300,6 +337,15 @@ fun DependencyHandler.androidxLifecycle(module: String, version: String? = null)
  */
 fun DependencyHandler.androidxPaging(module: String, version: String? = null): Any =
         androidx("paging", "paging-$module", version)
+
+/**
+ * Builds the dependency notation for the named Androidx Room at the given [version].
+ *
+ * @param module simple name of the Androidx Room module, for example "runtime".
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.androidxRoom(module: String, version: String? = null): Any =
+        androidx("room", "room-$module", version)
 
 /**
  * Builds the dependency notation for the named Androidx-test at the given [version].
