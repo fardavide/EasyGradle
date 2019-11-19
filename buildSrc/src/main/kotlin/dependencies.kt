@@ -3,18 +3,17 @@
 private object Version {
     const val androidGradlePlugin =     "3.5.0-rc03"    // Updated: Aug 08, 2019
     const val bintrayGradlePlugin =     "1.8.4"         // Updated: Jul 08, 2018
-    const val dokkaGradlePlugin =       "0.9.18"        // Updated: Mar 19, 2019
+    const val dokkaGradlePlugin =       "0.10.0"        // Updated: Oct 07, 2019
     const val junit =                   "4.13-beta-3"   // Updated: May 05, 2019
-    const val kotlin =                  "1.3.50"        // Updated: Aug 22, 2019
+    const val kotlin =                  "1.3.60"        // Updated: Nov 14, 2019
     const val mockk =                   "1.9.3"         // Updated: Mar 25, 2019
-    const val serialization =           "0.12.0"        // Updated: Aug 23, 2019
+    const val serialization =           "0.13.0"        // Updated: Sep 12, 2019
 }
 
 object Lib {
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Version.androidGradlePlugin}"
     const val bintrayGradlePlugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Version.bintrayGradlePlugin}"
     const val dokkaGradlePlugin = "org.jetbrains.dokka:dokka-gradle-plugin:${Version.dokkaGradlePlugin}"
-    const val dokkaAndroidGradlePlugin = "org.jetbrains.dokka:dokka-android-gradle-plugin:${Version.dokkaGradlePlugin}"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}"
     const val serializationGradlePlugin = "org.jetbrains.kotlin:kotlin-serialization:${Version.kotlin}"
 

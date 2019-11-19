@@ -9,9 +9,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.withType
-import org.jetbrains.dokka.gradle.DokkaAndroidTask
 import org.jetbrains.dokka.gradle.DokkaTask
-import java.io.File
 import kotlin.reflect.KProperty
 
 /*
@@ -82,9 +80,12 @@ fun dokkaConfig(block: DokkaConfigBuilder): DokkaConfigBuilder = { apply { this.
 
 class DokkaConfig internal constructor(project: Project) {
     // region Params
+    @Deprecated("Unused! Replacement not available yet")
     var apiVersion                  by project(0)
     var jdkVersion                  by project(8)
+    @Deprecated("Unused! Replacement not available yet")
     var sourceDirs: List<String>    by project(listOf("src/main/kotlin"))
+    @Deprecated("Unused! Replacement not available yet")
     var sourceDir: String           by writeOnly<String> { sourceDirs = listOf(it) }
     var outputFormat                by project("html")
     var outputDirectory             by project("doc")
@@ -116,21 +117,12 @@ typealias DokkaConfigBuilder = DokkaConfig.(Project) -> Unit
 private fun Project.dokka(c: DokkaConfig) {
     apply(plugin = "org.jetbrains.dokka")
     tasks.withType(DokkaTask::class) {
-        apiVersion = c.apiVersion.toString()
-        jdkVersion = c.jdkVersion
-        sourceDirs = c.sourceDirs.map { File(it) }
+//        apiVersion = c.apiVersion.toString()
         outputFormat = c.outputFormat
         outputDirectory = c.outputDirectory
-    }
-}
-
-private fun Project.dokkaAndroid(c: DokkaConfig) {
-    apply(plugin = "org.jetbrains.dokka-android")
-    tasks.withType(DokkaAndroidTask::class) {
-        apiVersion = c.apiVersion.toString()
-        jdkVersion = c.jdkVersion
-        sourceDirs = c.sourceDirs.map { File(it) }
-        outputFormat = c.outputFormat
-        outputDirectory = c.outputDirectory
+        configuration {
+//            sourceRoots = c.sourceDirs.map { File(it) }
+            jdkVersion = c.jdkVersion
+        }
     }
 }

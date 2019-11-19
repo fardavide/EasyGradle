@@ -19,7 +19,7 @@ dependencies {
     implementation(Lib.bintrayGradlePlugin)
 
     // Dokka Android
-    implementation(Lib.dokkaAndroidGradlePlugin)
+    implementation(Lib.dokkaGradlePlugin)
 
     // Test
     testImplementation(Lib.jUnit)

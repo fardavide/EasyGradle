@@ -17,13 +17,12 @@ Davide Farella</p>
 <tbody>
 <tr>
 <td>
-<p><a href="-source-type/index.html">SourceType</a></p>
+<h4><a href="-source-type/index.html">SourceType</a></h4>
 </td>
 <td>
-<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">SourceType</span></code>
 <p>Type of the source of the <a href="./index.html">Dependency</a>.
 It could be <a href="-source-type/-local.html">Local</a> ( probably hosted in the same project ) or <a href="-source-type/-remote.html">Remote</a> ( hosted on the net )</p>
-</td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">SourceType</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -32,22 +31,10 @@ It could be <a href="-source-type/-local.html">Local</a> ( probably hosted in th
 <tbody>
 <tr>
 <td>
-<p><a href="source-type.html">sourceType</a></p>
+<h4><a href="source-type.html">sourceType</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">sourceType</span><span class="symbol">: </span><a href="-source-type/index.html"><span class="identifier">Dependency.SourceType</span></a></code></td>
-</tr>
-</tbody>
-</table>
-<h3>Extension Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="../kotlin.-any/version.html">version</a></p>
-</td>
-<td>
-<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">.</span><span class="identifier">version</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$version(kotlin.Any, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">sourceType</span><span class="symbol">: </span><span class="identifier">SourceType</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -56,40 +43,36 @@ It could be <a href="-source-type/-local.html">Local</a> ( probably hosted in th
 <tbody>
 <tr>
 <td>
-<p><a href="../-library.html">Library</a></p>
+<h4><a href="../-library.html">Library</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">Library</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Dependency</span></a></code>
 <p>A library that can be included into <code>dependencies</code> block of a module</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">Library</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Dependency</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="../-local-dependency/index.html">LocalDependency</a></p>
+<h4><a href="../-local-dependency/index.html">LocalDependency</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">LocalDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Dependency</span></a></code>
 <p>A <a href="./index.html">Dependency</a> hosted locally.
 It is generally a module</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">LocalDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Dependency</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="../-plugin.html">Plugin</a></p>
+<h4><a href="../-plugin.html">Plugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">Plugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Dependency</span></a></code>
 <p>A generic plugin</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">Plugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Dependency</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="../-remote-dependency/index.html">RemoteDependency</a></p>
+<h4><a href="../-remote-dependency/index.html">RemoteDependency</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">RemoteDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Dependency</span></a></code>
 <p>A <a href="./index.html">Dependency</a> hosted remotely</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">RemoteDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Dependency</span></a></code></td>
 </tr>
 </tbody>
 </table>

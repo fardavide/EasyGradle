@@ -13,203 +13,178 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-dependency/index.html">Dependency</a></p>
+<h4><a href="-dependency/index.html">Dependency</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">Dependency</span></code>
 <p>A generic dependency</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">Dependency</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-dokka-config/index.html">DokkaConfig</a></p>
+<h4><a href="-dokka-config/index.html">DokkaConfig</a></h4>
 </td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">DokkaConfig</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-domain/index.html">Domain</a></p>
+<h4><a href="-dokka-config-builder.html">DokkaConfigBuilder</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">Domain</span></code>
+<p>Lambda for build a <a href="-dokka-config/index.html">DokkaConfig</a> within a <a href="#">Project</a></p>
+<code><span class="keyword">typealias </span><span class="identifier">DokkaConfigBuilder</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-dokka-config/index.html"><span class="identifier">DokkaConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="identifier">Project</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-domain/index.html">Domain</a></h4>
+</td>
+<td>
 <p>TODO</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">Domain</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-gradle-plugin.html">GradlePlugin</a></p>
+<h4><a href="-gradle-plugin.html">GradlePlugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">GradlePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-module-plugin/index.html"><span class="identifier">ModulePlugin</span></a><span class="symbol">, </span><a href="-project-plugin.html"><span class="identifier">ProjectPlugin</span></a></code>
 <p>A <a href="-plugin.html">Plugin</a> that works as <a href="-module-plugin/index.html">ModulePlugin</a> and <a href="-project-plugin.html">ProjectPlugin</a></p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">GradlePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-module-plugin/index.html"><span class="identifier">ModulePlugin</span></a><span class="symbol">, </span><a href="-project-plugin.html"><span class="identifier">ProjectPlugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-group/index.html">Group</a></p>
+<h4><a href="-group/index.html">Group</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Group</span></code>
 <p>Group of a <a href="-dependency/index.html">Dependency</a></p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Group</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-library.html">Library</a></p>
+<h4><a href="-library.html">Library</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">Library</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code>
 <p>A library that can be included into <code>dependencies</code> block of a module</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">Library</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-local-dependency/index.html">LocalDependency</a></p>
+<h4><a href="-local-dependency/index.html">LocalDependency</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">LocalDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code>
 <p>A <a href="-dependency/index.html">Dependency</a> hosted locally.
 It is generally a module</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">LocalDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-local-gradle-plugin/index.html">LocalGradlePlugin</a></p>
+<h4><a href="-local-gradle-plugin/index.html">LocalGradlePlugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">LocalGradlePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-gradle-plugin.html"><span class="identifier">GradlePlugin</span></a><span class="symbol">, </span><a href="-local-module-plugin.html"><span class="identifier">LocalModulePlugin</span></a><span class="symbol">, </span><a href="-local-project-plugin.html"><span class="identifier">LocalProjectPlugin</span></a></code>
 <p>A <a href="-gradle-plugin.html">GradlePlugin</a> hosted locally</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">LocalGradlePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-gradle-plugin.html"><span class="identifier">GradlePlugin</span></a><span class="symbol">, </span><a href="-local-module-plugin.html"><span class="identifier">LocalModulePlugin</span></a><span class="symbol">, </span><a href="-local-project-plugin.html"><span class="identifier">LocalProjectPlugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-local-library.html">LocalLibrary</a></p>
+<h4><a href="-local-library.html">LocalLibrary</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">LocalLibrary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-library.html"><span class="identifier">Library</span></a><span class="symbol">, </span><a href="-local-dependency/index.html"><span class="identifier">LocalDependency</span></a></code>
 <p>A <a href="-library.html">Library</a> hosted locally</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">LocalLibrary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-library.html"><span class="identifier">Library</span></a><span class="symbol">, </span><a href="-local-dependency/index.html"><span class="identifier">LocalDependency</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-local-module-plugin.html">LocalModulePlugin</a></p>
+<h4><a href="-local-module-plugin.html">LocalModulePlugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">LocalModulePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-module-plugin/index.html"><span class="identifier">ModulePlugin</span></a></code>
 <p>A <a href="-module-plugin/index.html">ModulePlugin</a> hosted locally</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">LocalModulePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-module-plugin/index.html"><span class="identifier">ModulePlugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-local-project-plugin.html">LocalProjectPlugin</a></p>
+<h4><a href="-local-project-plugin.html">LocalProjectPlugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">LocalProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-project-plugin.html"><span class="identifier">ProjectPlugin</span></a></code>
 <p>A <a href="-project-plugin.html">ProjectPlugin</a> hosted locally</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">LocalProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-project-plugin.html"><span class="identifier">ProjectPlugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-module-plugin/index.html">ModulePlugin</a></p>
+<h4><a href="-module-plugin/index.html">ModulePlugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">ModulePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-plugin.html"><span class="identifier">Plugin</span></a></code>
 <p>A <a href="-plugin.html">Plugin</a> that can be applied to a single module</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">ModulePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-plugin.html"><span class="identifier">Plugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-plugin.html">Plugin</a></p>
+<h4><a href="-plugin.html">Plugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">Plugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code>
 <p>A generic plugin</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">Plugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-project-plugin.html">ProjectPlugin</a></p>
+<h4><a href="-project-plugin.html">ProjectPlugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">ProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-plugin.html"><span class="identifier">Plugin</span></a></code>
 <p>A <a href="-plugin.html">Plugin</a> that can be applied to the whole project</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">ProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-plugin.html"><span class="identifier">Plugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-publish-config/index.html">PublishConfig</a></p>
+<h4><a href="-publish-config/index.html">PublishConfig</a></h4>
 </td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">PublishConfig</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-remote-dependency/index.html">RemoteDependency</a></p>
+<h4><a href="-publish-config-builder.html">PublishConfigBuilder</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">RemoteDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code>
-<p>A <a href="-dependency/index.html">Dependency</a> hosted remotely</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-remote-gradle-plugin/index.html">RemoteGradlePlugin</a></p>
-</td>
-<td>
-<code><span class="keyword">interface </span><span class="identifier">RemoteGradlePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-gradle-plugin.html"><span class="identifier">GradlePlugin</span></a><span class="symbol">, </span><a href="-remote-module-plugin/index.html"><span class="identifier">RemoteModulePlugin</span></a><span class="symbol">, </span><a href="-remote-project-plugin.html"><span class="identifier">RemoteProjectPlugin</span></a></code>
-<p>A <a href="-gradle-plugin.html">GradlePlugin</a> hosted locally</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-remote-library.html">RemoteLibrary</a></p>
-</td>
-<td>
-<code><span class="keyword">interface </span><span class="identifier">RemoteLibrary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-library.html"><span class="identifier">Library</span></a><span class="symbol">, </span><a href="-remote-dependency/index.html"><span class="identifier">RemoteDependency</span></a></code>
-<p>A <a href="-library.html">Library</a> hosted remotely</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-remote-module-plugin/index.html">RemoteModulePlugin</a></p>
-</td>
-<td>
-<code><span class="keyword">interface </span><span class="identifier">RemoteModulePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-module-plugin/index.html"><span class="identifier">ModulePlugin</span></a></code>
-<p>A <a href="-module-plugin/index.html">ModulePlugin</a> hosted remotely</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-remote-project-plugin.html">RemoteProjectPlugin</a></p>
-</td>
-<td>
-<code><span class="keyword">interface </span><span class="identifier">RemoteProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-project-plugin.html"><span class="identifier">ProjectPlugin</span></a><span class="symbol">, </span><a href="-remote-dependency/index.html"><span class="identifier">RemoteDependency</span></a></code>
-<p>A <a href="-project-plugin.html">ProjectPlugin</a> hosted remotely</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3>Type Aliases</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="-dokka-config-builder.html">DokkaConfigBuilder</a></p>
-</td>
-<td>
-<code><span class="keyword">typealias </span><span class="identifier">DokkaConfigBuilder</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-dokka-config/index.html"><span class="identifier">DokkaConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="identifier">Project</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Lambda for build a <a href="-dokka-config/index.html">DokkaConfig</a> within a <a href="#">Project</a></p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-publish-config-builder.html">PublishConfigBuilder</a></p>
-</td>
-<td>
-<code><span class="keyword">typealias </span><span class="identifier">PublishConfigBuilder</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-publish-config/index.html"><span class="identifier">PublishConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="identifier">Project</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Lambda for build a <a href="-publish-config/index.html">PublishConfig</a> within a <a href="#">Project</a></p>
+<code><span class="keyword">typealias </span><span class="identifier">PublishConfigBuilder</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-publish-config/index.html"><span class="identifier">PublishConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="identifier">Project</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-remote-dependency/index.html">RemoteDependency</a></h4>
 </td>
+<td>
+<p>A <a href="-dependency/index.html">Dependency</a> hosted remotely</p>
+<code><span class="keyword">interface </span><span class="identifier">RemoteDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-remote-gradle-plugin/index.html">RemoteGradlePlugin</a></h4>
+</td>
+<td>
+<p>A <a href="-gradle-plugin.html">GradlePlugin</a> hosted locally</p>
+<code><span class="keyword">interface </span><span class="identifier">RemoteGradlePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-gradle-plugin.html"><span class="identifier">GradlePlugin</span></a><span class="symbol">, </span><a href="-remote-module-plugin/index.html"><span class="identifier">RemoteModulePlugin</span></a><span class="symbol">, </span><a href="-remote-project-plugin.html"><span class="identifier">RemoteProjectPlugin</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-remote-library.html">RemoteLibrary</a></h4>
+</td>
+<td>
+<p>A <a href="-library.html">Library</a> hosted remotely</p>
+<code><span class="keyword">interface </span><span class="identifier">RemoteLibrary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-library.html"><span class="identifier">Library</span></a><span class="symbol">, </span><a href="-remote-dependency/index.html"><span class="identifier">RemoteDependency</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-remote-module-plugin/index.html">RemoteModulePlugin</a></h4>
+</td>
+<td>
+<p>A <a href="-module-plugin/index.html">ModulePlugin</a> hosted remotely</p>
+<code><span class="keyword">interface </span><span class="identifier">RemoteModulePlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-module-plugin/index.html"><span class="identifier">ModulePlugin</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-remote-project-plugin.html">RemoteProjectPlugin</a></h4>
+</td>
+<td>
+<p>A <a href="-project-plugin.html">ProjectPlugin</a> hosted remotely</p>
+<code><span class="keyword">interface </span><span class="identifier">RemoteProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-project-plugin.html"><span class="identifier">ProjectPlugin</span></a><span class="symbol">, </span><a href="-remote-dependency/index.html"><span class="identifier">RemoteDependency</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -218,35 +193,35 @@ It is generally a module</p>
 <tbody>
 <tr>
 <td>
-<p><a href="kotlin.-any/index.html">kotlin.Any</a></p>
+<h4><a href="kotlin.-any/index.html">kotlin.Any</a></h4>
 </td>
 <td>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="org.gradle.api.artifacts.dsl.-dependency-handler/index.html">org.gradle.api.artifacts.dsl.DependencyHandler</a></p>
+<h4><a href="org.gradle.api.artifacts.dsl.-dependency-handler/index.html">org.gradle.api.artifacts.dsl.DependencyHandler</a></h4>
 </td>
 <td>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="org.gradle.api.artifacts.-module-dependency/index.html">org.gradle.api.artifacts.ModuleDependency</a></p>
+<h4><a href="org.gradle.api.artifacts.-module-dependency/index.html">org.gradle.api.artifacts.ModuleDependency</a></h4>
 </td>
 <td>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="org.gradle.api.-project/index.html">org.gradle.api.Project</a></p>
+<h4><a href="org.gradle.api.-project/index.html">org.gradle.api.Project</a></h4>
 </td>
 <td>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="org.gradle.plugin.use.-plugin-dependencies-spec/index.html">org.gradle.plugin.use.PluginDependenciesSpec</a></p>
+<h4><a href="org.gradle.plugin.use.-plugin-dependencies-spec/index.html">org.gradle.plugin.use.PluginDependenciesSpec</a></h4>
 </td>
 <td>
 </td>
@@ -258,42 +233,42 @@ It is generally a module</p>
 <tbody>
 <tr>
 <td>
-<p><a href="coroutines version.html">coroutines version</a></p>
+<h4><a href="coroutines version.html">coroutines version</a></h4>
 </td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">coroutines version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="kotlin version.html">kotlin version</a></p>
+<h4><a href="kotlin version.html">kotlin version</a></h4>
 </td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">kotlin version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="kotlin-poet version.html">kotlinPoet version</a></p>
+<h4><a href="kotlin-poet version.html">kotlinPoet version</a></h4>
 </td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">kotlinPoet version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="ktor version.html">ktor version</a></p>
+<h4><a href="ktor version.html">ktor version</a></h4>
 </td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">ktor version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="mock-k version.html">mockK version</a></p>
+<h4><a href="mock-k version.html">mockK version</a></h4>
 </td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">mockK version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="serialization version.html">serialization version</a></p>
+<h4><a href="serialization version.html">serialization version</a></h4>
 </td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">serialization version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
@@ -305,56 +280,56 @@ It is generally a module</p>
 <tbody>
 <tr>
 <td>
-<p><a href="dokka-config.html">dokkaConfig</a></p>
+<h4><a href="dokka-config.html">dokkaConfig</a></h4>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">dokkaConfig</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$dokkaConfig(kotlin.Function2((studio.forface.easygradle.dsl.DokkaConfig, org.gradle.api.Project, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="-dokka-config-builder.html"><span class="identifier">DokkaConfigBuilder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-dokka-config-builder.html"><span class="identifier">DokkaConfigBuilder</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="module-plugin.html">modulePlugin</a></p>
+<h4><a href="module-plugin.html">modulePlugin</a></h4>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">modulePlugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$modulePlugin(kotlin.String)/pluginId">pluginId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-remote-module-plugin/index.html"><span class="identifier">RemoteModulePlugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="property.html">property</a></p>
+<h4><a href="property.html">property</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">property</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$property(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-read-write-property/index.html"><span class="identifier">ReadWriteProperty</span></a><span class="symbol">&lt;</span><span class="identifier">Project</span><span class="symbol">,</span>&nbsp;<a href="property.html#T"><span class="identifier">T</span></a><span class="symbol">?</span><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">property</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$property(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-read-write-property/index.html"><span class="identifier">ReadWriteProperty</span></a><span class="symbol">&lt;</span><span class="identifier">Project</span><span class="symbol">,</span>&nbsp;<span class="identifier">T</span><span class="symbol">?</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="publish-config.html">publishConfig</a></p>
+<h4><a href="publish-config.html">publishConfig</a></h4>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">publishConfig</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$publishConfig(kotlin.Function2((studio.forface.easygradle.dsl.PublishConfig, org.gradle.api.Project, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="-publish-config-builder.html"><span class="identifier">PublishConfigBuilder</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-publish-config-builder.html"><span class="identifier">PublishConfigBuilder</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-remote-library.html">RemoteLibrary</a></p>
+<h4><a href="-remote-library.html">RemoteLibrary</a></h4>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">RemoteLibrary</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$RemoteLibrary(kotlin.String, kotlin.String, kotlin.String)/group">group</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoteLibrary(kotlin.String, kotlin.String, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoteLibrary(kotlin.String, kotlin.String, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-remote-library.html"><span class="identifier">RemoteLibrary</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-remote-module-plugin.html">RemoteModulePlugin</a></p>
+<h4><a href="-remote-module-plugin.html">RemoteModulePlugin</a></h4>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">RemoteModulePlugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$RemoteModulePlugin(kotlin.String, kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoteModulePlugin(kotlin.String, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="-remote-module-plugin/index.html"><span class="identifier">RemoteModulePlugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-remote-plugin.html">RemotePlugin</a></p>
+<h4><a href="-remote-plugin.html">RemotePlugin</a></h4>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">RemotePlugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$RemotePlugin(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/group">group</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemotePlugin(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemotePlugin(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemotePlugin(kotlin.String, kotlin.String, kotlin.String, kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-remote-gradle-plugin/index.html"><span class="identifier">RemoteGradlePlugin</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-remove-project-plugin.html">RemoveProjectPlugin</a></p>
+<h4><a href="-remove-project-plugin.html">RemoveProjectPlugin</a></h4>
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">RemoveProjectPlugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$RemoveProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/group">group</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoveProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoveProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-remote-project-plugin.html"><span class="identifier">RemoteProjectPlugin</span></a></code></td>
