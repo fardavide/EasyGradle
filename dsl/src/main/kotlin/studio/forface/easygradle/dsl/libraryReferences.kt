@@ -309,6 +309,18 @@ fun DependencyHandler.squareup(groupName: String, module: String = groupName, ve
         "com.squareup.$groupName:$module${version?.let { ":$version" } ?: "" }"
 // endregion
 
+// region Jake Wharton
+/**
+ * Builds the dependency notation for the named `com.jakewharton` group at the given [version].
+ *
+ * @param groupName simple name of the `com.jakewharton` group, for example "retrofit"
+ * @param module simple name of the `com.jakewharton` module, for example "butterknife". Default is [groupName]
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.jakeWharton(groupName: String, module: String = groupName, version: String? = null): Any =
+        "com.jakewharton.$groupName:$module${version?.let { ":$version" } ?: "" }"
+// endregion
+
 // region MockK
 /**
  * Builds the dependency notation for MockK.

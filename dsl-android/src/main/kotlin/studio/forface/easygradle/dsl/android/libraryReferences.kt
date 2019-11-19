@@ -6,6 +6,7 @@
 package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import studio.forface.easygradle.dsl.jakeWharton
 import studio.forface.easygradle.dsl.squareup
 
 // region Jetpack
@@ -378,6 +379,18 @@ val DependencyHandler.`retrofit` get() = squareup("retrofit2", "retrofit", versi
 
 
 var `retrofit version` = defaultRetrofitVersion
+
+// region Jake Wharton
+/**
+ * Builds the dependency notation for Retrofit Kotlin Serialization Converter.
+ * @see jakeWharton
+ *
+ * You can also use `` `retrofit-kotlin-serialization` version "1.0.0" `` if you want to use an explicit version.
+ */
+val DependencyHandler.`retrofit-kotlin-serialization` get() = jakeWharton("retrofit", "retrofit2-kotlinx-serialization-converter", version = `retrofit-kotlin-serialization version`)
+
+
+var `retrofit-kotlin-serialization version` = defaultRetrofitKotlinSerializationVersion
 // endregion
 
 // region 4face
