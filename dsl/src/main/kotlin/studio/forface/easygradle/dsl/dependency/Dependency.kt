@@ -1,8 +1,8 @@
 @file:Suppress(
         "unused", // Public APIs
-        "FunctionName" // Constructor functions
+        "FunctionName", // Constructor functions
+        "PackageDirectoryMismatch" // ignore `dependency` package
 )
-
 package studio.forface.easygradle.dsl
 
 import studio.forface.easygradle.dsl.Dependency.SourceType.Local
@@ -25,7 +25,7 @@ interface Dependency {
 
 /**
  * A [Dependency] hosted locally.
- * It is generally a module
+ * It is generally a module or a file
  */
 interface LocalDependency : Dependency {
     override val sourceType get() = Local
@@ -33,11 +33,36 @@ interface LocalDependency : Dependency {
     /** Name of this module [Dependency] */
     val name: String
 
-    /** Optional parent module [LocalDependency] for this Dependency */
-    val parent: LocalDependency? get() = null
+    /** @return the path to the [Dependency] */
+    fun path(): String = name
+}
+
+/**
+ * A [LocalDependency] included into a module
+ */
+interface ModuleDependency : LocalDependency {
+
+    /** Optional parent module [ModuleDependency] for this Dependency */
+    val parent: ModuleDependency? get() = null
 
     /** @return the path to the [Dependency]. E.g. `` ":sharedTest:testKotlin" `` */
-    fun path(): String = "${parent?.path() ?: ""}:$name"
+    override fun path(): String = "${parent?.path() ?: ""}:$name"
+}
+
+/**
+ * A [LocalDependency] included into a file
+ */
+interface FileDependency : LocalDependency {
+
+    val projectDirectoryPath: String
+    val subDirectoryPath: String
+    val versionSeparator: String
+    val version: String
+    val extension: String
+
+    /** @return the path to the [Dependency]. E.g. `` ":sharedTest:testKotlin" `` */
+    override fun path() = (if (projectDirectoryPath.isNotBlank()) "$projectDirectoryPath/" else "") +
+            "$subDirectoryPath/$name$versionSeparator$version.$extension"
 }
 
 /**
@@ -71,6 +96,36 @@ interface Library : Dependency
  * @see LocalDependency
  */
 interface LocalLibrary : Library, LocalDependency
+
+/**
+ * A [LocalLibrary] from a module
+ * @see ModuleDependency
+ */
+interface LocalModuleLibrary : LocalLibrary, ModuleDependency
+fun LocalModuleLibrary(name: String) = object : LocalModuleLibrary {
+    override val name = name
+}
+
+/**
+ * A [LocalLibrary] from a file
+ * @see FileDependency
+ */
+interface LocalFileLibrary : LocalLibrary, FileDependency
+fun LocalFileLibrary(
+        projectDirectoryPath: String,
+        subDirectoryPath: String,
+        name: String,
+        versionSeparator: String,
+        version: String,
+        extension: String
+) = object : LocalFileLibrary {
+    override val projectDirectoryPath = projectDirectoryPath
+    override val subDirectoryPath = subDirectoryPath
+    override val name = name
+    override val versionSeparator = versionSeparator
+    override val version = version
+    override val extension = extension
+}
 
 /**
  * A [Library] hosted remotely
@@ -138,7 +193,7 @@ interface LocalProjectPlugin : ProjectPlugin
  * @see RemoteDependency
  */
 interface RemoteProjectPlugin : ProjectPlugin, RemoteDependency
-fun RemoveProjectPlugin(group: String, module: String, version: String) = object : RemoteProjectPlugin {
+fun RemoteProjectPlugin(group: String, module: String, version: String) = object : RemoteProjectPlugin {
     override val group = group
     override val module = module
     override val version = version

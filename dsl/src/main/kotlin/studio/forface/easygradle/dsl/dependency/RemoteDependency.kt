@@ -1,4 +1,7 @@
-@file:Suppress("unused") // Public APIs
+@file:Suppress(
+        "unused", // Public APIs
+        "PackageDirectoryMismatch" // ignore `dependency` package
+)
 
 package studio.forface.easygradle.dsl
 
@@ -29,8 +32,8 @@ interface Domain {
     /** @return [RemoteGradlePlugin] created with receiver [Group] as parent */
     fun Group.plugin(module: String, pluginId: String) = RemotePlugin(name, module, version, pluginId)
 
-    /** @return [RemoveProjectPlugin] created with receiver [Group] as parent */
-    fun Group.projectPlugin(module: String) = RemoveProjectPlugin(name, module, version)
+    /** @return [RemoteProjectPlugin] created with receiver [Group] as parent */
+    fun Group.projectPlugin(module: String) = RemoteProjectPlugin(name, module, version)
 
     /** @return [RemoteModulePlugin] with version of [Domain] */
     fun modulePlugin(pluginId: String) = RemoteModulePlugin(pluginId, version)

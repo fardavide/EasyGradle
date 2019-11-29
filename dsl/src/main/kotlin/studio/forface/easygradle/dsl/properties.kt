@@ -1,7 +1,6 @@
 @file:Suppress(
         "unused" // Public APIs
 )
-
 package studio.forface.easygradle.dsl
 
 import org.gradle.api.Project
