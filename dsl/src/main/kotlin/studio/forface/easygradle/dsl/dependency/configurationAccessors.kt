@@ -13,7 +13,6 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import org.gradle.kotlin.dsl.add
 import org.gradle.kotlin.dsl.project
-import java.io.File
 
 /*
  * Configuration accessors for `Dependency` and subclasses
@@ -74,22 +73,22 @@ fun DependencyHandler.add(
         configuration: String,
         module: LocalModuleLibrary,
         dependencyConfiguration: ProjectDependency.() -> Unit = {}
-) = add(configuration, project(module.path()), dependencyConfiguration)
+) = add(configuration, project(module.path), dependencyConfiguration)
 // endregion
 
 // region File
-fun DependencyHandler.api(fileLibrary: LocalFileLibrary) = add("api", fileLibrary)
+fun DependencyHandler.api(fileLibrary: LocalFileLibrary) = addFile("api", fileLibrary)
 
-fun DependencyHandler.compileOnly(fileLibrary: LocalFileLibrary) = add("compileOnly", fileLibrary)
+fun DependencyHandler.compileOnly(fileLibrary: LocalFileLibrary) = addFile("compileOnly", fileLibrary)
 
-fun DependencyHandler.implementation(fileLibrary: LocalFileLibrary) = add("implementation", fileLibrary)
+fun DependencyHandler.implementation(fileLibrary: LocalFileLibrary) = addFile("implementation", fileLibrary)
 
-fun DependencyHandler.testImplementation(fileLibrary: LocalFileLibrary) = add("testImplementation", fileLibrary)
+fun DependencyHandler.testImplementation(fileLibrary: LocalFileLibrary) = addFile("testImplementation", fileLibrary)
 
 fun DependencyHandler.addFile(
         configuration: String,
         fileLibrary: LocalFileLibrary
-) = add(configuration, File(fileLibrary.path()))
+) = add(configuration, fileLibrary.source())
 // endregion
 // endregion
 

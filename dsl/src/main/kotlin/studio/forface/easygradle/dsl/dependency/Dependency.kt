@@ -5,6 +5,7 @@
 )
 package studio.forface.easygradle.dsl
 
+import org.gradle.api.Project
 import studio.forface.easygradle.dsl.Dependency.SourceType.Local
 import studio.forface.easygradle.dsl.Dependency.SourceType.Remote
 
@@ -33,8 +34,11 @@ interface LocalDependency : Dependency {
     /** Name of this module [Dependency] */
     val name: String
 
-    /** @return the path to the [Dependency] */
-    fun path(): String = name
+    /** The path to the [Dependency] */
+    val path get() = name
+
+    /** Resolves the Dependency notation for this [LocalDependency] */
+    fun source(): Any
 }
 
 /**
@@ -46,7 +50,8 @@ interface ModuleDependency : LocalDependency {
     val parent: ModuleDependency? get() = null
 
     /** @return the path to the [Dependency]. E.g. `` ":sharedTest:testKotlin" `` */
-    override fun path(): String = "${parent?.path() ?: ""}:$name"
+    override val path: String
+        get() = "${parent?.path ?: ""}:$name"
 }
 
 /**
@@ -61,8 +66,9 @@ interface FileDependency : LocalDependency {
     val extension: String
 
     /** @return the path to the [Dependency]. E.g. `` ":sharedTest:testKotlin" `` */
-    override fun path() = (if (projectDirectoryPath.isNotBlank()) "$projectDirectoryPath/" else "") +
-            "$subDirectoryPath/$name$versionSeparator$version.$extension"
+    override val path
+        get() = (if (projectDirectoryPath.isNotBlank()) "$projectDirectoryPath/" else "") +
+                "$subDirectoryPath/$name$versionSeparator$version.$extension"
 }
 
 /**
@@ -102,8 +108,9 @@ interface LocalLibrary : Library, LocalDependency
  * @see ModuleDependency
  */
 interface LocalModuleLibrary : LocalLibrary, ModuleDependency
-fun LocalModuleLibrary(name: String) = object : LocalModuleLibrary {
+fun Project.LocalModuleLibrary(name: String) = object : LocalModuleLibrary {
     override val name = name
+    override fun source() = project(name)
 }
 
 /**
@@ -111,7 +118,7 @@ fun LocalModuleLibrary(name: String) = object : LocalModuleLibrary {
  * @see FileDependency
  */
 interface LocalFileLibrary : LocalLibrary, FileDependency
-fun LocalFileLibrary(
+fun Project.LocalFileLibrary(
         projectDirectoryPath: String,
         subDirectoryPath: String,
         name: String,
@@ -125,6 +132,8 @@ fun LocalFileLibrary(
     override val versionSeparator = versionSeparator
     override val version = version
     override val extension = extension
+
+    override fun source() = files(path)
 }
 
 /**
