@@ -21,9 +21,15 @@ internal fun Any.assertStringsNotEmpty(vararg prop: KProperty<String>) = prop.fo
  */
 internal fun Any.assertStringNotEmpty(prop: KProperty<String>) {
     val string = prop.javaGetter!!.invoke(this) as String
-    if (string.isEmpty()) paramNotSet(this::class, prop)
+    if (string.isEmpty()) throw paramNotSet(this::class, prop)
 }
 
 /** @throws IllegalArgumentException */
-private fun paramNotSet(kclass: KClass<*>, prop: KProperty<*>): Nothing =
-        throw IllegalArgumentException("`${kclass.simpleName}.${prop.name}` has not being set")
+private fun paramNotSet(kclass: KClass<*>, prop: KProperty<*>) =
+        IllegalArgumentException("`${kclass.simpleName}.${prop.name}` has not being set")
+
+/**
+ * @return [String]
+ * If receiver [String] is not null, use it for create another string, else return an empty string
+ */
+fun String?.useIfNotNull(block: (String) -> String) = this?.let(block) ?: ""
