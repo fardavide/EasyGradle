@@ -6,6 +6,8 @@
 package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import studio.forface.easygradle.dsl.dagger
+import studio.forface.easygradle.dsl.google
 import studio.forface.easygradle.dsl.jakeWharton
 import studio.forface.easygradle.dsl.squareup
 
@@ -300,7 +302,7 @@ fun DependencyHandler.android(groupName: String, module: String = groupName, ver
  * @param version optional desired version, unspecified if null.
  */
 fun DependencyHandler.googleAndroid(groupName: String, module: String = groupName, version: String? = null): Any =
-        "com.google.android.$groupName:$module${version?.let { ":$version" } ?: "" }"
+        google("android.$groupName", module, version)
 
 /**
  * Builds the dependency notation for the named Androidx group at the given [version].
@@ -368,6 +370,12 @@ fun DependencyHandler.androidxWork(module: String, version: String? = null): Any
 // endregion
 // endregion
 
+// Google
+val DependencyHandler.`dagger-android` get() =              dagger("android")
+val DependencyHandler.`dagger-android-support` get() =      dagger("android-support")
+val DependencyHandler.`dagger-android-processor` get() =    dagger("android-processor")
+// endregion
+
 // region Square
 /**
  * Builds the dependency notation for Retrofit 2.
@@ -379,6 +387,7 @@ val DependencyHandler.`retrofit` get() = squareup("retrofit2", "retrofit", versi
 
 
 var `retrofit version` = defaultRetrofitVersion
+// endregion
 
 // region Jake Wharton
 /**

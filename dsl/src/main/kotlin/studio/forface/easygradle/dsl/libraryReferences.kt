@@ -285,6 +285,33 @@ var `ktor version` = defaultKtorVersion
 // endregion
 // endregion
 
+// region Google
+
+// region Dagger
+val DependencyHandler.`dagger` get() =                      dagger()
+val DependencyHandler.`dagger-compiler` get() =             dagger("compiler")
+
+/**
+ * Builds the dependency notation for the named Dagger.
+ * @param module simple name of the Dagger, for example "compiler".
+ */
+fun DependencyHandler.dagger(module: String? = null, version: String = `dagger version`): Any =
+        google("dagger", "dagger${module?.let { "-$module" } ?: ""}", version)
+
+var `dagger version` = defaultDaggerVersion
+// endregion
+
+/**
+ * Builds the dependency notation for the named Google group at the given [version].
+ *
+ * @param groupName simple name of the Google group, for example "dagger"
+ * @param module simple name of the Google module, for example "dagger-compiler". Default is [groupName]
+ * @param version optional desired version, unspecified if null.
+ */
+fun DependencyHandler.google(groupName: String, module: String = groupName, version: String? = null): Any =
+        "com.google.$groupName:$module${version?.let { ":$version" } ?: "" }"
+// endregion
+
 // region Square
 /**
  * Builds the dependency notation for Kotlin Poet.
