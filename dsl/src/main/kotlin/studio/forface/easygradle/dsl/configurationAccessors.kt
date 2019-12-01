@@ -39,6 +39,17 @@ fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
     }
 }
 
+fun DependencyHandler.kapt(vararg dependencyNotations: Any) {
+    dependencyNotations.forEach {
+        when(it) {
+            is LocalModuleLibrary -> kapt(it)
+            is LocalFileLibrary -> kapt(it)
+            is RemoteLibrary -> kapt(it)
+            else -> add("kapt", it)
+        }
+    }
+}
+
 fun DependencyHandler.testImplementation(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
         when(it) {

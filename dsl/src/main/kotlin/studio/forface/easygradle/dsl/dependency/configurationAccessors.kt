@@ -64,6 +64,11 @@ fun DependencyHandler.implementation(
         dependencyConfiguration: ProjectDependency.() -> Unit = {}
 ) = add("implementation", module, dependencyConfiguration)
 
+fun DependencyHandler.kapt(
+        module: LocalModuleLibrary,
+        dependencyConfiguration: ProjectDependency.() -> Unit = {}
+) = add("kapt", module, dependencyConfiguration)
+
 fun DependencyHandler.testImplementation(
         module: LocalModuleLibrary,
         dependencyConfiguration: ProjectDependency.() -> Unit = {}
@@ -82,6 +87,8 @@ fun DependencyHandler.api(fileLibrary: LocalFileLibrary) = addFile("api", fileLi
 fun DependencyHandler.compileOnly(fileLibrary: LocalFileLibrary) = addFile("compileOnly", fileLibrary)
 
 fun DependencyHandler.implementation(fileLibrary: LocalFileLibrary) = addFile("implementation", fileLibrary)
+
+fun DependencyHandler.kapt(fileLibrary: LocalFileLibrary) = addFile("kapt", fileLibrary)
 
 fun DependencyHandler.testImplementation(fileLibrary: LocalFileLibrary) = addFile("testImplementation", fileLibrary)
 
