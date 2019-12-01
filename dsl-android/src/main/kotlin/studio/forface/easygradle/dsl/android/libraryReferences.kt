@@ -320,7 +320,7 @@ fun DependencyHandler.androidx(groupName: String, module: String = groupName, ve
  * @param module simple name of the Androidx arch-core module, for example "testing".
  * @param version optional desired version, unspecified if null.
  */
-fun DependencyHandler.androidxArch(module: String, version: String? = null): Any =
+fun DependencyHandler.androidxArch(module: String, version: String = `android-arch version`): Any =
         androidx("arch.core", "core-$module", version)
 
 /**
@@ -329,7 +329,7 @@ fun DependencyHandler.androidxArch(module: String, version: String? = null): Any
  * @param module simple name of the Androidx lifecycle module, for example "livedata".
  * @param version optional desired version, unspecified if null.
  */
-fun DependencyHandler.androidxLifecycle(module: String, version: String? = null): Any =
+fun DependencyHandler.androidxLifecycle(module: String, version: String = `lifecycle version`): Any =
         androidx("lifecycle", "lifecycle-$module", version)
 
 /**
@@ -338,7 +338,7 @@ fun DependencyHandler.androidxLifecycle(module: String, version: String? = null)
  * @param module simple name of the Androidx paging module, for example "runtime".
  * @param version optional desired version, unspecified if null.
  */
-fun DependencyHandler.androidxPaging(module: String, version: String? = null): Any =
+fun DependencyHandler.androidxPaging(module: String, version: String = `android-paging version`): Any =
         androidx("paging", "paging-$module", version)
 
 /**
@@ -347,7 +347,7 @@ fun DependencyHandler.androidxPaging(module: String, version: String? = null): A
  * @param module simple name of the Androidx Room module, for example "runtime".
  * @param version optional desired version, unspecified if null.
  */
-fun DependencyHandler.androidxRoom(module: String, version: String? = null): Any =
+fun DependencyHandler.androidxRoom(module: String, version: String = `android-room version`): Any =
         androidx("room", "room-$module", version)
 
 /**
@@ -356,7 +356,7 @@ fun DependencyHandler.androidxRoom(module: String, version: String? = null): Any
  * @param module simple name of the Androidx-test module, for example "runner".
  * @param version optional desired version, unspecified if null.
  */
-fun DependencyHandler.androidxTest(module: String, version: String? = null): Any =
+fun DependencyHandler.androidxTest(module: String, version: String = `android-test version`): Any =
         androidx("test", module, version)
 
 /**
@@ -365,7 +365,7 @@ fun DependencyHandler.androidxTest(module: String, version: String? = null): Any
  * @param module simple name of the Androidx-work module, for example "runtime".
  * @param version optional desired version, unspecified if null.
  */
-fun DependencyHandler.androidxWork(module: String, version: String? = null): Any =
+fun DependencyHandler.androidxWork(module: String, version: String = `android-work version`): Any =
         androidx("work", "work-$module", version)
 // endregion
 // endregion
