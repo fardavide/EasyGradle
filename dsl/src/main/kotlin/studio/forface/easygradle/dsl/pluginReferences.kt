@@ -1,11 +1,11 @@
 @file:Suppress(
-        "PackageDirectoryMismatch", // Enable implicit import
         "unused", // Public API
         "ObjectPropertyName", // val with '-'
         "RemoveRedundantBackticks" // val with backticks without special characters
 )
-package org.gradle.kotlin.dsl
+package studio.forface.easygradle.dsl
 
+import org.gradle.kotlin.dsl.kotlin
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
