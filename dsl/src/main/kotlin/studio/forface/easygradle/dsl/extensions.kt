@@ -1,4 +1,3 @@
-@file:Suppress("unused") // Public API
 
 package studio.forface.easygradle.dsl
 
@@ -30,36 +29,47 @@ val Project.isAndroid get() =
  */
 infix fun Any.version(version: String): String {
     val string = this.toString()
-    val parts = string.split(':')
+    val (group, module) = RemoteDependencyParts.from(string)
 
-    require((parts.size == 2 || parts.size == 3)) {
+    requireNotNull(module) {
         "Invalid dependency format: '$string'. Expected 'group:artifact' or 'group:artifact:version'"
     }
 
-    return "${parts[0]}:${parts[1]}:$version"
+    return "$group:$module:$version"
 }
 
 // region exclude utils
 fun ModuleDependency.exclude(vararg any: Any) {
     any.forEach {
         when(it) {
+            is String -> exclude(dependency = it)
             is Group -> exclude(it)
             is RemoteLibrary -> exclude(it)
             is List<*> -> it.forEach { item -> exclude(item!!) }
-            else -> throw IllegalArgumentException(it.toString())
+            else -> throw IllegalArgumentException("Impossible to exclude the following: $it")
         }
     }
 }
-fun ModuleDependency.exclude(vararg groups: Group) {
-    groups.forEach(::exclude)
+fun ModuleDependency.exclude(dependency: String) {
+    val (group, module) = RemoteDependencyParts.from(dependency)
+    exclude(group, module)
 }
 fun ModuleDependency.exclude(group: Group) {
     group.all().forEach(::exclude)
 }
-fun ModuleDependency.exclude(vararg modules: RemoteLibrary) {
-    modules.forEach(::exclude)
-}
 fun ModuleDependency.exclude(library: RemoteLibrary) {
     exclude(group = library.group, module = library.module)
+}
+
+private data class RemoteDependencyParts(val group: String, val module: String?, val version: String?) {
+    companion object {
+        fun from(string: String): RemoteDependencyParts {
+            val parts = string.split(':')
+            require(parts.isNotEmpty() && parts.size <= 3) {
+                "Invalid dependency format: '$string'. Expected 'group:artifact' or 'group:artifact:version'"
+            }
+            return RemoteDependencyParts(parts[0], parts.getOrNull(1), parts.getOrNull(2))
+        }
+    }
 }
 // endregion
