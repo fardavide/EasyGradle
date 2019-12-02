@@ -98,7 +98,7 @@ fun DependencyHandler.android(groupName: String? = null, module: String? = null,
         dependency("com.android", groupName, module, moduleSuffix, version)
 
 fun DependencyHandler.googleAndroid(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        google("android.$groupName", module, moduleSuffix, version)
+        google("android.$groupName", module ?: groupName, moduleSuffix, version)
 
 fun DependencyHandler.androidx(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
         dependency("androidx", groupName, module, moduleSuffix, version)
