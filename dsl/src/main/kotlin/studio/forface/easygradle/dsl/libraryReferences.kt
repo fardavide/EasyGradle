@@ -1,7 +1,7 @@
 @file:Suppress(
         "unused", // Public API
-        "ObjectPropertyName", // val with '-'
-        "RemoveRedundantBackticks" // val with backticks without special characters
+        "ObjectPropertyName", // Field with '-'
+        "RemoveRedundantBackticks" // Field with backticks without special characters
 )
 package studio.forface.easygradle.dsl
 

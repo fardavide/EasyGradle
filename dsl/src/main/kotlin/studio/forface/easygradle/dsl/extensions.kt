@@ -1,8 +1,12 @@
-
+@file:Suppress(
+        "RemoveRedundantBackticks" // Field with backticks without special characters
+)
 package studio.forface.easygradle.dsl
 
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ModuleDependency
+import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.tasks.SourceSetContainer
@@ -39,9 +43,13 @@ infix fun Any.version(version: String): String {
 }
 
 // region exclude utils
+infix fun Dependency.exclude(any: Any) {
+    (this as ModuleDependency).exclude(any, NoParam)
+}
 fun ModuleDependency.exclude(vararg any: Any) {
     any.forEach {
         when(it) {
+            is NoParam -> { /* no-op */ }
             is String -> exclude(dependency = it)
             is Group -> exclude(it)
             is RemoteLibrary -> exclude(it)
@@ -61,6 +69,15 @@ fun ModuleDependency.exclude(library: RemoteLibrary) {
     exclude(group = library.group, module = library.module)
 }
 
+/**
+ * A [String] classifier for build a dependency for [exclude] rules
+ * E.g. `` implementation(...) exclude kotlinx(`any`) ``
+ */
+@Suppress("unused") // scoped to `DependencyHandler`
+val DependencyHandler.`any` get() = ANY
+
+private const val ANY = "\$any$"
+
 private data class RemoteDependencyParts(val group: String, val module: String?, val version: String?) {
     companion object {
         fun from(string: String): RemoteDependencyParts {
@@ -72,4 +89,5 @@ private data class RemoteDependencyParts(val group: String, val module: String?,
         }
     }
 }
+private object NoParam
 // endregion
