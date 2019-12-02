@@ -60,7 +60,7 @@ fun ModuleDependency.exclude(vararg any: Any) {
 }
 fun ModuleDependency.exclude(dependency: String) {
     val (group, module) = RemoteDependencyParts.from(dependency)
-    exclude(group, module)
+    exclude(group, module.takeIf { it != ANY })
 }
 fun ModuleDependency.exclude(group: Group) {
     group.all().forEach(::exclude)
