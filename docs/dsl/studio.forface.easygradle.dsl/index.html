@@ -44,6 +44,14 @@
 </tr>
 <tr>
 <td>
+<h4><a href="-file-dependency/index.html">FileDependency</a></h4>
+</td>
+<td>
+<p>A <a href="-local-dependency/index.html">LocalDependency</a> included into a file</p>
+<code><span class="keyword">interface </span><span class="identifier">FileDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-local-dependency/index.html"><span class="identifier">LocalDependency</span></a></code></td>
+</tr>
+<tr>
+<td>
 <h4><a href="-gradle-plugin.html">GradlePlugin</a></h4>
 </td>
 <td>
@@ -72,8 +80,16 @@
 </td>
 <td>
 <p>A <a href="-dependency/index.html">Dependency</a> hosted locally.
-It is generally a module</p>
+It is generally a module or a file</p>
 <code><span class="keyword">interface </span><span class="identifier">LocalDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-dependency/index.html"><span class="identifier">Dependency</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-local-file-library.html">LocalFileLibrary</a></h4>
+</td>
+<td>
+<p>A <a href="-local-library.html">LocalLibrary</a> from a file</p>
+<code><span class="keyword">interface </span><span class="identifier">LocalFileLibrary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-local-library.html"><span class="identifier">LocalLibrary</span></a><span class="symbol">, </span><a href="-file-dependency/index.html"><span class="identifier">FileDependency</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -93,6 +109,14 @@ It is generally a module</p>
 </tr>
 <tr>
 <td>
+<h4><a href="-local-module-library.html">LocalModuleLibrary</a></h4>
+</td>
+<td>
+<p>A <a href="-local-library.html">LocalLibrary</a> from a module</p>
+<code><span class="keyword">interface </span><span class="identifier">LocalModuleLibrary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-local-library.html"><span class="identifier">LocalLibrary</span></a><span class="symbol">, </span><a href="-module-dependency/index.html"><span class="identifier">ModuleDependency</span></a></code></td>
+</tr>
+<tr>
+<td>
 <h4><a href="-local-module-plugin.html">LocalModulePlugin</a></h4>
 </td>
 <td>
@@ -106,6 +130,14 @@ It is generally a module</p>
 <td>
 <p>A <a href="-project-plugin.html">ProjectPlugin</a> hosted locally</p>
 <code><span class="keyword">interface </span><span class="identifier">LocalProjectPlugin</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-project-plugin.html"><span class="identifier">ProjectPlugin</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-module-dependency/index.html">ModuleDependency</a></h4>
+</td>
+<td>
+<p>A <a href="-local-dependency/index.html">LocalDependency</a> included into a module</p>
+<code><span class="keyword">interface </span><span class="identifier">ModuleDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-local-dependency/index.html"><span class="identifier">LocalDependency</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -200,6 +232,13 @@ It is generally a module</p>
 </tr>
 <tr>
 <td>
+<h4><a href="org.gradle.api.artifacts.-dependency/index.html">org.gradle.api.artifacts.Dependency</a></h4>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
 <h4><a href="org.gradle.api.artifacts.dsl.-dependency-handler/index.html">org.gradle.api.artifacts.dsl.DependencyHandler</a></h4>
 </td>
 <td>
@@ -237,6 +276,13 @@ It is generally a module</p>
 </td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">coroutines version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="dagger version.html">dagger version</a></h4>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">dagger version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -329,10 +375,10 @@ It is generally a module</p>
 </tr>
 <tr>
 <td>
-<h4><a href="-remove-project-plugin.html">RemoveProjectPlugin</a></h4>
+<h4><a href="-remote-project-plugin.html">RemoteProjectPlugin</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">RemoveProjectPlugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$RemoveProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/group">group</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoveProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoveProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-remote-project-plugin.html"><span class="identifier">RemoteProjectPlugin</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">RemoteProjectPlugin</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$RemoteProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/group">group</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoteProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$RemoteProjectPlugin(kotlin.String, kotlin.String, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-remote-project-plugin.html"><span class="identifier">RemoteProjectPlugin</span></a></code></td>
 </tr>
 </tbody>
 </table>

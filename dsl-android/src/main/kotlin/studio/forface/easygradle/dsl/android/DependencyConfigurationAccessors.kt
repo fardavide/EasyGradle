@@ -12,16 +12,20 @@ import studio.forface.easygradle.dsl.*
 // region Remote
 fun DependencyHandler.androidTestImplementation(
         module: RemoteLibrary,
-        dependencyConfiguration: Action<ExternalModuleDependency>
+        dependencyConfiguration: Action<ExternalModuleDependency> = NoAction
 ) = add("androidTestImplementation", module, dependencyConfiguration)
 // endregion
 
 // region Local
 fun DependencyHandler.androidTestImplementation(
         module: LocalModuleLibrary,
-        dependencyConfiguration: ProjectDependency.() -> Unit
+        dependencyConfiguration: ProjectDependency.() -> Unit = {}
 ) = add("androidTestImplementation", module, dependencyConfiguration)
 
 fun DependencyHandler.androidTestImplementation(fileLibrary: LocalFileLibrary) =
         addFile("androidTestImplementation", fileLibrary)
 // endregion
+
+internal object NoAction : Action<ExternalModuleDependency> {
+    override fun execute(p0: ExternalModuleDependency) {}
+}

@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ModuleDependency - dsl</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">dsl</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.easygradle.dsl</a>&nbsp;/&nbsp;<a href="./index.html">ModuleDependency</a><br/>
+<br/>
+<h1>ModuleDependency</h1>
+<code><span class="keyword">interface </span><span class="identifier">ModuleDependency</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-local-dependency/index.html"><span class="identifier">LocalDependency</span></a></code>
+<p>A <a href="../-local-dependency/index.html">LocalDependency</a> included into a module</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="parent.html">parent</a></h4>
+</td>
+<td>
+<p>Optional parent module <a href="./index.html">ModuleDependency</a> for this Dependency</p>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">parent</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ModuleDependency</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="path.html">path</a></h4>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">path</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../-local-module-library.html">LocalModuleLibrary</a></h4>
+</td>
+<td>
+<p>A <a href="../-local-library.html">LocalLibrary</a> from a module</p>
+<code><span class="keyword">interface </span><span class="identifier">LocalModuleLibrary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-local-library.html"><span class="identifier">LocalLibrary</span></a><span class="symbol">, </span><a href="./index.html"><span class="identifier">ModuleDependency</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
