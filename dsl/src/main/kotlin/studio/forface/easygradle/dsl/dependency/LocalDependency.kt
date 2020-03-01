@@ -14,11 +14,11 @@ import org.gradle.api.Project
 
 // region Constructors
 fun Project.jar(
-        name: String,
-        version: String = "",
-        versionSeparator: String = if (version.isNotBlank()) "_" else "",
-        projectDirectoryPath: String = projectDir.path,
-        subDirectoryPath: String = "libs"
+    name: String,
+    version: String = "",
+    versionSeparator: String = if (version.isNotBlank()) "_" else "",
+    projectDirectoryPath: String = projectDir.path,
+    subDirectoryPath: String = "libs"
 ) = fileLibrary(
         projectDirectoryPath =  projectDirectoryPath,
         subDirectoryPath =      subDirectoryPath,
@@ -30,12 +30,12 @@ fun Project.jar(
 
 /** @return [LocalFileLibrary] */
 fun Project.fileLibrary(
-        name: String,
-        extension: String,
-        version: String = "",
-        versionSeparator: String = if (version.isNotBlank()) "_" else "",
-        projectDirectoryPath: String = projectDir.path,
-        subDirectoryPath: String = "libs"
+    name: String,
+    extension: String,
+    version: String = "",
+    versionSeparator: String = if (version.isNotBlank()) "_" else "",
+    projectDirectoryPath: String = projectDir.path,
+    subDirectoryPath: String = "libs"
 ) = LocalFileLibrary(
         projectDirectoryPath =  projectDirectoryPath,
         subDirectoryPath =      subDirectoryPath,

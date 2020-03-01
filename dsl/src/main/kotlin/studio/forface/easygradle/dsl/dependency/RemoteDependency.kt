@@ -24,7 +24,6 @@ interface Domain {
     /** @return [List] of all the [RemoteDependency] for this [Domain] */
     fun allModules() = allGroups().flatMap { it.all() }
 
-
     // region Constructor functions
     /** @return [RemoteLibrary] created with receiver [Group] as parent */
     fun Group.library(module: String) = RemoteLibrary(name, module, version)
@@ -39,7 +38,6 @@ interface Domain {
     fun modulePlugin(pluginId: String) = RemoteModulePlugin(pluginId, version)
     // endregion
 }
-
 
 /** Group of a [Dependency] */
 abstract class Group(val name: String) {

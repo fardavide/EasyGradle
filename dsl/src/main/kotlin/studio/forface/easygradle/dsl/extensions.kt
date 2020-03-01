@@ -48,7 +48,7 @@ infix fun Dependency.exclude(any: Any) {
 }
 fun ModuleDependency.exclude(vararg any: Any) {
     any.forEach {
-        when(it) {
+        when (it) {
             is NoParam -> { /* no-op */ }
             is String -> exclude(dependency = it)
             is Group -> exclude(it)
@@ -82,11 +82,12 @@ private data class RemoteDependencyParts(val group: String, val module: String?,
     companion object {
         fun from(string: String): RemoteDependencyParts {
             val parts = string.split(':')
-            require(parts.isNotEmpty() && parts.size <= 3) {
+            require(parts.isNotEmpty() && parts.size <= DEPENDENCY_PARTS) {
                 "Invalid dependency format: '$string'. Expected 'group:artifact' or 'group:artifact:version'"
             }
             return RemoteDependencyParts(parts[0], parts.getOrNull(1), parts.getOrNull(2))
         }
+        private const val DEPENDENCY_PARTS = 3
     }
 }
 private object NoParam

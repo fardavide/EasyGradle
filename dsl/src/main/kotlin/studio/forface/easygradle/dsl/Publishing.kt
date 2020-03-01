@@ -1,7 +1,6 @@
 @file:Suppress(
         "MemberVisibilityCanBePrivate", "unused" // Public APIs
 )
-
 package studio.forface.easygradle.dsl
 
 import kotlinx.serialization.ImplicitReflectionSerializer
@@ -11,7 +10,11 @@ import kotlinx.serialization.parseList
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.provideDelegate
-import studio.forface.easygradle.dsl.internal.*
+import studio.forface.easygradle.dsl.internal.ConfigReadWriteProperty
+import studio.forface.easygradle.dsl.internal.PublicationsBundle
+import studio.forface.easygradle.dsl.internal.PublicationsBundleBuilder
+import studio.forface.easygradle.dsl.internal._publish
+import studio.forface.easygradle.dsl.internal.assertStringsNotEmpty
 import kotlin.reflect.KProperty
 
 /**
@@ -30,9 +33,9 @@ import kotlin.reflect.KProperty
  * @param block Lambda for setup [PublishConfig]
  */
 fun Project.publish(
-        baseBlock: PublishConfigBuilder? = null,
-        artifact: String? = null,
-        block: PublishConfigBuilder = {}
+    baseBlock: PublishConfigBuilder? = null,
+    artifact: String? = null,
+    block: PublishConfigBuilder = {}
 ) {
     _publish(baseBlock, artifact, block) {
         PublicationsBundle(sourceSets["main"].allSource)
@@ -69,8 +72,8 @@ class PublishConfig internal constructor(project: Project) {
 
     @UseExperimental(ImplicitReflectionSerializer::class)
     private operator fun <T : Any> Project.invoke(
-            default: T,
-            propertyName: String? = null
+        default: T,
+        propertyName: String? = null
     ) = object : ConfigReadWriteProperty<PublishConfig, T>(this, default, propertyName = propertyName) {
 
         override fun String.toList(property: KProperty<*>): T? {

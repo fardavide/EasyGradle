@@ -10,7 +10,7 @@ import studio.forface.easygradle.dsl.RemoteLibrary
 
 fun DependencyHandler.androidTestImplementation(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        when(it) {
+        when (it) {
             is LocalModuleLibrary -> androidTestImplementation(it)
             is LocalFileLibrary -> androidTestImplementation(it)
             is RemoteLibrary -> androidTestImplementation(it)

@@ -4,12 +4,16 @@ import com.jfrog.bintray.gradle.BintrayExtension
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.jvm.tasks.Jar
-import org.gradle.kotlin.dsl.*
+import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.delegateClosureOf
+import org.gradle.kotlin.dsl.get
 import studio.forface.easygradle.dsl.PublishConfig
 import studio.forface.easygradle.dsl.PublishConfigBuilder
 import studio.forface.easygradle.dsl.isAndroid
 import studio.forface.easygradle.dsl.publishing
-import java.util.*
+import java.util.Date
 
 class PublicationsBundle(val sources: Any)
 
@@ -17,10 +21,10 @@ typealias PublicationsBundleBuilder = Project.() -> PublicationsBundle
 
 @Suppress("FunctionName") // This is meant to be internal, but needed from Android artifact
 fun Project._publish(
-        baseBlock: PublishConfigBuilder?,
-        artifact: String?,
-        block: PublishConfigBuilder,
-        publicationsBundleBuilder: PublicationsBundleBuilder
+    baseBlock: PublishConfigBuilder?,
+    artifact: String?,
+    block: PublishConfigBuilder,
+    publicationsBundleBuilder: PublicationsBundleBuilder
 ) {
     val project = this
     val validConfig = PublishConfig(this).apply {

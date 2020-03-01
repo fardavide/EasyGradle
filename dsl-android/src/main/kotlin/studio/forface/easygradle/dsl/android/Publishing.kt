@@ -30,9 +30,9 @@ import studio.forface.easygradle.dsl.publishConfig
  * @param block Lambda for setup [PublishConfig]
  */
 fun Project.publishAndroid(
-        baseBlock: PublishConfigBuilder? = null,
-        artifact: String? = null,
-        block: PublishConfigBuilder = {}
+    baseBlock: PublishConfigBuilder? = null,
+    artifact: String? = null,
+    block: PublishConfigBuilder = {}
 ) {
     _publish(baseBlock, artifact, block) {
         PublicationsBundle(android.sourceSets["main"].java.srcDirs)

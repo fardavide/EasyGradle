@@ -6,7 +6,13 @@
 package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import studio.forface.easygradle.dsl.*
+import studio.forface.easygradle.dsl.dagger
+import studio.forface.easygradle.dsl.dependency
+import studio.forface.easygradle.dsl.forface
+import studio.forface.easygradle.dsl.google
+import studio.forface.easygradle.dsl.jakeWharton
+import studio.forface.easygradle.dsl.squareup
+import studio.forface.easygradle.dsl.version
 
 // region Jetpack
 val DependencyHandler.`android-ktx` get() =                 androidx("core", moduleSuffix = "ktx") version `ktx version`

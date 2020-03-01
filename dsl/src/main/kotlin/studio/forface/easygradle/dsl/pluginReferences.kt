@@ -9,6 +9,7 @@ import org.gradle.kotlin.dsl.kotlin
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
+val PluginDependenciesSpec.`detekt` get() =                 plugin("io.gitlab.arturbosch.detekt").version(`detekt version`)
 val PluginDependenciesSpec.`dokka` get() =                  plugin("org.jetbrains.dokka")
 val PluginDependenciesSpec.`kotlin-js` get() =              kotlin("js")
 val PluginDependenciesSpec.`kotlin-jvm` get() =             kotlin("jvm")
@@ -17,4 +18,3 @@ val PluginDependenciesSpec.`kotlin-multiplatform` get() =   kotlin("multiplatfor
 val PluginDependenciesSpec.`kotlin-serialization` get() =   kotlin("plugin.serialization")
 
 fun PluginDependenciesSpec.plugin(id: String): PluginDependencySpec = id(id)
-

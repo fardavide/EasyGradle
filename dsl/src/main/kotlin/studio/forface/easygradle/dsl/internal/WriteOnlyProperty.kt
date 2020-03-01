@@ -11,7 +11,7 @@ internal fun <T> writeOnly(setter: (T) -> Unit) = object : WriteOnlyProperty<T>(
  * @author Davide Farella
  */
 internal abstract class WriteOnlyProperty<T>(
-        val setter: (T) -> Unit
+    val setter: (T) -> Unit
 ) : ReadWriteProperty<Any?, T> {
 
     /** @throws UnsupportedOperationException */

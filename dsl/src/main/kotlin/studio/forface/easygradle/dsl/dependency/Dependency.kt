@@ -119,12 +119,12 @@ fun Project.LocalModuleLibrary(name: String) = object : LocalModuleLibrary {
  */
 interface LocalFileLibrary : LocalLibrary, FileDependency
 fun Project.LocalFileLibrary(
-        projectDirectoryPath: String,
-        subDirectoryPath: String,
-        name: String,
-        versionSeparator: String,
-        version: String,
-        extension: String
+    projectDirectoryPath: String,
+    subDirectoryPath: String,
+    name: String,
+    versionSeparator: String,
+    version: String,
+    extension: String
 ) = object : LocalFileLibrary {
     override val projectDirectoryPath = projectDirectoryPath
     override val subDirectoryPath = subDirectoryPath

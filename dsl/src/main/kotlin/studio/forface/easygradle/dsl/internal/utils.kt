@@ -4,7 +4,6 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.jvm.javaGetter
 
-
 /**
  * Assert that all of the given [KProperty]s do not refer to an empty string
  *

@@ -35,9 +35,9 @@ import kotlin.reflect.KProperty
  * @param block Lambda for setup [DokkaConfig]
  */
 fun Project.dokka(
-        config: DokkaConfig = DokkaConfig(this),
-        baseBlock: DokkaConfigBuilder? = null,
-        block: DokkaConfigBuilder = {}
+    config: DokkaConfig = DokkaConfig(this),
+    baseBlock: DokkaConfigBuilder? = null,
+    block: DokkaConfigBuilder = {}
 ) {
     val project = this
     val validConfig = config.apply {
@@ -53,6 +53,7 @@ fun Project.dokka(
  */
 fun dokkaConfig(block: DokkaConfigBuilder): DokkaConfigBuilder = { apply { this.block(it) } }
 
+@Suppress("MagicNumber")
 class DokkaConfig(project: Project) {
     // region Params
     @Deprecated("Unused! Replacement not available yet")
@@ -67,18 +68,18 @@ class DokkaConfig(project: Project) {
     // endregion
 
     @UseExperimental(ImplicitReflectionSerializer::class)
-    private operator fun <T: Any> Project.invoke(
-            default: T,
-            propertyName: String? = null
+    private operator fun <T : Any> Project.invoke(
+        default: T,
+        propertyName: String? = null
     ) = object : ConfigReadWriteProperty<DokkaConfig, T>(
-            this,
-            default,
-            propertyName = propertyName,
-            propertyPrefix = "dokka."
+        this,
+        default,
+        propertyName = propertyName,
+        propertyPrefix = "dokka."
     ) {
         override fun String.toList(property: KProperty<*>): T? {
             @Suppress("UNCHECKED_CAST", "DuplicatedCode")
-            return when(property) {
+            return when (property) {
                 DokkaConfig::sourceDirs -> Json.parseList<String>(this) as? T?
                 else -> throw AssertionError()
             }

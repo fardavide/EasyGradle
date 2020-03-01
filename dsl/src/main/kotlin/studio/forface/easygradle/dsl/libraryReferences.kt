@@ -80,13 +80,18 @@ val DependencyHandler.`kotlinPoet-metadata-specs` get() =   squareup("kotlinpoet
 var `kotlinPoet version` = defaultKotlinPoetVersion
 // endregion
 
+// region Detekt
+val DependencyHandler.`detekt-formatting` get() =           dependency("io.gitlab.arturbosch", "detekt", moduleSuffix = "formatting") version `detekt version`
+
+var `detekt version` = defaultDetektVersion
+// endregion
+
 // region MockK
 val DependencyHandler.`mockk` get() =                       mockK() version  `mockK version`
 val DependencyHandler.`mockk-android` get() =               mockK("android") version  `mockK version`
 
 var `mockK version` = defaultMockkVersion
 // endregion
-
 
 // region base
 /**
@@ -102,11 +107,11 @@ var `mockK version` = defaultMockkVersion
  * @throws [IllegalArgumentException] if none of [groupName] and [module] is set
  */
 fun DependencyHandler.dependency(
-        group: String,
-        groupName: String? = null,
-        module: String? = null,
-        moduleSuffix: String? = null,
-        version: String? = null
+    group: String,
+    groupName: String? = null,
+    module: String? = null,
+    moduleSuffix: String? = null,
+    version: String? = null
 ): Any {
     val safeModule = module ?: groupName ?: throw IllegalArgumentException("One of 'groupName' or 'module' is required")
 

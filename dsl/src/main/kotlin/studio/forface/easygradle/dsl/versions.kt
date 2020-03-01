@@ -12,5 +12,8 @@ internal const val defaultDaggerVersion =               "2.25.2"    // Updated: 
 // Square
 internal const val defaultKotlinPoetVersion =           "1.4.2"     // Updated: Oct 28, 2019
 
+// Detekt
+internal const val defaultDetektVersion =               "1.6.0"     // Updated: Feb 26, 2020
+
 // MockK
 internal const val defaultMockkVersion =                "1.9.3"

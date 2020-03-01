@@ -1,31 +1,36 @@
 @file:Suppress(
-        "unused" // Public APIs
+    "unused" // Public APIs
 )
+
 package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.Action
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import studio.forface.easygradle.dsl.*
+import studio.forface.easygradle.dsl.LocalFileLibrary
+import studio.forface.easygradle.dsl.LocalModuleLibrary
+import studio.forface.easygradle.dsl.RemoteLibrary
+import studio.forface.easygradle.dsl.add
+import studio.forface.easygradle.dsl.addFile
 
 // region Remote
 fun DependencyHandler.androidTestImplementation(
-        module: RemoteLibrary,
-        dependencyConfiguration: Action<ExternalModuleDependency> = NoAction
+    module: RemoteLibrary,
+    dependencyConfiguration: Action<ExternalModuleDependency> = NoAction
 ) = add("androidTestImplementation", module, dependencyConfiguration)
 // endregion
 
 // region Local
 fun DependencyHandler.androidTestImplementation(
-        module: LocalModuleLibrary,
-        dependencyConfiguration: ProjectDependency.() -> Unit = {}
+    module: LocalModuleLibrary,
+    dependencyConfiguration: ProjectDependency.() -> Unit = {}
 ) = add("androidTestImplementation", module, dependencyConfiguration)
 
 fun DependencyHandler.androidTestImplementation(fileLibrary: LocalFileLibrary) =
-        addFile("androidTestImplementation", fileLibrary)
+    addFile("androidTestImplementation", fileLibrary)
 // endregion
 
 internal object NoAction : Action<ExternalModuleDependency> {
-    override fun execute(p0: ExternalModuleDependency) {}
+    override fun execute(p0: ExternalModuleDependency) { /* noop */ }
 }

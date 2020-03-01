@@ -1,3 +1,5 @@
+@file:Suppress("RemoveRedundantBackticks")
+
 plugins {
     `kotlin-dsl`
 }
@@ -12,20 +14,25 @@ dependencies {
     // base dsl module
     api(project(":dsl"))
 
-    // Android
-    implementation(Lib.androidGradlePlugin)
+    implementation(
 
-    // Bintray
-    implementation(Lib.bintrayGradlePlugin)
+        // Android
+        `android-gradlePlugin`,
 
-    // Dokka Android
-    implementation(Lib.dokkaGradlePlugin)
+        // Bintray
+        `bintray-gradlePlugin`,
 
-    // Test
-    testImplementation(Lib.jUnit)
-    testImplementation(Lib.kotlinTest)
-    testImplementation(Lib.kotlinTestJunit)
-    testImplementation(Lib.mockk)
+        // Dokka Android
+        `dokka-gradlePlugin`,
+
+        // Test
+        `jUnit`,
+        `kotlinTest`,
+        `kotlinTestJunit`,
+        `mockk`
+    )
+
+    detektPlugins(`detekt-formatting`)
 }
 
 dokka()

@@ -13,11 +13,11 @@ import studio.forface.easygradle.dsl.fileLibrary
 
 // region Constructors
 fun Project.aar(
-        name: String,
-        version: String = "",
-        versionSeparator: String = if (version.isNotBlank()) "_" else "",
-        projectDirectoryPath: String = projectDir.path,
-        subDirectoryPath: String = "libs"
+    name: String,
+    version: String = "",
+    versionSeparator: String = if (version.isNotBlank()) "_" else "",
+    projectDirectoryPath: String = projectDir.path,
+    subDirectoryPath: String = "libs"
 ) = fileLibrary(
         projectDirectoryPath =  projectDirectoryPath,
         subDirectoryPath =      subDirectoryPath,

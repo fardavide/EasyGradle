@@ -1,7 +1,9 @@
+@file:Suppress("RemoveRedundantBackticks")
+
 plugins {
     `kotlin-dsl`
-    id("kotlin")
-    id("kotlinx-serialization")
+    `kotlin`
+    `kotlinx-serialization`
 }
 
 repositories {
@@ -11,21 +13,26 @@ repositories {
 
 dependencies {
 
-    // Bintray
-    implementation(Lib.bintrayGradlePlugin)
+    implementation(
 
-    // Dokka
-    implementation(Lib.dokkaGradlePlugin)
+        // Bintray
+        `bintray-gradlePlugin`,
 
-    // Accessors
-    implementation(Lib.kotlin)
-    implementation(Lib.serialization)
+        // Dokka
+        `dokka-gradlePlugin`,
 
-    // Test
-    testImplementation(Lib.jUnit)
-    testImplementation(Lib.kotlinTest)
-    testImplementation(Lib.kotlinTestJunit)
-    testImplementation(Lib.mockk)
+        // Accessors
+        `kotlin`,
+        `serialization`,
+
+        // Test
+        `jUnit`,
+        `kotlinTest`,
+        `kotlinTestJunit`,
+        `mockk`
+    )
+
+    detektPlugins(`detekt-formatting`)
 }
 
 dokka()

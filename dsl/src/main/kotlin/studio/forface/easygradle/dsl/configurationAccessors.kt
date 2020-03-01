@@ -8,7 +8,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 
 fun DependencyHandler.api(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        when(it) {
+        when (it) {
             is LocalModuleLibrary -> api(it)
             is LocalFileLibrary -> api(it)
             is RemoteLibrary -> api(it)
@@ -19,7 +19,7 @@ fun DependencyHandler.api(vararg dependencyNotations: Any) {
 
 fun DependencyHandler.compileOnly(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        when(it) {
+        when (it) {
             is LocalModuleLibrary -> compileOnly(it)
             is LocalFileLibrary -> compileOnly(it)
             is RemoteLibrary -> compileOnly(it)
@@ -30,7 +30,7 @@ fun DependencyHandler.compileOnly(vararg dependencyNotations: Any) {
 
 fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        when(it) {
+        when (it) {
             is LocalModuleLibrary -> implementation(it)
             is LocalFileLibrary -> implementation(it)
             is RemoteLibrary -> implementation(it)
@@ -41,7 +41,7 @@ fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
 
 fun DependencyHandler.kapt(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        when(it) {
+        when (it) {
             is LocalModuleLibrary -> kapt(it)
             is LocalFileLibrary -> kapt(it)
             is RemoteLibrary -> kapt(it)
@@ -52,7 +52,7 @@ fun DependencyHandler.kapt(vararg dependencyNotations: Any) {
 
 fun DependencyHandler.testImplementation(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        when(it) {
+        when (it) {
             is LocalModuleLibrary -> testImplementation(it)
             is LocalFileLibrary -> testImplementation(it)
             is RemoteLibrary -> testImplementation(it)

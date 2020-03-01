@@ -8,14 +8,14 @@ import kotlin.reflect.KProperty
  * [ReadWriteProperty] for delegate to variables of Configuration classes
  * @author Davide Farella
  */
-abstract class ConfigReadWriteProperty<Scope: Any, PropType: Any>(
-        private val project: Project,
-        private val default: PropType,
-        private val propertyName: String? = null,
-        private val propertyPrefix: String = ""
+abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
+    private val project: Project,
+    private val default: PropType,
+    private val propertyName: String? = null,
+    private val propertyPrefix: String = ""
 ) : ReadWriteProperty<Scope, PropType> {
     private var backValue: PropType? = null
-    private val KProperty<*>.actualName get() = propertyName ?: "$propertyPrefix${name}"
+    private val KProperty<*>.actualName get() = propertyName ?: "$propertyPrefix$name"
 
     /** @see ReadWriteProperty.getValue */
     override fun getValue(thisRef: Scope, property: KProperty<*>) =
@@ -29,7 +29,7 @@ abstract class ConfigReadWriteProperty<Scope: Any, PropType: Any>(
     private fun prop(property: KProperty<*>): PropType? {
         val stringValue = project.findProperty(property.actualName)?.toString() ?: return null
         @Suppress("UNCHECKED_CAST") // Cast is checked because of safe operator `as?`
-        return when(default) {
+        return when (default) {
             is String ->    stringValue as? PropType
             is Boolean ->   stringValue.toBoolean() as? PropType
             is Int ->       stringValue.toIntOrNull() as? PropType
