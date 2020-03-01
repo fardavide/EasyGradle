@@ -61,8 +61,8 @@ private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
                     from(bundle.sources)
                 }
 
-                artifact(sourcesJar)
                 artifact(tasks[if (isAndroid) "bundleReleaseAar" else "jar"])
+                artifact(sourcesJar)
             }
         }
 
