@@ -15,55 +15,84 @@ import studio.forface.easygradle.dsl.squareup
 import studio.forface.easygradle.dsl.version
 
 // region Jetpack
+// region Ktx
 val DependencyHandler.`android-ktx` get() =                 androidx("core", moduleSuffix = "ktx") version `ktx version`
 var `ktx version` = defaultKtxVersion
+// endregion
 
-val DependencyHandler.`android-test-core` get() =           androidxTest("core")
-val DependencyHandler.`android-test-junit` get() =          androidx("test.ext", "junit") version `android-test version`
-val DependencyHandler.`android-test-rules` get() =          androidxTest("rules")
-val DependencyHandler.`android-test-runner` get() =         androidxTest("runner")
-var `android-test version` = defaultTestVersion
-
+// region Annotation
 val DependencyHandler.`android-annotation` get() =          androidx("annotation") version `android-annotation version`
 var `android-annotation version` = defaultAnnotationVersion
+// endregion
 
+// region Arch
 val DependencyHandler.`android-arch-common` get() =         androidxArch("common")
 val DependencyHandler.`android-arch-runtime` get() =        androidxArch("runtime")
 val DependencyHandler.`android-arch-testing` get() =        androidxArch("testing")
 var `android-arch version` = defaultArchVersion
+// endregion
 
+// region Appcompat
 val DependencyHandler.`appcompat` get() =                   androidx("appcompat") version `appcompat version`
 var `appcompat version` = defaultSupportVersion
+// endregion
 
+// region Constraint Layout
 val DependencyHandler.`constraint-layout` get() =           androidx("constraintlayout") version `constraint-layout version`
 var `constraint-layout version` = defaultConstraintLayoutVersion
+// endregion
 
+// region Espresso
 val DependencyHandler.`espresso` get() =                    androidx("test.espresso", "espresso-core") version `espresso version`
 var `espresso version` = defaultEspressoVersion
+// endregion
 
+// region Lifecycle
 val DependencyHandler.`lifecycle-compiler` get() =          androidxLifecycle("compiler")
 val DependencyHandler.`lifecycle-extensions` get() =        androidxLifecycle("extensions")
 val DependencyHandler.`lifecycle-liveData` get() =          androidxLifecycle("livedata-ktx")
 val DependencyHandler.`lifecycle-runtime` get() =           androidxLifecycle("runtime-ktx")
 val DependencyHandler.`lifecycle-viewModel` get() =         androidxLifecycle("viewmodel-ktx")
 var `lifecycle version` = defaultLifecycleVersion
+// endregion
 
+// region Material
 val DependencyHandler.`material` get() =                    googleAndroid("material") version `material version`
 var `material version` = defaultMaterialVersion
+// endregion
 
+// region Paging
 val DependencyHandler.`paging-common` get() =               androidxPaging("common-ktx")
 val DependencyHandler.`paging-runtime` get() =              androidxPaging("runtime-ktx")
 var `android-paging version` = defaultPagingVersion
+// endregion
 
+// region Robolectric
+val DependencyHandler.`robolectric` get() =                 dependency("org.robolectric", module = "robolectric") version `robolectric version`
+var `robolectric version` = defaultRobolectricVersion
+// endregion
+
+// region Room
 val DependencyHandler.`room-runtime` get() =                androidxRoom("runtime")
 val DependencyHandler.`room-compiler` get() =               androidxRoom("compiler")
 val DependencyHandler.`room-ktx` get() =                    androidxRoom("ktx")
 val DependencyHandler.`room-testing` get() =                androidxRoom("testing")
 var `android-room version` = defaultRoomVersion
+// endregion
 
+// region Test
+val DependencyHandler.`android-test-core` get() =           androidxTest("core")
+val DependencyHandler.`android-test-junit` get() =          androidx("test.ext", "junit") version `android-test version`
+val DependencyHandler.`android-test-rules` get() =          androidxTest("rules")
+val DependencyHandler.`android-test-runner` get() =         androidxTest("runner")
+var `android-test version` = defaultTestVersion
+// endregion
+
+// region Work
 val DependencyHandler.`android-work-runtime` get() =        androidxWork("runtime-ktx")
 val DependencyHandler.`android-work-testing` get() =        androidxWork("testing")
 var `android-work version` = defaultWorkVersion
+// endregion
 
 val DependencyHandler.`android-gradle-plugin` get() =       android("tools.build", "gradle") version `android-gradle-plugin version`
 var `android-gradle-plugin version` = defaultAgpVersion
@@ -85,12 +114,20 @@ var `retrofit version` = defaultRetrofitVersion
 val DependencyHandler.`retrofit-kotlin-serialization` get() =   jakeWharton("retrofit", "retrofit2-kotlinx-serialization-converter") version `retrofit-kotlin-serialization version`
 
 var `retrofit-kotlin-serialization version` = defaultRetrofitKotlinSerializationVersion
+
+val DependencyHandler.`timber` get() =                          jakeWharton("timber") version `timber version`
+
+var `timber version` = defaultTimberVersion
 // endregion
 
 // region 4face
 val DependencyHandler.`fluentNotifications` get() =             forface("fluentnotifications") version `fluentNotifications version`
 
 var `fluentNotifications version` = defaultFluentNotificationsVersion
+
+val DependencyHandler.`theia` get() =                           forface("theia") version `theia version`
+
+var `theia version` = defaultTheiaVersion
 
 val DependencyHandler.`viewStateStore` get() =                  forface("viewstatestore") version `viewStateStore version`
 val DependencyHandler.`viewStateStore-paging` get() =           forface("viewstatestore", moduleSuffix = "paging") version `viewStateStore version`

@@ -11,6 +11,7 @@ internal const val defaultDaggerVersion =               "2.25.2"    // Updated: 
 
 // Square
 internal const val defaultKotlinPoetVersion =           "1.4.2"     // Updated: Oct 28, 2019
+internal const val defaultSqlDelightVersion =           "1.2.2"     // Updated: Jan 22, 2020
 
 // Detekt
 internal const val defaultDetektVersion =               "1.6.0"     // Updated: Feb 26, 2020

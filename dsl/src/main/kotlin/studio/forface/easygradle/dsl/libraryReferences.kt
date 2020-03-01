@@ -78,6 +78,15 @@ val DependencyHandler.`kotlinPoet` get() =                  squareup("kotlinpoet
 val DependencyHandler.`kotlinPoet-metadata-specs` get() =   squareup("kotlinpoet", moduleSuffix = "metadata-specs") version `kotlinPoet version`
 
 var `kotlinPoet version` = defaultKotlinPoetVersion
+
+val DependencyHandler.`sqlDelight-android-driver` get() =   sqlDelight("android-driver")
+val DependencyHandler.`sqlDelight-native-driver` get() =    sqlDelight("native-driver")
+val DependencyHandler.`sqlDelight-sqlite-driver` get() =    sqlDelight("sqlite-driver")
+val DependencyHandler.`sqlDelight-sqljs-driver` get() =     sqlDelight("sqljs-driver")
+
+val DependencyHandler.`sqlDelight-gradle-plugin` get() =    sqlDelight("gradle-plugin")
+
+var `sqlDelight version` = defaultSqlDelightVersion
 // endregion
 
 // region Detekt
@@ -126,39 +135,42 @@ fun DependencyHandler.dependency(
 
 // region groups
 fun DependencyHandler.forface(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        dependency("studio.forface", groupName, module, moduleSuffix, version)
+    dependency("studio.forface", groupName, module, moduleSuffix, version)
 
 fun DependencyHandler.google(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        dependency("com.google", groupName, module, moduleSuffix, version)
+    dependency("com.google", groupName, module, moduleSuffix, version)
 
 fun DependencyHandler.jakeWharton(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        dependency("com.jakewharton", groupName, module, moduleSuffix, version)
+    dependency("com.jakewharton", groupName, module, moduleSuffix, version)
 
 fun DependencyHandler.jetbrains(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        dependency("org.jetbrains", groupName, module, moduleSuffix, version)
+    dependency("org.jetbrains", groupName, module, moduleSuffix, version)
 
 fun DependencyHandler.squareup(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        dependency("com.squareup", groupName, module, moduleSuffix, version)
+    dependency("com.squareup", groupName, module, moduleSuffix, version)
 // endregion
 
 // region subgroups
 fun DependencyHandler.kotlinx(moduleSuffix: String? = null, version: String? = null) =
-        jetbrains("kotlinx", moduleSuffix = moduleSuffix, version = version)
+    jetbrains("kotlinx", moduleSuffix = moduleSuffix, version = version)
 // endregion
 
 // region modules
 fun DependencyHandler.coroutines(moduleSuffix: String? = null, version: String = `coroutines version`) =
-        kotlinx("coroutines-$moduleSuffix", version)
+    kotlinx("coroutines-$moduleSuffix", version)
 
 fun DependencyHandler.dagger(moduleSuffix: String? = null, version: String = `dagger version`) =
-        google("dagger", moduleSuffix = moduleSuffix, version = version)
+    google("dagger", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.kotlin(moduleSuffix: String? = null, version: String = `kotlin version`) =
-        jetbrains("kotlin", moduleSuffix = moduleSuffix, version = version)
+    jetbrains("kotlin", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.mockK(moduleSuffix: String? = null, version: String = `mockK version`) =
-        dependency("io.mockk", module = "mockk", moduleSuffix = moduleSuffix, version = version)
+    dependency("io.mockk", module = "mockk", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.serialization(moduleSuffix: String? = null, version: String = `serialization version`) =
-        kotlinx("serialization-$moduleSuffix", version)
+    kotlinx("serialization-$moduleSuffix", version)
+
+fun DependencyHandler.sqlDelight(module: String? = null, version: String? = `sqlDelight version`) =
+    squareup("sqldelight", module = module, version = version)
 // endregion

@@ -10,6 +10,7 @@ internal const val defaultKtxVersion =                          "1.1.0-rc03"    
 internal const val defaultLifecycleVersion =                    "2.2.0-alpha03" // Updated:
 internal const val defaultMaterialVersion =                     "1.1.0-alpha09" // Updated:
 internal const val defaultPagingVersion =                       "2.1.0"         // Updated: Jan 26, 2019
+internal const val defaultRobolectricVersion =                  "4.3.1"         // Updated: Oct 11, 2019
 internal const val defaultRoomVersion =                         "2.2.1"         // Updated: Oct 23, 2019
 internal const val defaultSupportVersion =                      "1.1.0-rc01"    // Updated:
 internal const val defaultTestVersion =                         "1.2.0"         // Updated:
@@ -19,6 +20,10 @@ internal const val defaultWorkVersion =                         "2.2.0"         
 internal const val defaultRetrofitVersion =                     "2.6.2"         // Updated: Sep 24, 2019
 internal const val defaultRetrofitKotlinSerializationVersion =  "0.4.0"         // Updated: Apr 12, 2019
 
+// Jake Wharton
+internal const val defaultTimberVersion =                       "4.7.1"         // Updated: Jun 28, 2018
+
 // 4face
 internal const val defaultFluentNotificationsVersion =          "0.1-beta-6"    // Updated: May 26, 2019
-internal const val defaultViewStateStoreVersion =               "1.3-beta-3"    // Updated: Oct 03, 2019
+internal const val defaultTheiaVersion =                        "1.0-alpha-4"   // Updated: Jun 15, 2019
+internal const val defaultViewStateStoreVersion =               "1.4-beta-3"    // Updated: Jan 16, 2020
