@@ -6,6 +6,7 @@
 package studio.forface.easygradle.dsl
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import studio.forface.easygradle.common.lateinit
 import studio.forface.easygradle.dsl.internal.useIfNotNull
 
 // region Kotlin
@@ -24,7 +25,7 @@ val DependencyHandler.`kotlin-test-junit` get() =               kotlin("test-jun
 val DependencyHandler.`kotlin-test-junit5` get() =              kotlin("test-junit5")
 val DependencyHandler.`kotlin-gradle-plugin` get() =            kotlin("gradle-plugin")
 
-var `kotlin version` = defaultKotlinVersion
+var `kotlin version` by lateinit ()
 // endregion
 
 // region Coroutines
@@ -42,7 +43,7 @@ val DependencyHandler.`coroutines-core-windowsx64` get() =      coroutines("core
 val DependencyHandler.`coroutines-jdk8` get() =                 coroutines("jdk8")
 val DependencyHandler.`coroutines-test` get() =                 coroutines("test")
 
-var `coroutines version` = defaultCoroutinesVersion
+var `coroutines version` by lateinit ()
 // endregion
 
 // region Serialization
@@ -51,7 +52,7 @@ val DependencyHandler.`serialization-common` get() =            serialization("r
 val DependencyHandler.`serialization-js` get() =                serialization("runtime-js")
 val DependencyHandler.`serialization-native` get() =            serialization("runtime-native")
 
-var `serialization version` = defaultSerializationVersion
+var `serialization version` by lateinit ()
 
 val DependencyHandler.`serialization-gradle-plugin` get() =     kotlin("serialization")
 // endregion
@@ -59,7 +60,7 @@ val DependencyHandler.`serialization-gradle-plugin` get() =     kotlin("serializ
 // region Ktor
 // TODO
 
-var `ktor version` = defaultKtorVersion
+var `ktor version` by lateinit ()
 // endregion
 // endregion
 
@@ -69,7 +70,7 @@ var `ktor version` = defaultKtorVersion
 val DependencyHandler.`dagger` get() =                          dagger()
 val DependencyHandler.`dagger-compiler` get() =                 dagger("compiler")
 
-var `dagger version` = defaultDaggerVersion
+var `dagger version` by lateinit ()
 // endregion
 // endregion
 
@@ -77,7 +78,7 @@ var `dagger version` = defaultDaggerVersion
 val DependencyHandler.`kotlinPoet` get() =                  squareup("kotlinpoet") version `kotlinPoet version`
 val DependencyHandler.`kotlinPoet-metadata-specs` get() =   squareup("kotlinpoet", moduleSuffix = "metadata-specs") version `kotlinPoet version`
 
-var `kotlinPoet version` = defaultKotlinPoetVersion
+var `kotlinPoet version` by lateinit ()
 
 val DependencyHandler.`sqlDelight-android-driver` get() =   sqlDelight("android-driver")
 val DependencyHandler.`sqlDelight-native-driver` get() =    sqlDelight("native-driver")
@@ -86,20 +87,20 @@ val DependencyHandler.`sqlDelight-sqljs-driver` get() =     sqlDelight("sqljs-dr
 
 val DependencyHandler.`sqlDelight-gradle-plugin` get() =    sqlDelight("gradle-plugin")
 
-var `sqlDelight version` = defaultSqlDelightVersion
+var `sqlDelight version` by lateinit ()
 // endregion
 
 // region Detekt
 val DependencyHandler.`detekt-formatting` get() =           dependency("io.gitlab.arturbosch", "detekt", moduleSuffix = "formatting") version `detekt version`
 
-var `detekt version` = defaultDetektVersion
+var `detekt version` by lateinit ()
 // endregion
 
 // region MockK
 val DependencyHandler.`mockk` get() =                       mockK() version  `mockK version`
 val DependencyHandler.`mockk-android` get() =               mockK("android") version  `mockK version`
 
-var `mockK version` = defaultMockkVersion
+var `mockK version` by lateinit ()
 // endregion
 
 // region base

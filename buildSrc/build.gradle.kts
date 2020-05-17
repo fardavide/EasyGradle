@@ -8,7 +8,7 @@ repositories {
 }
 
 buildscript {
-    val kotlin =            "1.3.60"        // Updated: Nov 14, 2019
+    val kotlin =            "1.3.72"        // Released: Apr 14, 2020
 
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlin")
@@ -16,10 +16,10 @@ buildscript {
 }
 
 dependencies {
-    val android =           "3.6.0-alpha03" // Updated: Jun 06, 2019
-    val bintray =           "1.8.4"         // Updated: Jul 08, 2018
-    val dokka =             "0.10.0"        // Updated: Oct 07, 2019
-    val serialization =     "0.12.0"        // Updated: Aug 23, 2019
+    val android =           "3.6.0-alpha03" // Released: Jun 06, 2019
+    val bintray =           "1.8.4"         // Released: Jul 08, 2018
+    val dokka =             "0.10.0"        // Released: Oct 07, 2019
+    val serialization =     "0.20.0"        // Released: Mar 04, 2020
 
     implementation("com.android.tools.build:gradle:$android")
     implementation("com.jfrog.bintray.gradle:gradle-bintray-plugin:$bintray")

@@ -1,5 +1,3 @@
-@file:Suppress("RemoveRedundantBackticks")
-
 plugins {
     `kotlin-dsl`
     `kotlin`
@@ -14,6 +12,8 @@ repositories {
 dependencies {
 
     implementation(
+
+        project(":common"),
 
         // Bintray
         `bintray-gradlePlugin`,

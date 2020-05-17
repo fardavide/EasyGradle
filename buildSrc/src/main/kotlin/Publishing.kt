@@ -63,20 +63,20 @@ fun publishConfig(block: PublishConfigBuilder): PublishConfigBuilder = { apply {
 
 class PublishConfig internal constructor(project: Project) {
     // region Params
-    var username                                by project("", propertyName = "bintray.user")
-    var apiKey                                  by project("", propertyName = "bintray.apikey")
-    var bintrayGroup                            by project("")
-    var groupId                                 by project("")
-    var artifact                                by project("")
-    var groupName                               by project(artifact)
-    var version                                 by project("")
-    var description                             by project("")
-    var siteUrl                                 by project("")
-    var gitUrl                                  by project("")
-    internal val devs: MutableList<Developer>   by project(mutableListOf<Developer>(), propertyName = "developers") // TODO include in `studio.forface.easygradle.dsl.publish`
-    internal val lics: MutableList<License>     by project(mutableListOf<License>(), propertyName = "licenses")
-    var override                                by project(false, propertyName = "publish.override")
-    var publicDownloadNumber                    by project(true)
+    var username                                by project<String>("", propertyName = "bintray.user")
+    var apiKey                                  by project<String>("", propertyName = "bintray.apikey")
+    var bintrayGroup                            by project<String>("")
+    var groupId                                 by project<String>("")
+    var artifact                                by project<String>("")
+    var groupName                               by project<String>(artifact)
+    var version                                 by project<String>("")
+    var description                             by project<String>("")
+    var siteUrl                                 by project<String>("")
+    var gitUrl                                  by project<String>("")
+    internal val devs: MutableList<Developer>   by project<MutableList<Developer>>(mutableListOf<Developer>(), propertyName = "developers") // TODO include in `studio.forface.easygradle.dsl.publish`
+    internal val lics: MutableList<License>     by project<MutableList<License>>(mutableListOf<License>(), propertyName = "licenses")
+    var override                                by project<Boolean>(false, propertyName = "publish.override")
+    var publicDownloadNumber                    by project<Boolean>(true)
     // endregion
 
     @UseExperimental(ImplicitReflectionSerializer::class)

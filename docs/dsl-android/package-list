@@ -1,6 +1,7 @@
 $dokka.format:html
 $dokka.linkExtension:html
 $dokka.location:studio.forface.easygradle.dsl.android$aar(org.gradle.api.Project, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)studio.forface.easygradle.dsl.android/org.gradle.api.-project/aar.html
+$dokka.location:studio.forface.easygradle.dsl.android$activity#org.gradle.api.artifacts.dsl.DependencyHandlerstudio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/activity.html
 $dokka.location:studio.forface.easygradle.dsl.android$android(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String)studio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/android.html
 $dokka.location:studio.forface.easygradle.dsl.android$android-annotation#org.gradle.api.artifacts.dsl.DependencyHandlerstudio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/android-annotation.html
 $dokka.location:studio.forface.easygradle.dsl.android$android-arch-common#org.gradle.api.artifacts.dsl.DependencyHandlerstudio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/android-arch-common.html
@@ -33,6 +34,7 @@ $dokka.location:studio.forface.easygradle.dsl.android$dagger-android-processor#o
 $dokka.location:studio.forface.easygradle.dsl.android$dagger-android-support#org.gradle.api.artifacts.dsl.DependencyHandlerstudio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/dagger-android-support.html
 $dokka.location:studio.forface.easygradle.dsl.android$espresso#org.gradle.api.artifacts.dsl.DependencyHandlerstudio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/espresso.html
 $dokka.location:studio.forface.easygradle.dsl.android$fluentNotifications#org.gradle.api.artifacts.dsl.DependencyHandlerstudio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/fluent-notifications.html
+$dokka.location:studio.forface.easygradle.dsl.android$fragment#org.gradle.api.artifacts.dsl.DependencyHandlerstudio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/fragment.html
 $dokka.location:studio.forface.easygradle.dsl.android$googleAndroid(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String)studio.forface.easygradle.dsl.android/org.gradle.api.artifacts.dsl.-dependency-handler/google-android.html
 $dokka.location:studio.forface.easygradle.dsl.android$kotlin-android#org.gradle.plugin.use.PluginDependenciesSpecstudio.forface.easygradle.dsl.android/org.gradle.plugin.use.-plugin-dependencies-spec/kotlin-android.html
 $dokka.location:studio.forface.easygradle.dsl.android$kotlin-android-extensions#org.gradle.plugin.use.PluginDependenciesSpecstudio.forface.easygradle.dsl.android/org.gradle.plugin.use.-plugin-dependencies-spec/kotlin-android-extensions.html

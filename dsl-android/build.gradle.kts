@@ -1,5 +1,3 @@
-@file:Suppress("RemoveRedundantBackticks")
-
 plugins {
     `kotlin-dsl`
 }
@@ -11,10 +9,11 @@ repositories {
 
 dependencies {
 
-    // base dsl module
     api(project(":dsl"))
 
     implementation(
+
+        project(":common"),
 
         // Android
         `android-gradlePlugin`,

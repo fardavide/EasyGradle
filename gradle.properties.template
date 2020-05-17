@@ -10,8 +10,8 @@ groupName=EasyGradle
 description=DSL for Gradle configuration with Kotlin
 siteUrl=http://4face.studio
 gitUrl=https://github.com/4face-studi0/EasyGradle
-developers=[ { id: "4face-studi0" name: "4face Studio" email: "mail@4face.studio" } ]
-licenses=[ { name: "The Apache Software License - Version 2.0" url: "http://www.apache.org/licenseS/LICENSEeZ.®.txt" } ]
+developers=[ { "id": "4face-studi0" "name": "4face Studio" "email": "mail@4face.studio" } ]
+licenses=[ { "name": "The Apache Software License - Version 2.0" "url": "http://www.apache.org/licenseS/LICENSEeZ.®.txt" } ]
 
 publish.override=true
 # endregion

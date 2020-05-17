@@ -1,11 +1,10 @@
 @file:Suppress(
-        "unused", // Public API
-        "ObjectPropertyName", // val with '-'
-        "RemoveRedundantBackticks" // val with backticks without special characters
+    "unused" // Public API
 )
 package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import studio.forface.easygradle.common.lateinit
 import studio.forface.easygradle.dsl.dagger
 import studio.forface.easygradle.dsl.dependency
 import studio.forface.easygradle.dsl.forface
@@ -15,36 +14,12 @@ import studio.forface.easygradle.dsl.squareup
 import studio.forface.easygradle.dsl.version
 
 // region Jetpack
-// region Ktx
-val DependencyHandler.`android-ktx` get() =                 androidx("core", moduleSuffix = "ktx") version `ktx version`
-var `ktx version` = defaultKtxVersion
-// endregion
-
-// region Annotation
-val DependencyHandler.`android-annotation` get() =          androidx("annotation") version `android-annotation version`
-var `android-annotation version` = defaultAnnotationVersion
-// endregion
 
 // region Arch
 val DependencyHandler.`android-arch-common` get() =         androidxArch("common")
 val DependencyHandler.`android-arch-runtime` get() =        androidxArch("runtime")
 val DependencyHandler.`android-arch-testing` get() =        androidxArch("testing")
-var `android-arch version` = defaultArchVersion
-// endregion
-
-// region Appcompat
-val DependencyHandler.`appcompat` get() =                   androidx("appcompat") version `appcompat version`
-var `appcompat version` = defaultSupportVersion
-// endregion
-
-// region Constraint Layout
-val DependencyHandler.`constraint-layout` get() =           androidx("constraintlayout") version `constraint-layout version`
-var `constraint-layout version` = defaultConstraintLayoutVersion
-// endregion
-
-// region Espresso
-val DependencyHandler.`espresso` get() =                    androidx("test.espresso", "espresso-core") version `espresso version`
-var `espresso version` = defaultEspressoVersion
+var `android-arch version` by lateinit()
 // endregion
 
 // region Lifecycle
@@ -53,23 +28,13 @@ val DependencyHandler.`lifecycle-extensions` get() =        androidxLifecycle("e
 val DependencyHandler.`lifecycle-liveData` get() =          androidxLifecycle("livedata-ktx")
 val DependencyHandler.`lifecycle-runtime` get() =           androidxLifecycle("runtime-ktx")
 val DependencyHandler.`lifecycle-viewModel` get() =         androidxLifecycle("viewmodel-ktx")
-var `lifecycle version` = defaultLifecycleVersion
-// endregion
-
-// region Material
-val DependencyHandler.`material` get() =                    googleAndroid("material") version `material version`
-var `material version` = defaultMaterialVersion
+var `lifecycle version` by lateinit()
 // endregion
 
 // region Paging
 val DependencyHandler.`paging-common` get() =               androidxPaging("common-ktx")
 val DependencyHandler.`paging-runtime` get() =              androidxPaging("runtime-ktx")
-var `android-paging version` = defaultPagingVersion
-// endregion
-
-// region Robolectric
-val DependencyHandler.`robolectric` get() =                 dependency("org.robolectric", module = "robolectric") version `robolectric version`
-var `robolectric version` = defaultRobolectricVersion
+var `android-paging version` by lateinit()
 // endregion
 
 // region Room
@@ -77,7 +42,7 @@ val DependencyHandler.`room-runtime` get() =                androidxRoom("runtim
 val DependencyHandler.`room-compiler` get() =               androidxRoom("compiler")
 val DependencyHandler.`room-ktx` get() =                    androidxRoom("ktx")
 val DependencyHandler.`room-testing` get() =                androidxRoom("testing")
-var `android-room version` = defaultRoomVersion
+var `android-room version` by lateinit()
 // endregion
 
 // region Test
@@ -85,17 +50,47 @@ val DependencyHandler.`android-test-core` get() =           androidxTest("core")
 val DependencyHandler.`android-test-junit` get() =          androidx("test.ext", "junit") version `android-test version`
 val DependencyHandler.`android-test-rules` get() =          androidxTest("rules")
 val DependencyHandler.`android-test-runner` get() =         androidxTest("runner")
-var `android-test version` = defaultTestVersion
+var `android-test version` by lateinit()
 // endregion
 
 // region Work
 val DependencyHandler.`android-work-runtime` get() =        androidxWork("runtime-ktx")
 val DependencyHandler.`android-work-testing` get() =        androidxWork("testing")
-var `android-work version` = defaultWorkVersion
+var `android-work version` by lateinit()
 // endregion
 
+// region other
 val DependencyHandler.`android-gradle-plugin` get() =       android("tools.build", "gradle") version `android-gradle-plugin version`
-var `android-gradle-plugin version` = defaultAgpVersion
+var `android-gradle-plugin version` by lateinit()
+
+
+val DependencyHandler.`activity` get() =                    androidx("activity", moduleSuffix = "ktx") version `activity version`
+var `activity version` by lateinit()
+
+val DependencyHandler.`android-annotation` get() =          androidx("annotation") version `android-annotation version`
+var `android-annotation version` by lateinit()
+
+val DependencyHandler.`android-ktx` get() =                 androidx("core", moduleSuffix = "ktx") version `ktx version`
+var `ktx version` by lateinit()
+
+val DependencyHandler.`appcompat` get() =                   androidx("appcompat") version `appcompat version`
+var `appcompat version` by lateinit()
+
+val DependencyHandler.`constraint-layout` get() =           androidx("constraintlayout") version `constraint-layout version`
+var `constraint-layout version` by lateinit()
+
+val DependencyHandler.`espresso` get() =                    androidx("test.espresso", "espresso-core") version `espresso version`
+var `espresso version` by lateinit()
+
+val DependencyHandler.`fragment` get() =                    androidx("fragment", moduleSuffix = "ktx") version `fragment version`
+var `fragment version` by lateinit()
+
+val DependencyHandler.`material` get() =                    googleAndroid("material") version `material version`
+var `material version` by lateinit()
+
+val DependencyHandler.`robolectric` get() =                 dependency("org.robolectric", module = "robolectric") version `robolectric version`
+var `robolectric version` by lateinit()
+// endregion
 // endregion
 
 // region Google
@@ -106,33 +101,27 @@ val DependencyHandler.`dagger-android-processor` get() =        dagger("android-
 
 // region Square
 val DependencyHandler.`retrofit` get() =                        squareup("retrofit2", "retrofit") version `retrofit version`
-
-var `retrofit version` = defaultRetrofitVersion
+var `retrofit version` by lateinit()
 // endregion
 
 // region Jake Wharton
 val DependencyHandler.`retrofit-kotlin-serialization` get() =   jakeWharton("retrofit", "retrofit2-kotlinx-serialization-converter") version `retrofit-kotlin-serialization version`
-
-var `retrofit-kotlin-serialization version` = defaultRetrofitKotlinSerializationVersion
+var `retrofit-kotlin-serialization version` by lateinit()
 
 val DependencyHandler.`timber` get() =                          jakeWharton("timber") version `timber version`
-
-var `timber version` = defaultTimberVersion
+var `timber version` by lateinit()
 // endregion
 
 // region 4face
 val DependencyHandler.`fluentNotifications` get() =             forface("fluentnotifications") version `fluentNotifications version`
-
-var `fluentNotifications version` = defaultFluentNotificationsVersion
+var `fluentNotifications version` by lateinit()
 
 val DependencyHandler.`theia` get() =                           forface("theia") version `theia version`
-
-var `theia version` = defaultTheiaVersion
+var `theia version` by lateinit()
 
 val DependencyHandler.`viewStateStore` get() =                  forface("viewstatestore") version `viewStateStore version`
 val DependencyHandler.`viewStateStore-paging` get() =           forface("viewstatestore", moduleSuffix = "paging") version `viewStateStore version`
-
-var `viewStateStore version` = defaultViewStateStoreVersion
+var `viewStateStore version` by lateinit()
 // endregion
 
 

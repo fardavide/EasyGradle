@@ -80,15 +80,13 @@ fun dokkaConfig(block: DokkaConfigBuilder): DokkaConfigBuilder = { apply { this.
 
 class DokkaConfig internal constructor(project: Project) {
     // region Params
+    var jdkVersion                  by project<Int>(8)
     @Deprecated("Unused! Replacement not available yet")
-    var apiVersion                  by project(0)
-    var jdkVersion                  by project(8)
-    @Deprecated("Unused! Replacement not available yet")
-    var sourceDirs: List<String>    by project(listOf("src/main/kotlin"))
+    var sourceDirs: List<String>    by project<List<String>>(listOf("src/main/kotlin"))
     @Deprecated("Unused! Replacement not available yet")
     var sourceDir: String           by writeOnly<String> { sourceDirs = listOf(it) }
-    var outputFormat                by project("html")
-    var outputDirectory             by project("doc")
+    var outputFormat                by project<String>("html")
+    var outputDirectory             by project<String>("doc")
     // endregion
 
     @UseExperimental(ImplicitReflectionSerializer::class)
@@ -117,7 +115,6 @@ typealias DokkaConfigBuilder = DokkaConfig.(Project) -> Unit
 private fun Project.dokka(c: DokkaConfig) {
     apply(plugin = "org.jetbrains.dokka")
     tasks.withType(DokkaTask::class) {
-//        apiVersion = c.apiVersion.toString()
         outputFormat = c.outputFormat
         outputDirectory = c.outputDirectory
         configuration {
