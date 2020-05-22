@@ -36,6 +36,9 @@ val PluginDependenciesSpec.`kotlin` get() = id("kotlin")
 val PluginDependenciesSpec.`kotlinx-serialization` get() = id("kotlinx-serialization")
 
 // Utils
+fun DependencyHandler.api(vararg dependencyNotations: Any) {
+    for (dep in dependencyNotations) add("api", dep)
+}
 fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
     for (dep in dependencyNotations) add("implementation", dep)
 }

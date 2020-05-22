@@ -4,7 +4,7 @@
 package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import studio.forface.easygradle.common.lateinit
+import studio.forface.easygradle.internal.lateinit
 import studio.forface.easygradle.dsl.dagger
 import studio.forface.easygradle.dsl.dependency
 import studio.forface.easygradle.dsl.forface

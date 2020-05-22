@@ -10,8 +10,8 @@ import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.get
 import studio.forface.easygradle.dsl.PublishConfig
 import studio.forface.easygradle.dsl.PublishConfigBuilder
-import studio.forface.easygradle.dsl.internal.PublicationsBundle
-import studio.forface.easygradle.dsl.internal._publish
+import studio.forface.easygradle.internal.PublicationsBundle
+import studio.forface.easygradle.internal._publish
 import studio.forface.easygradle.dsl.publishConfig
 
 /**

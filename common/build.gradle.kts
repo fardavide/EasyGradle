@@ -20,3 +20,6 @@ dependencies {
 
     detektPlugins(`detekt-formatting`)
 }
+
+dokka()
+//publish(artifact = "common")

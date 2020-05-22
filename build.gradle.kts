@@ -1,5 +1,3 @@
-@file:Suppress("RemoveRedundantBackticks")
-
 import io.gitlab.arturbosch.detekt.DetektPlugin
 
 buildscript {

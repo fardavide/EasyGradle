@@ -8,7 +8,7 @@ import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.provideDelegate
 import studio.forface.easygradle.dsl.android.AndroidConfig.Type.Application
 import studio.forface.easygradle.dsl.android.AndroidConfig.Type.Library
-import studio.forface.easygradle.dsl.internal.ConfigReadWriteProperty
+import studio.forface.easygradle.internal.ConfigReadWriteProperty
 
 class AndroidConfig(project: Project) {
     // region Params

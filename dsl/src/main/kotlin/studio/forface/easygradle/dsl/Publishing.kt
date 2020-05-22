@@ -10,11 +10,11 @@ import kotlinx.serialization.parseList
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.provideDelegate
-import studio.forface.easygradle.dsl.internal.ConfigReadWriteProperty
-import studio.forface.easygradle.dsl.internal.PublicationsBundle
-import studio.forface.easygradle.dsl.internal.PublicationsBundleBuilder
-import studio.forface.easygradle.dsl.internal._publish
-import studio.forface.easygradle.dsl.internal.assertStringsNotEmpty
+import studio.forface.easygradle.internal.ConfigReadWriteProperty
+import studio.forface.easygradle.internal.PublicationsBundle
+import studio.forface.easygradle.internal.PublicationsBundleBuilder
+import studio.forface.easygradle.internal._publish
+import studio.forface.easygradle.internal.assertStringsNotEmpty
 import kotlin.reflect.KProperty
 
 /**

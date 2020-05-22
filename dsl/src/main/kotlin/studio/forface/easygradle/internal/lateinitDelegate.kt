@@ -1,4 +1,4 @@
-package studio.forface.easygradle.common
+package studio.forface.easygradle.internal
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -20,10 +20,13 @@ fun lateinit() = object : ReadWriteProperty<Any?, String> {
         }
 
         return VERSION ?: throw UninitializedPropertyAccessException("""
-            |'${propertyName}' has not been set, ensure to set it at the start of your Gradle script.
+            |'$propertyName' has not been set, ensure to set it at the start of `buildscript` block of Gradle script.
             |Example:
             |// build.gradle.kts - start of the file
-            |initVersions()
+            |buildscript {
+            |   initVersions()
+            |   ...
+            |}
             |
             |// versionsConfig.kt in buildSrc
             |fun initVersions() {

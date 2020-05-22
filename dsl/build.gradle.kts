@@ -13,7 +13,7 @@ dependencies {
 
     implementation(
 
-        project(":common"),
+//        project(":common"),
 
         // Bintray
         `bintray-gradlePlugin`,

@@ -1,4 +1,4 @@
-package studio.forface.easygradle.dsl.internal
+package studio.forface.easygradle.internal
 
 import org.gradle.api.Project
 import kotlin.properties.ReadWriteProperty

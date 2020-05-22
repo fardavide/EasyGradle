@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    `kotlin`
 }
 
 repositories {
@@ -13,7 +14,7 @@ dependencies {
 
     implementation(
 
-        project(":common"),
+//        project(":common"),
 
         // Android
         `android-gradlePlugin`,

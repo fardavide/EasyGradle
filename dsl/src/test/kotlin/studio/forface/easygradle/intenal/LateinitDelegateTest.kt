@@ -1,6 +1,8 @@
-package studio.forface.easygradle.common
+package studio.forface.easygradle.intenal
 
+import studio.forface.easygradle.internal.lateinit
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.asserter
 
 /**
@@ -17,7 +19,7 @@ internal class LateinitDelegateTest {
     @Test
     fun `lateinit works correctly if version is set`() {
         initializedVersion = "1.2.3"
-        initializedVersion
+        assertEquals("1.2.3", initializedVersion)
     }
 
     @Test

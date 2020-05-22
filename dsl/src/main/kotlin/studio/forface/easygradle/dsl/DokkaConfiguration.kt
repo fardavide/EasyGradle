@@ -11,8 +11,8 @@ import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.dokka.gradle.DokkaTask
-import studio.forface.easygradle.dsl.internal.ConfigReadWriteProperty
-import studio.forface.easygradle.dsl.internal.writeOnly
+import studio.forface.easygradle.internal.ConfigReadWriteProperty
+import studio.forface.easygradle.internal.writeOnly
 import kotlin.reflect.KProperty
 
 /*
