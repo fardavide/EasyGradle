@@ -9,6 +9,10 @@
 <br/>
 <h1>PublishConfig</h1>
 <code><span class="keyword">class </span><span class="identifier">PublishConfig</span></code>
+<p>Holds params for publication.
+Each parameter can be se programmatically of in <code>gradle.properties</code>; properties names in gradle.properties reflect
+the field name of the variable, where not specified differently.
+See gradle.properties.template for more examples</p>
 <h3>Types</h3>
 <table>
 <tbody>
@@ -64,6 +68,8 @@
 <h4><a href="api-key.html">apiKey</a></h4>
 </td>
 <td>
+<p>Api Key of Bintray user.
+Property name: <code>bintray.apikey</code></p>
 <code><span class="keyword">var </span><span class="identifier">apiKey</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
@@ -71,13 +77,16 @@
 <h4><a href="artifact.html">artifact</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">artifact</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+<p>Name of the artifact to public.
+Default is <a href="#">Project.getName</a></p>
+<code><span class="keyword">var </span><span class="identifier">artifact</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">!</span></code></td>
 </tr>
 <tr>
 <td>
 <h4><a href="bintray-group.html">bintrayGroup</a></h4>
 </td>
 <td>
+<p>Desired Group for publication, excluding group id</p>
 <code><span class="keyword">var </span><span class="identifier">bintrayGroup</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
@@ -85,6 +94,7 @@
 <h4><a href="description.html">description</a></h4>
 </td>
 <td>
+<p>Optional description of the library</p>
 <code><span class="keyword">var </span><span class="identifier">description</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
@@ -92,6 +102,7 @@
 <h4><a href="git-url.html">gitUrl</a></h4>
 </td>
 <td>
+<p>Optional Git url of the library</p>
 <code><span class="keyword">var </span><span class="identifier">gitUrl</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
@@ -99,6 +110,7 @@
 <h4><a href="group-id.html">groupId</a></h4>
 </td>
 <td>
+<p>Id for the group <a href="bintray-group.html">bintrayGroup</a></p>
 <code><span class="keyword">var </span><span class="identifier">groupId</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
@@ -106,13 +118,24 @@
 <h4><a href="group-name.html">groupName</a></h4>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">groupName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+<code><span class="keyword">var </span><s><span class="identifier">groupName</span></s><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="organization.html">organization</a></h4>
+</td>
+<td>
+<p>Optional name of the organization</p>
+<code><span class="keyword">var </span><span class="identifier">organization</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
 <h4><a href="override.html">override</a></h4>
 </td>
 <td>
+<p>Whether the publication must override a pre-existent one
+Default is <code>false</code>
+Property name: <code>publish.override</code></p>
 <code><span class="keyword">var </span><span class="identifier">override</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
 </tr>
 <tr>
@@ -120,6 +143,8 @@
 <h4><a href="project-name.html">projectName</a></h4>
 </td>
 <td>
+<p>Name of the module containing the sources to publish
+Default is <a href="artifact.html">artifact</a></p>
 <code><span class="keyword">var </span><span class="identifier">projectName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
@@ -127,13 +152,24 @@
 <h4><a href="public-download-number.html">publicDownloadNumber</a></h4>
 </td>
 <td>
+<p>Whether the download number must be visible publicly.
+Default is <code>true</code></p>
 <code><span class="keyword">var </span><span class="identifier">publicDownloadNumber</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="repo.html">repo</a></h4>
+</td>
+<td>
+<p>Name of the Repository where to publish</p>
+<code><span class="keyword">var </span><span class="identifier">repo</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
 <td>
 <h4><a href="site-url.html">siteUrl</a></h4>
 </td>
 <td>
+<p>Optional website url of the library</p>
 <code><span class="keyword">var </span><span class="identifier">siteUrl</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
@@ -141,6 +177,8 @@
 <h4><a href="username.html">username</a></h4>
 </td>
 <td>
+<p>Username of Bintray user.
+Property name: <code>bintray.user</code></p>
 <code><span class="keyword">var </span><span class="identifier">username</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 <tr>
@@ -148,6 +186,7 @@
 <h4><a href="version.html">version</a></h4>
 </td>
 <td>
+<p>Version of the library</p>
 <code><span class="keyword">var </span><span class="identifier">version</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 </tbody>

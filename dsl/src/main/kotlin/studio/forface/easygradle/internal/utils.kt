@@ -24,8 +24,8 @@ internal fun Any.assertStringNotEmpty(prop: KProperty<String>) {
 }
 
 /** @throws IllegalArgumentException */
-private fun paramNotSet(kclass: KClass<*>, prop: KProperty<*>) =
-        IllegalArgumentException("`${kclass.simpleName}.${prop.name}` has not being set")
+private fun Any.paramNotSet(kclass: KClass<*>, prop: KProperty<*>) =
+        IllegalArgumentException("`${kclass.simpleName}.${prop.name}` has not being set for '$this'")
 
 /**
  * @return [String]

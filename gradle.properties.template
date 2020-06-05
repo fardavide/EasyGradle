@@ -6,7 +6,7 @@ version=0.15-SNAPSHOT
 
 bintrayGroup=studio.forface
 groupId=easygradle
-groupName=EasyGradle
+repo=EasyGradle
 description=DSL for Gradle configuration with Kotlin
 siteUrl=http://4face.studio
 gitUrl=https://github.com/4face-studi0/EasyGradle

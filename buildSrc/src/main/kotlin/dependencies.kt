@@ -10,7 +10,7 @@ private object Version {
 
     const val detekt =                  "1.6.0"         // Updated: Feb 26, 2020
     const val junit =                   "4.13-beta-3"   // Updated: May 05, 2019
-    const val kotlin =                  "1.3.60"        // Updated: Nov 14, 2019
+    const val kotlin =                  "1.3.72"        // Updated: Apr 14, 2020
     const val mockk =                   "1.9.3"         // Updated: Mar 25, 2019
     const val serialization =           "0.13.0"        // Updated: Sep 12, 2019
 }

@@ -48,29 +48,85 @@ fun Project.publish(
  */
 fun publishConfig(block: PublishConfigBuilder): PublishConfigBuilder = { apply { this.block(it) } }
 
+/**
+ * Holds params for publication.
+ * Each parameter can be se programmatically of in `gradle.properties`; properties names in gradle.properties reflect
+ * the field name of the variable, where not specified differently.
+ * See gradle.properties.template for more examples
+ */
 class PublishConfig internal constructor(project: Project) {
-    // region Params
+
+    /**
+     * Username of Bintray user.
+     * Property name: `bintray.user`
+     */
     var username by project("", propertyName = "bintray.user")
+
+    /**
+     * Api Key of Bintray user.
+     * Property name: `bintray.apikey`
+     */
     var apiKey by project("", propertyName = "bintray.apikey")
+
+    /** Optional name of the organization */
+    var organization by project("")
+
+    /** Desired Group for publication, excluding group id */
     var bintrayGroup by project("")
+
+    /** Id for the group [bintrayGroup] */
     var groupId by project("")
-    var artifact by project("")
-    var groupName by project(artifact)
+
+    /**
+     * Name of the artifact to public.
+     * Default is [Project.getName]
+     */
+    var artifact by project(project.name)
+
+    // TODO: remove in 1.5
+    @Deprecated("Use 'repo' instead", ReplaceWith("repo"))
+    var groupName by project("")
+
+    /** Name of the Repository where to publish */
+    var repo by project("")
+
+    /** Version of the library */
     var version by project("")
+
+    /** Optional description of the library */
     var description by project("")
+
+    /** Optional website url of the library */
     var siteUrl by project("")
+
+    /** Optional Git url of the library */
     var gitUrl by project("")
+
+    /**
+     * Name of the module containing the sources to publish
+     * Default is [artifact]
+     */
+    var projectName: String? = artifact
+
+    /**
+     * Whether the publication must override a pre-existent one
+     * Default is `false`
+     * Property name: `publish.override`
+     */
+    var override by project(false, propertyName = "publish.override")
+
+    /**
+     * Whether the download number must be visible publicly.
+     * Default is `true`
+     */
+    var publicDownloadNumber by project(true)
+
+    // region internal
     internal val devs: MutableList<Developer> by project(mutableListOf<Developer>(), propertyName = "developers")
     internal val lics: MutableList<License> by project(mutableListOf<License>(), propertyName = "licenses")
-    var projectName: String? = artifact
-    var override by project(false, propertyName = "publish.override")
-    var publicDownloadNumber by project(true)
-    // endregion
-
-    @Suppress("PropertyName") // This is meant to be internal, but needed from Android artifact
     internal lateinit var publicationsBundleBuilder: PublicationsBundleBuilder
 
-    @UseExperimental(ImplicitReflectionSerializer::class)
+    @OptIn(ImplicitReflectionSerializer::class)
     private operator fun <T : Any> Project.invoke(
         default: T,
         propertyName: String? = null
@@ -85,6 +141,13 @@ class PublishConfig internal constructor(project: Project) {
             }
         }
     }
+
+    internal fun validate() {
+        for (license in lics) license.validate()
+        for (developer in devs) developer.validate()
+        assertStringsNotEmpty(::username, ::apiKey, ::bintrayGroup, ::groupId, ::artifact, ::repo)
+    }
+    // endregion
 
     // region Dsl functions
     // region Licenses
@@ -140,20 +203,14 @@ class PublishConfig internal constructor(project: Project) {
     @Marker
     fun DevelopersBuilder.developer(block: Developer.() -> Unit) = +Developer().apply(block)
     // endregion
-
-    internal fun validate() {
-        for (license in lics) license.validate()
-        for (developer in devs) developer.validate()
-        assertStringsNotEmpty(::username, ::apiKey, ::bintrayGroup, ::groupId, ::artifact, ::groupName)
-    }
     // endregion
 
     // region Children
     @Marker
     @Serializable
     class Developer internal constructor() {
-        var id: String = ""
-        var name: String = id
+        var name: String = ""
+        var id: String = name
         var email: String = ""
 
         internal fun validate() {

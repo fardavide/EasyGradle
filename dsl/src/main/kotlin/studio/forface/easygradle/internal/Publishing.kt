@@ -73,7 +73,7 @@ private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
             key = c.apiKey
 
             pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
-                repo = c.groupName
+                repo = c.repo
                 name = "${c.bintrayGroup}.${c.artifact}"
                 desc = c.description
                 websiteUrl = c.siteUrl
@@ -83,6 +83,8 @@ private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
                 publish = true
                 override = c.override
                 publicDownloadNumbers = c.publicDownloadNumber
+
+                if (c.organization.isNotEmpty()) userOrg = c.organization
 
                 version(delegateClosureOf<BintrayExtension.VersionConfig> {
                     desc = c.description
