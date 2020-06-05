@@ -12,7 +12,7 @@ private object Version {
     const val junit =                   "4.13-beta-3"   // Updated: May 05, 2019
     const val kotlin =                  "1.3.72"        // Updated: Apr 14, 2020
     const val mockk =                   "1.9.3"         // Updated: Mar 25, 2019
-    const val serialization =           "0.13.0"        // Updated: Sep 12, 2019
+    const val serialization =           "0.20.0"        // Updated: Mar 04, 2020
 }
 
 // Libraries
