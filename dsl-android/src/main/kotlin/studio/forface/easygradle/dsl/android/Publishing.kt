@@ -23,18 +23,23 @@ import studio.forface.easygradle.dsl.publishConfig
  *
  *
  * @param artifact Optional [PublishConfig.artifact] for the [PublishConfig], this is useful when we have a stored
- * common [PublishConfig] for the project and we want to apply it for a single module
+ *   common [PublishConfig] for the project and we want to apply it for a single module
  *
  * @param baseBlock Optional Lambda previously created by [publishConfig] for have a base setup for [PublishConfig]
+ *
+ * @param lazy Whether the configuration should be applied lazily. If `true` if will be setup in [Project.afterEvaluate]
+ *   Default is `true`. You might need to set to `false` if this method is already called inside a
+ *   [Project.afterEvaluate] block
  *
  * @param block Lambda for setup [PublishConfig]
  */
 fun Project.publishAndroid(
     baseBlock: PublishConfigBuilder? = null,
     artifact: String? = null,
+    lazy: Boolean = true,
     block: PublishConfigBuilder = {}
 ) {
-    _publish(baseBlock, artifact, block) {
+    _publish(baseBlock, artifact, lazy, block) {
         PublicationsBundle(android.sourceSets["main"].java.srcDirs)
     }
 }

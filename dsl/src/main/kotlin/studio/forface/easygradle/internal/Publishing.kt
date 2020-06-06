@@ -23,6 +23,7 @@ typealias PublicationsBundleBuilder = Project.() -> PublicationsBundle
 fun Project._publish(
     baseBlock: PublishConfigBuilder?,
     artifact: String?,
+    lazy: Boolean,
     block: PublishConfigBuilder,
     publicationsBundleBuilder: PublicationsBundleBuilder
 ) {
@@ -34,63 +35,66 @@ fun Project._publish(
         this.publicationsBundleBuilder = publicationsBundleBuilder
         validate()
     }
-    publish(validConfig)
+    publish(lazy, validConfig)
 }
 
 private fun PublishConfig.projectFor(project: Project) =
         if (projectName?.isBlank() == false) project.project(":$projectName") else project
 
 @Suppress("UnstableApiUsage")
-private fun Project.publish(c: PublishConfig) = with(c.projectFor(this)) {
+private fun Project.publish(lazy: Boolean, c: PublishConfig) = with(c.projectFor(this)) {
     apply(plugin = "com.jfrog.bintray")
     apply(plugin = "maven-publish")
 
     group = "${c.bintrayGroup}.${c.groupId}"
     version = c.version
 
-    afterEvaluate {
-        publishing {
-            publications.create<MavenPublication>(c.artifact) {
-                groupId = "${c.bintrayGroup}.${c.groupId}"
-                artifactId = c.artifact
-                version = c.version
+    if (lazy) afterEvaluate { publishBlock(c) }
+    else publishBlock(c)
+}
 
-                val bundle = c.publicationsBundleBuilder(this@with)
-                val sourcesJar = tasks.create("sourcesJar", Jar::class) {
-                    archiveClassifier.set("sources")
-                    from(bundle.sources)
-                }
+private fun Project.publishBlock(c: PublishConfig) {
+    publishing {
+        publications.create<MavenPublication>(c.artifact) {
+            groupId = "${c.bintrayGroup}.${c.groupId}"
+            artifactId = c.artifact
+            version = c.version
 
-                artifact(tasks[if (isAndroid) "bundleReleaseAar" else "jar"])
-                artifact(sourcesJar)
+            val bundle = c.publicationsBundleBuilder(this@publishBlock)
+            val sourcesJar = tasks.create("sourcesJar", Jar::class) {
+                archiveClassifier.set("sources")
+                from(bundle.sources)
             }
+
+            artifact(tasks[if (isAndroid) "bundleReleaseAar" else "jar"])
+            artifact(sourcesJar)
         }
+    }
 
-        configure<BintrayExtension> {
-            setPublications(c.artifact)
+    configure<BintrayExtension> {
+        setPublications(c.artifact)
 
-            user = c.username
-            key = c.apiKey
+        user = c.username
+        key = c.apiKey
 
-            pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
-                repo = c.repo
-                name = "${c.bintrayGroup}.${c.artifact}"
+        pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
+            repo = c.repo
+            name = "${c.bintrayGroup}.${c.groupId}"
+            desc = c.description
+            websiteUrl = c.siteUrl
+            vcsUrl = c.gitUrl
+            setLicenses(* c.lics.map { it.toString() }.toTypedArray())
+            dryRun = false
+            publish = true
+            override = c.override
+            publicDownloadNumbers = c.publicDownloadNumber
+
+            if (c.organization.isNotEmpty()) userOrg = c.organization
+
+            version(delegateClosureOf<BintrayExtension.VersionConfig> {
                 desc = c.description
-                websiteUrl = c.siteUrl
-                vcsUrl = c.gitUrl
-                setLicenses(* c.lics.map { it.toString() }.toTypedArray())
-                dryRun = false
-                publish = true
-                override = c.override
-                publicDownloadNumbers = c.publicDownloadNumber
-
-                if (c.organization.isNotEmpty()) userOrg = c.organization
-
-                version(delegateClosureOf<BintrayExtension.VersionConfig> {
-                    desc = c.description
-                    released = Date().toString()
-                })
+                released = Date().toString()
             })
-        }
+        })
     }
 }
