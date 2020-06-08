@@ -1,21 +1,22 @@
 package studio.forface.easygradle.internal
 
-import com.jfrog.bintray.gradle.BintrayExtension
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
-import org.gradle.kotlin.dsl.delegateClosureOf
 import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.maven
+import org.gradle.kotlin.dsl.repositories
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.dokka.gradle.DokkaTask
 import studio.forface.easygradle.dsl.PublishConfig
 import studio.forface.easygradle.dsl.PublishConfigBuilder
 import studio.forface.easygradle.dsl.isAndroid
 import studio.forface.easygradle.dsl.publishing
-import java.util.Date
+import studio.forface.easygradle.internal.PublishType.*
 
-class PublicationsBundle(val sources: Any)
+class PublicationsBundle(val sources: Any?)
 
 typealias PublicationsBundleBuilder = Project.() -> PublicationsBundle
 
@@ -23,8 +24,8 @@ typealias PublicationsBundleBuilder = Project.() -> PublicationsBundle
 fun Project._publish(
     baseBlock: PublishConfigBuilder?,
     artifact: String?,
-    lazy: Boolean,
     block: PublishConfigBuilder,
+    type: PublishType,
     publicationsBundleBuilder: PublicationsBundleBuilder
 ) {
     val project = this
@@ -35,66 +36,104 @@ fun Project._publish(
         this.publicationsBundleBuilder = publicationsBundleBuilder
         validate()
     }
-    publish(lazy, validConfig)
+    publish(validConfig, type)
 }
 
-private fun PublishConfig.projectFor(project: Project) =
-        if (projectName?.isBlank() == false) project.project(":$projectName") else project
+enum class PublishType {
+    MULTI_PLATFORM, ANDROID_ONLY, JVM_ONLY
+}
 
 @Suppress("UnstableApiUsage")
-private fun Project.publish(lazy: Boolean, c: PublishConfig) = with(c.projectFor(this)) {
-    apply(plugin = "com.jfrog.bintray")
+private fun Project.publish(c: PublishConfig, type: PublishType) {
     apply(plugin = "maven-publish")
+    // apply(plugin = "signing")
 
-    group = "${c.bintrayGroup}.${c.groupId}"
+    // signing {
+    //     useGpgCmd()
+    //     sign(publishing.publications)
+    // }
+
     version = c.version
 
-    if (lazy) afterEvaluate { publishBlock(c) }
-    else publishBlock(c)
-}
+    val javaDocsJar = tasks.create<Jar>("javaDocsJar") {
+        tasks.withType<DokkaTask>().firstOrNull()?.let { dokka ->
+            dependsOn(dokka)
+            from(dokka.outputDirectory)
+        }
+        archiveClassifier.set("javadoc")
+    }
 
-private fun Project.publishBlock(c: PublishConfig) {
-    publishing {
-        publications.create<MavenPublication>(c.artifact) {
-            groupId = "${c.bintrayGroup}.${c.groupId}"
-            artifactId = c.artifact
-            version = c.version
+    val emptySourceJar = tasks.create<Jar>("emptySourcesJar") {
+        archiveClassifier.set("sources")
+    }
 
-            val bundle = c.publicationsBundleBuilder(this@publishBlock)
-            val sourcesJar = tasks.create("sourcesJar", Jar::class) {
-                archiveClassifier.set("sources")
-                from(bundle.sources)
+    val sourcesJar = tasks.create<Jar>("sourcesJar") {
+        from(c.publicationsBundleBuilder(this@publish).sources)
+        archiveClassifier.set("sources")
+    }
+
+    fun setupPublishing() {
+        publishing {
+
+            publications.withType<MavenPublication> {
+
+                pom {
+                    name.set(c.name)
+                    description.set(c.description)
+                    url.set(c.siteUrl)
+                    licenses {
+                        for (lic in c.lics)
+                            license {
+                                name.set(lic.name)
+                                url.set(lic.url)
+                                distribution.set("repo")
+                            }
+                    }
+                    developers {
+                        for (dev in c.devs)
+                            developer {
+                                id.set(dev.id)
+                                name.set(dev.name)
+                                email.set(dev.name)
+                            }
+                    }
+                    scm {
+                        url.set(c.scmUrl)
+                        connection.set("scm:git:${c.scmConnection}")
+                        developerConnection.set("scm:git:${c.scmDevConnection}")
+                    }
+                }
+
+                artifact(javaDocsJar)
+                if (type == MULTI_PLATFORM) {
+                    if (name == "kotlinMultiplatform") artifact(emptySourceJar)
+                } else {
+                    artifact(sourcesJar)
+                    artifact(tasks[if (isAndroid) "bundleReleaseAar" else "jar"])
+                }
             }
+        }
 
-            artifact(tasks[if (isAndroid) "bundleReleaseAar" else "jar"])
-            artifact(sourcesJar)
+        repositories {
+            val target = c.organization.takeIf { it.isNotBlank() } ?: c.username
+            val override = if (c.override) 1 else 0
+            val publish = if (c.publish) 1 else 0
+            maven(
+                "https://api.bintray.com/maven/" +
+                    "$target/" +
+                    "${c.repo}/" +
+                    "${c.artifact}/;" +
+                    "publish=$publish;" +
+                    "override=$override"
+            ) {
+                credentials {
+                    username = c.username
+                    password = c.apiKey
+                }
+            }
         }
     }
 
-    configure<BintrayExtension> {
-        setPublications(c.artifact)
-
-        user = c.username
-        key = c.apiKey
-
-        pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
-            repo = c.repo
-            name = "${c.bintrayGroup}.${c.groupId}"
-            desc = c.description
-            websiteUrl = c.siteUrl
-            vcsUrl = c.gitUrl
-            setLicenses(* c.lics.map { it.toString() }.toTypedArray())
-            dryRun = false
-            publish = true
-            override = c.override
-            publicDownloadNumbers = c.publicDownloadNumber
-
-            if (c.organization.isNotEmpty()) userOrg = c.organization
-
-            version(delegateClosureOf<BintrayExtension.VersionConfig> {
-                desc = c.description
-                released = Date().toString()
-            })
-        })
-    }
+    if (type == ANDROID_ONLY) afterEvaluate { setupPublishing() }
+    else setupPublishing()
 }

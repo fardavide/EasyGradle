@@ -1,5 +1,5 @@
 @file:Suppress(
-        "MemberVisibilityCanBePrivate", "unused" // Public APIs
+    "MemberVisibilityCanBePrivate", "unused" // Public APIs
 )
 
 package studio.forface.easygradle.dsl.android
@@ -13,9 +13,10 @@ import studio.forface.easygradle.dsl.PublishConfigBuilder
 import studio.forface.easygradle.internal.PublicationsBundle
 import studio.forface.easygradle.internal._publish
 import studio.forface.easygradle.dsl.publishConfig
+import studio.forface.easygradle.internal.PublishType.ANDROID_ONLY
 
 /**
- * Apply publish script to the given module
+ * Apply publish script to the given [ANDROID_ONLY] module
  *
  * Params for [PublishConfig] can be set in `gradle.properties`
  * @see PublishConfig params for names and format
@@ -27,19 +28,14 @@ import studio.forface.easygradle.dsl.publishConfig
  *
  * @param baseBlock Optional Lambda previously created by [publishConfig] for have a base setup for [PublishConfig]
  *
- * @param lazy Whether the configuration should be applied lazily. If `true` if will be setup in [Project.afterEvaluate]
- *   Default is `true`. You might need to set to `false` if this method is already called inside a
- *   [Project.afterEvaluate] block
- *
  * @param block Lambda for setup [PublishConfig]
  */
 fun Project.publishAndroid(
     baseBlock: PublishConfigBuilder? = null,
     artifact: String? = null,
-    lazy: Boolean = true,
     block: PublishConfigBuilder = {}
 ) {
-    _publish(baseBlock, artifact, lazy, block) {
+    _publish(baseBlock, artifact, block, ANDROID_ONLY) {
         PublicationsBundle(android.sourceSets["main"].java.srcDirs)
     }
 }

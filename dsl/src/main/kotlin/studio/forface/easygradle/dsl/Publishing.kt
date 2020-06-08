@@ -1,6 +1,4 @@
-@file:Suppress(
-        "MemberVisibilityCanBePrivate", "unused" // Public APIs
-)
+@file:Suppress("MemberVisibilityCanBePrivate", "unused")
 package studio.forface.easygradle.dsl
 
 import kotlinx.serialization.ImplicitReflectionSerializer
@@ -13,14 +11,25 @@ import org.gradle.kotlin.dsl.provideDelegate
 import studio.forface.easygradle.internal.ConfigReadWriteProperty
 import studio.forface.easygradle.internal.PublicationsBundle
 import studio.forface.easygradle.internal.PublicationsBundleBuilder
+import studio.forface.easygradle.internal.PublishType.JVM_ONLY
+import studio.forface.easygradle.internal.PublishType.MULTI_PLATFORM
 import studio.forface.easygradle.internal._publish
 import studio.forface.easygradle.internal.assertStringsNotEmpty
 import kotlin.reflect.KProperty
 
 /**
- * Apply publish script to the given module
+ * Apply publish script to the given [MULTI_PLATFORM] module
+ * NOTE: remember to setup library variants for Android sourceSets. Example:
+ * ```
+android {
+    publishLibraryVariants("release", "debug")
+}
+ * ```
  *
- * Params for [PublishConfig] can be set in `gradle.properties`
+ * Params for [PublishConfig] can be set:
+ * * programmatically
+ * * in `gradle.properties`
+ * * in Environment variable
  * @see PublishConfig params for names and format
  * Objects and lists will respect the JSON standard format
  *
@@ -30,19 +39,42 @@ import kotlin.reflect.KProperty
  *
  * @param baseBlock Optional Lambda previously created by [publishConfig] for have a base setup for [PublishConfig]
  *
- * @param lazy Whether the configuration should be applied lazily. If `true` if will be setup in [Project.afterEvaluate]
- *   Default is `true`. You might need to set to `false` if this method is already called inside a
- *   [Project.afterEvaluate] block
+ * @param block Lambda for setup [PublishConfig]
+ */
+fun Project.publishMultiplatform(
+    baseBlock: PublishConfigBuilder? = null,
+    artifact: String? = null,
+    block: PublishConfigBuilder = {}
+) {
+    _publish(baseBlock, artifact, block, MULTI_PLATFORM) {
+        PublicationsBundle(sourceSets["main"].allSource)
+    }
+}
+
+/**
+ * Apply publish script to the given [JVM_ONLY] module
+ *
+ * Params for [PublishConfig] can be set:
+ * * programmatically
+ * * in `gradle.properties`
+ * * in Environment variable
+ * @see PublishConfig params for names and format
+ * Objects and lists will respect the JSON standard format
+ *
+ *
+ * @param artifact Optional [PublishConfig.artifact] for the [PublishConfig], this is useful when we have a stored
+ *   common [PublishConfig] for the project and we want to apply it for a single module
+ *
+ * @param baseBlock Optional Lambda previously created by [publishConfig] for have a base setup for [PublishConfig]
  *
  * @param block Lambda for setup [PublishConfig]
  */
-fun Project.publish(
+fun Project.publishJvm(
     baseBlock: PublishConfigBuilder? = null,
     artifact: String? = null,
-    lazy: Boolean = true,
     block: PublishConfigBuilder = {}
 ) {
-    _publish(baseBlock, artifact, lazy, block) {
+    _publish(baseBlock, artifact, block, JVM_ONLY) {
         PublicationsBundle(sourceSets["main"].allSource)
     }
 }
@@ -55,8 +87,12 @@ fun publishConfig(block: PublishConfigBuilder): PublishConfigBuilder = { apply {
 
 /**
  * Holds params for publication.
- * Each parameter can be se programmatically of in `gradle.properties`; properties names in gradle.properties reflect
- * the field name of the variable, where not specified differently.
+ * Each parameter can be set
+ * * programmatically
+ * * in `gradle.properties`
+ * * as Environment variable
+ * properties names in gradle.properties reflect the field name of the variable and environment variables reflect the
+ * property name name as uppercase snake_case where not specified differently.
  * See gradle.properties.template for more examples
  */
 class PublishConfig internal constructor(project: Project) {
@@ -76,24 +112,21 @@ class PublishConfig internal constructor(project: Project) {
     /** Optional name of the organization */
     var organization by project("")
 
-    /** Desired Group for publication, excluding group id */
-    var bintrayGroup by project("")
+    /**
+     * Name of the project on Bintray.
+     * Default is capitalized [Project.getName]
+     * Property name: `projectName`
+     */
+    var name by project(project.name.capitalize(), "projectName")
 
-    /** Id for the group [bintrayGroup] */
-    var groupId by project("")
+    /** Name of the Repository where to publish */
+    var repo by project("")
 
     /**
      * Name of the artifact to public.
      * Default is [Project.getName]
      */
     var artifact by project(project.name)
-
-    // TODO: remove in 1.5
-    @Deprecated("Use 'repo' instead", ReplaceWith("repo"))
-    var groupName by project("")
-
-    /** Name of the Repository where to publish */
-    var repo by project("")
 
     /** Version of the library */
     var version by project("")
@@ -104,27 +137,37 @@ class PublishConfig internal constructor(project: Project) {
     /** Optional website url of the library */
     var siteUrl by project("")
 
-    /** Optional Git url of the library */
-    var gitUrl by project("")
+    /**
+     * Scm url of the library
+     * Property name: `scm.url`
+     */
+    var scmUrl by project("", "scm.url")
 
     /**
-     * Name of the module containing the sources to publish
-     * Default is [artifact]
+     * Scm connection of the library
+     * Property name: `scm.connection`
      */
-    var projectName: String? = artifact
+    var scmConnection by project("", "scm.connection")
+
+    /**
+     * Scm Dev connection of the library
+     * Property name: `scm.devconnection`
+     */
+    var scmDevConnection by project("", "scm.devConnection")
 
     /**
      * Whether the publication must override a pre-existent one
      * Default is `false`
-     * Property name: `publish.override`
+     * Property name: `bintray.override`
      */
-    var override by project(false, propertyName = "publish.override")
+    var override by project(false, propertyName = "bintray.override")
 
     /**
-     * Whether the download number must be visible publicly.
-     * Default is `true`
+     * Whether the publication must be published
+     * Default is `false`
+     * Property name: `bintray.publish`
      */
-    var publicDownloadNumber by project(true)
+    var publish by project(false, propertyName = "bintray.publish")
 
     // region internal
     internal val devs: MutableList<Developer> by project(mutableListOf<Developer>(), propertyName = "developers")
@@ -134,8 +177,14 @@ class PublishConfig internal constructor(project: Project) {
     @OptIn(ImplicitReflectionSerializer::class)
     private operator fun <T : Any> Project.invoke(
         default: T,
-        propertyName: String? = null
-    ) = object : ConfigReadWriteProperty<PublishConfig, T>(this, default, propertyName = propertyName) {
+        propertyName: String? = null,
+        envName: String? = null
+    ) = object : ConfigReadWriteProperty<PublishConfig, T>(
+        this,
+        default,
+        propertyName = propertyName,
+        envName = envName
+    ) {
 
         override fun String.toList(property: KProperty<*>): T? {
             @Suppress("UNCHECKED_CAST")
@@ -150,7 +199,7 @@ class PublishConfig internal constructor(project: Project) {
     internal fun validate() {
         for (license in lics) license.validate()
         for (developer in devs) developer.validate()
-        assertStringsNotEmpty(::username, ::apiKey, ::bintrayGroup, ::groupId, ::artifact, ::repo)
+        assertStringsNotEmpty(::username, ::apiKey, ::repo, ::artifact, ::scmUrl, ::scmConnection, ::scmDevConnection)
     }
     // endregion
 
