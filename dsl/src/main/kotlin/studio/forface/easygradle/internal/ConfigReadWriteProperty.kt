@@ -46,10 +46,10 @@ abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
         val string = toString()
         @Suppress("UNCHECKED_CAST") // Cast is checked because of safe operator `as?`
         return when (default) {
-            is String ->    string as? PropType
-            is Boolean ->   string.toBoolean() as? PropType
-            is Int ->       string.toIntOrNull() as? PropType
-            is List<*> ->   string.toList(property)
+            is String -> string as? PropType
+            is Boolean -> string.toBoolean() as? PropType
+            is Int -> string.toIntOrNull() as? PropType
+            is List<*> -> string.toList(property)
             else -> throw IllegalArgumentException("'${default::class.simpleName}' is not a supported type")
         }
     }

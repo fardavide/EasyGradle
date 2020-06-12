@@ -9,7 +9,8 @@ internal class ExtensionsTest {
 
     @Test
     fun version() = with(mockk<DependencyHandler>(relaxed = true)) {
-        val result = kotlin version "banana"
+        `kotlin version` = "ciao"
+        val result = `kotlin` version "banana"
         assertEquals("org.jetbrains.kotlin:kotlin-stdlib:banana", result)
     }
 }

@@ -13,10 +13,8 @@ dependencies {
 
     implementation(
 
-//        project(":common"),
-
         // Bintray
-        `bintray-gradlePlugin`,
+        `mavenPublish-gradlePlugin`,
 
         // Dokka
         `dokka-gradlePlugin`,

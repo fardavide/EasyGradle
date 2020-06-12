@@ -14,16 +14,8 @@ dependencies {
 
     implementation(
 
-//        project(":common"),
-
         // Android
         `android-gradlePlugin`,
-
-        // Bintray
-        `bintray-gradlePlugin`,
-
-        // Dokka Android
-        `dokka-gradlePlugin`,
 
         // Test
         `jUnit`,

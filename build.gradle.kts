@@ -39,7 +39,7 @@ subprojects {
         reports {
             html.enabled = true // observe findings in your browser with structure and code snippets
             xml.enabled = false // checkstyle like format mainly for integrations like Jenkins
-            txt.enabled = false // similar to the console output, contains issue signature to manually edit baseline files
+            txt.enabled = false // similar to console output, contains issue signature to manually edit baseline files
         }
     }
 }

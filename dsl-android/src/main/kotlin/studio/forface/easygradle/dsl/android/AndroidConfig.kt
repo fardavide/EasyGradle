@@ -6,27 +6,26 @@ package studio.forface.easygradle.dsl.android
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.provideDelegate
-import studio.forface.easygradle.dsl.android.AndroidConfig.Type.Application
-import studio.forface.easygradle.dsl.android.AndroidConfig.Type.Library
+import studio.forface.easygradle.dsl.android.AndroidConfig.Type.*
 import studio.forface.easygradle.internal.ConfigReadWriteProperty
 
 class AndroidConfig(project: Project) {
     // region Params
-    var id: String? =               null
+    var id: String? = null
         set(value) {
             field = value
             type = value?.let { Application } ?: Library
         }
-    var versionCode                 by project(0)
-    var versionName                 by project("")
-    var minSdk                      by project(21)
-    var targetSdk                   by project(29)
-    var compileSdk =                targetSdk
-    var type =                      Library
+    var versionCode by project(0)
+    var versionName by project("")
+    var minSdk by project(21)
+    var targetSdk by project(29)
+    var compileSdk = targetSdk
+    var type = Library
 
-    var multidex                    by project(false)
-    var vectorDrawables             by project(true)
-    var testInstrumentationRunner   by project("androidx.test.runner.AndroidJUnitRunner")
+    var multidex by project(false)
+    var vectorDrawables by project(true)
+    var testInstrumentationRunner by project("androidx.test.runner.AndroidJUnitRunner")
     // endregion
 
     // region Delegation
