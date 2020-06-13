@@ -13,7 +13,9 @@ class PublishConfigTest {
 
         // GIVEN
         val project = mockk<Project>() {
+            every { group } returns "none"
             every { name } returns "none"
+            every { version } returns "none"
             every { findProperty(any()) } returns null
         }
         val configBuilder = PublishConfig {
@@ -51,7 +53,7 @@ class PublishConfigTest {
             "bintray.publish" to "false",
             "bintray.override" to "true",
             "scm.url" to "gitUrl",
-            "bintray.user" to "User",
+            "bintray.user" to "none", // Can be set by CI
             "bintray.apikey" to "MY_API_KEY"
         )
         val project = mockk<Project>() {
@@ -68,9 +70,9 @@ class PublishConfigTest {
         val bintrayUrl = config.buildBintrayUrl()
 
         // THEN
-        assertEquals(
-            "https://api.bintray.com/maven/User/MyRepository/my.group:my-package/;publish=0;override=1",
-            bintrayUrl
+        assert(
+            "https://api.bintray.com/maven/.+/MyRepository/my.group:my-package/;publish=0;override=1"
+                .toRegex().matches(bintrayUrl)
         )
     }
 }
