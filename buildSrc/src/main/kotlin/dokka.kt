@@ -51,8 +51,8 @@ fun Project.dokka(
 ) {
     apply(plugin = "org.jetbrains.dokka")
     tasks.withType<DokkaTask> {
-        config()
-        block()
+        config(this@dokka)
+        block(this@dokka)
     }
 }
 
@@ -62,7 +62,7 @@ fun Project.dokka(
  */
 fun DokkaConfig(builder: DokkaConfig) = builder
 
-typealias DokkaConfig = DokkaTask.() -> Unit
+typealias DokkaConfig = DokkaTask.(Project) -> Unit
 
 /**
  * Set [DokkaTask.outputFormat] using [OutputFormat] enum, instead of a String

@@ -2,36 +2,45 @@
 
 package studio.forface.easygradle.dsl
 
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
-
-// TODO Excluded deps
 
 fun DependencyHandler.api(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        add("api", it)
+        addX("api", it)
     }
 }
 
 fun DependencyHandler.compileOnly(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        add("compileOnly", it)
+        addX("compileOnly", it)
     }
 }
 
 fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        add("implementation", it)
+        addX("implementation", it)
     }
 }
 
 fun DependencyHandler.kapt(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        add("kapt", it)
+        addX("kapt", it)
     }
 }
 
 fun DependencyHandler.testImplementation(vararg dependencyNotations: Any) {
     dependencyNotations.forEach {
-        add("testImplementation", it)
+        addX("testImplementation", it)
     }
+}
+
+fun DependencyHandler.addX(configurationName: String, notation: Any) {
+    if (notation is ExcludingDependency) add("testImplementation", notation.notation)
+        .exclude(notation.excludeNotations)
+    else add(configurationName, notation)
+}
+
+private fun Dependency?.exclude(notations: List<Any>) {
+    this?.exclude(*notations.toTypedArray())
 }

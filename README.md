@@ -12,7 +12,58 @@ api("studio.forface.easygradle:dsl:$easyGradle")
 api("studio.forface.easygradle:dsl-android:$easyGradle")
 ```
 
+
+
 ### Features:
+
+
+
+* **Easy publishing** on Bintray ( wraps [maven-publish](https://github.com/vanniktech/gradle-maven-publish-plugin) )
+
+  Support Jvm, Android and Multiplatform
+
+  Only apply to your gradle and use `./gradlew uploadArchives`
+
+  ```kotlin
+  // build.gradle.kts
+  ...
+  publish()
+  ```
+
+  * It **fetches params from your `Project`'s properties** ( `group`, `name`, `version`, etc or declared in `gradle.properties` file - see [template](https://github.com/4face-studi0/EasyGradle/blob/master/gradle.properties.template) - relative to the module or root )
+
+  * or **fetches from environment variables**
+
+  * or **declared in DSL style**
+
+    ```kotlin
+    publish {
+      artifact = "dsl"
+      developers {
+        developer {
+          name = "Davide"
+          id = "4face-studi0"
+          email = "mail@face.studio"
+        }
+      }
+      ...
+    }
+    ```
+
+  * a default block could be stored and reused
+
+    ```kotlin
+    val config = PublishConfig { project ->
+      version = Version(1, 2, Beta, 2, 0)
+      ...
+    }
+    
+    publish(config) {
+      // optional additional block
+    }
+    ```
+
+  
 
 * **Library** and **Plugin** dependencies ( check docs for full list )
 
@@ -37,6 +88,8 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   }
   ```
 
+  
+
 * External **versions** declaration
 
   ```kotlin
@@ -58,6 +111,8 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   }
   ```
 
+  
+
 * **Configuration accessors** DSL
 
   ```kotlin
@@ -73,7 +128,21 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   )
   ```
 
-* **Android versioning** class for automatically generate `versionName` and `versionCode` from the given *major, minor, channel, patch and build* versions ( see [Version](https://github.com/4face-studi0/EasyGradle/blob/master/dsl-android/src/main/kotlin/studio/forface/easygradle/dsl/android/Version.kt) ) 
+
+
+* **exclude extensions**
+
+  ```kotlin
+  androidTestImplementation(
+    `android-test`,
+    `mockk-android` exclude `mockk`,
+    `junit4` exclude jUnit5(`any`) and "another:lib"
+  )
+  ```
+
+  
+
+* **versioning**, it is also compatible with Android for automatically generate `versionName` and `versionCode` from the given *major, minor, channel, patch and build* versions ( see [Version](https://github.com/4face-studi0/EasyGradle/blob/master/dsl/src/main/kotlin/studio/forface/easygradle/dsl/Version.kt) ) 
 
   It can also be used by following ( avoiding to pass `versionName` and `versionCode` )
 
@@ -85,7 +154,9 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   }
   ```
 
-* **Dokka script**
+  
+
+* **Dokka** builder and extensions ( plugin application is built-in )
 
   ```kotlin
   // build.gradle.kts
@@ -93,48 +164,26 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   dokka()
   ```
 
-* **Publishing script** for Bintray
+  or
 
   ```kotlin
-  // build.gradle.kts
-  ...
-  publish()
+  dokka {
+    // this: DokkaTask
+    outputFormatType = OutputFormat.Markdown
+  }
   ```
 
-  * It has default params
+  or, similar to `PublishConfig`
 
-  * other params could be declared in `gradle.properties` file ( see [template](https://github.com/4face-studi0/EasyGradle/blob/master/gradle.properties.template) )
+  ```kotlin
+  val config = DokkaConfig { project ->
+    ...
+  }
   
-  * or in environment variables
+  dokka(config)
+  ```
 
-  * or inside the block
-
-    ```kotlin
-    publish {
-      artifact = "dsl"
-      developers {
-        developer {
-          name = "Davide"
-          id = "4face-studi0"
-          email = "mail@face.studio"
-        }
-      }
-      ...
-    }
-    ```
-
-  * a default block could be created
-
-    ```kotlin
-    val defaultPublishConfig = PublishConfig {
-      androidVersion = Version(1, 2, Beta, 2, 0)
-      ...
-    }
-    
-    publish(defaultPublishConfig) {
-      ...
-    }
-    ```
+  
 
 * *More to come*
 

@@ -38,3 +38,5 @@ internal fun String?.useIfNotNull(block: (String) -> String) = this?.let(block) 
  * If receiver [String.isNotBlank] is not null, use it for create another string, else return an empty string
  */
 internal fun String.useIfNotBlank(block: (String) -> String) = this.takeIf { it.isNotBlank() }?.let(block) ?: ""
+
+internal operator fun String.minus(other: String) = this.replace(other, "")
