@@ -1,11 +1,10 @@
-https://github.com/4face-studi0/Assert4Kbintray.user=4face
+bintray.user=4face
 bintray.apikey=<< MY BINTRAY API KEY >>
 
 group=studio.forface.easygradle
-version=0.15-SNAPSHOT
+version=1.5-beta-1
 
 repo=4face
-projectName=EasyGradle
 description=DSL for Gradle configuration with Kotlin
 siteUrl=http://4face.studio
 developers=[ { "id": "4face-studi0" "name": "4face Studio" "email": "mail@4face.studio" } ]
@@ -14,5 +13,5 @@ scm.url=https://github.com/4face-studi0/EasyGradle
 scm.connection=git://github.com/face-studi0/EasyGradle.git
 scm.devConnection=ssh://git@github.com/4face-studi0/EasyGradle.git
 
-bintray.override=true
-bintray.publish=false
+bintray.publish=true
+bintray.override=false

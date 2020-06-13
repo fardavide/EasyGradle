@@ -40,6 +40,3 @@ fun DependencyHandler.api(vararg dependencyNotations: Any) {
 fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
     for (dep in dependencyNotations) add("implementation", dep)
 }
-fun DependencyHandler.testImplementation(vararg dependencyNotations: Any) {
-    for (dep in dependencyNotations) add("testImplementation", dep)
-}

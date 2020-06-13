@@ -56,19 +56,18 @@ fun Project.publish2(
  * @param artifact Optional [PublishConfig.artifact] for the [PublishConfig], this is useful when we have a stored
  *   common [PublishConfig] for the project and we want to apply it for a single module
  *
- * @param baseBlock Optional Lambda previously created by [publishConfig] for have a base setup for [PublishConfig]
+ * @param config Optional Lambda previously created by [PublishConfig] for have a base setup for [PublishConfig]
  *
  * @param block Lambda for setup [PublishConfig]
  */
 fun Project.publish(
-    baseBlock: PublishConfigBuilder? = null,
+    config: PublishConfigBuilder? = null,
     artifact: String? = null,
     block: PublishConfigBuilder = {}
 ) {
-    val c = PublishConfig(this).apply {
-        baseBlock?.let { this.baseBlock(project) }
+    val c = config.build(this).apply {
         artifact?.let { this.artifact = it }
-        this.block(project)
+        block(project)
         validate()
     }
 
@@ -103,16 +102,8 @@ fun Project.publish(
 
     mavenPublish {
         targets.getByName("uploadArchives") {
-            val target = c.organization.takeIf { it.isNotBlank() } ?: c.username
-            val override = if (c.override) 1 else 0
-            val publish = if (c.publish) 1 else 0
 
-            releaseRepositoryUrl = "https://api.bintray.com/maven/" +
-                "$target/" +
-                "${c.repo}/" +
-                "${c.name}/" +
-                ";publish=$publish" +
-                ";override=$override"
+            releaseRepositoryUrl = c.buildBintrayUrl()
             repositoryUsername = c.username
             repositoryPassword = c.apiKey
         }
@@ -123,14 +114,7 @@ fun Project.publish(
  * @return [PublishConfigBuilder]
  * @param block Lambda for setup [PublishConfig]
  */
-fun publishConfig(block: PublishConfigBuilder): PublishConfigBuilder = { apply { this.block(it) } }
-
-/**
- * @return [PublishConfig]
- * @param block Lambda for setup [PublishConfig]
- */
-fun Project.buildPublishConfig(block: PublishConfigBuilder): PublishConfig =
-    PublishConfig(this).apply { block(this@buildPublishConfig) }
+fun PublishConfig(block: PublishConfigBuilder) = block
 
 /**
  * Holds params for publication.
@@ -159,15 +143,11 @@ class PublishConfig internal constructor(project: Project) {
     /** Optional name of the organization */
     var organization by project("")
 
-    /**
-     * Name of the project on Bintray.
-     * Default is capitalized [Project.getName]
-     * Property name: `projectName`
-     */
-    var name by project(project.name.capitalize(), "projectName")
-
     /** Name of the Repository where to publish */
     var repo by project("")
+
+    /** Group of the Library */
+    var group by project(project.group.toString())
 
     /**
      * Name of the artifact to public.
@@ -175,14 +155,18 @@ class PublishConfig internal constructor(project: Project) {
      */
     var artifact by project(project.name)
 
-    /** Group of the Library */
-    var group by project("")
+    /**
+     * Name of the project on Bintray.
+     * Default is `$group:$artifact`
+     * Property name: `projectName`
+     */
+    var name by project("$group:$artifact", "projectName")
 
     /**
      * Version of the library
      * Property name: `version`
      */
-    var versionName by project("", "version")
+    var versionName by project(project.version.toString(), "version")
 
     /** Optional description of the library */
     var description by project("")
@@ -226,6 +210,19 @@ class PublishConfig internal constructor(project: Project) {
     internal val devs: MutableList<Developer> by project(mutableListOf<Developer>(), propertyName = "developers")
     internal val lics: MutableList<License> by project(mutableListOf<License>(), propertyName = "licenses")
 
+    internal fun buildBintrayUrl(): String {
+        val target = organization.takeIf { it.isNotBlank() } ?: username
+        val override = if (override) 1 else 0
+        val publish = if (publish) 1 else 0
+
+        return "https://api.bintray.com/maven/" +
+            "$target/" +
+            "$repo/" +
+            "$name/" +
+            ";publish=$publish" +
+            ";override=$override"
+    }
+
     @OptIn(ImplicitReflectionSerializer::class, UnstableDefault::class)
     private operator fun <T : Any> Project.invoke(
         default: T,
@@ -258,9 +255,7 @@ class PublishConfig internal constructor(project: Project) {
             ::apiKey,
             ::repo,
             ::artifact,
-            ::scmUrl,
-            ::scmConnection,
-            ::scmDevConnection
+            ::scmUrl
         )
     }
     // endregion
@@ -354,9 +349,12 @@ class PublishConfig internal constructor(project: Project) {
     annotation class Marker
 }
 
-private var PublishConfig.version: Version
+var PublishConfig.version: Version
     get() = throw UnsupportedOperationException()
     set(value) { versionName = value.versionName }
 
 /** Lambda for build a [PublishConfig] within a [Project] */
 typealias PublishConfigBuilder = PublishConfig.(Project) -> Unit
+
+internal fun PublishConfigBuilder?.build(project: Project): PublishConfig =
+    PublishConfig(project).apply { this@build?.let { it(project) } }

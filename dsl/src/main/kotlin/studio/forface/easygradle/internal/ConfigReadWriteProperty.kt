@@ -8,7 +8,7 @@ import kotlin.reflect.KProperty
  * [ReadWriteProperty] for delegate to variables of Configuration classes
  * @author Davide Farella
  */
-abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
+internal abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
     private val project: Project,
     private val default: PropType,
     private val propertyName: String? = null,

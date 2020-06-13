@@ -31,10 +31,10 @@ private fun Any.paramNotSet(kclass: KClass<*>, prop: KProperty<*>) =
  * @return [String]
  * If receiver [String] is not null, use it for create another string, else return an empty string
  */
-fun String?.useIfNotNull(block: (String) -> String) = this?.let(block) ?: ""
+internal fun String?.useIfNotNull(block: (String) -> String) = this?.let(block) ?: ""
 
 /**
  * @return [String]
  * If receiver [String.isNotBlank] is not null, use it for create another string, else return an empty string
  */
-fun String.useIfNotBlank(block: (String) -> String) = this.takeIf { it.isNotBlank() }?.let(block) ?: ""
+internal fun String.useIfNotBlank(block: (String) -> String) = this.takeIf { it.isNotBlank() }?.let(block) ?: ""

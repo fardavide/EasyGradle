@@ -1,6 +1,7 @@
 plugins {
     `kotlin-dsl`
     `kotlin`
+    // Needed for serialize devs and licenses from gradle.properties
     `kotlinx-serialization`
 }
 
@@ -29,9 +30,4 @@ dependencies {
         `kotlinTestJunit`,
         `mockk`
     )
-
-    detektPlugins(`detekt-formatting`)
 }
-
-dokka()
-publish(artifact = "dsl")

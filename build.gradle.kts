@@ -32,9 +32,8 @@ subprojects {
     detekt {
         autoCorrect = true
         failFast = false // fail build on any finding
-        buildUponDefaultConfig = true // preconfigure defaults
+        buildUponDefaultConfig = false // preconfigure defaults
         config = files("$rootDir/config/detekt.yml") // point to your custom config defining rules to run
-//        baseline = file("$rootDir/config/baseline.xml") // a way of suppressing issues before introducing detekt
 
         reports {
             html.enabled = true // observe findings in your browser with structure and code snippets
@@ -42,4 +41,16 @@ subprojects {
             txt.enabled = false // similar to console output, contains issue signature to manually edit baseline files
         }
     }
+
+    dependencies {
+        add("detektPlugins", `detekt-formatting`)
+    }
+
+    // Configure Dokka
+    dokka {
+        outputFormatType = OutputFormat.MARKDOWN
+    }
+
+    // Configure Publishing
+    publish()
 }

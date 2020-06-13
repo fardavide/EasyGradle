@@ -23,9 +23,4 @@ dependencies {
         `kotlinTestJunit`,
         `mockk`
     )
-
-    detektPlugins(`detekt-formatting`)
 }
-
-dokka()
-publish(artifact = "dsl-android")

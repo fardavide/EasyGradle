@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package studio.forface.easygradle.dsl
 
 import org.gradle.api.Project
@@ -62,3 +64,41 @@ fun Project.dokka(
 fun DokkaConfig(builder: DokkaConfig) = builder
 
 typealias DokkaConfig = DokkaTask.() -> Unit
+
+/**
+ * Set [DokkaTask.outputFormat] using [OutputFormat] enum, instead of a String
+ */
+var DokkaTask.outputFormatType
+    get() = OutputFormat.fromType(outputFormat)
+    set(value) {
+        outputFormat = value.type
+    }
+
+enum class OutputFormat(val type: String) {
+    /**
+     * minimalistic html format used by default, Java classes are translated to Kotlin
+     */
+    HTML("html"),
+
+    /**
+     * looks like normal Javadoc, Kotlin classes are translated to Java
+     */
+    JAVADOC("javadoc"),
+
+    /**
+     * looks like [HTML], but Kotlin classes are translated to Java
+     */
+    HTML_AS_JAVA("html-as-java"),
+
+    /**
+     * markdown structured as [HTML], Java classes are translated to Kotlin
+     * * `gfm` - GitHub flavored markdown
+     * * `jekyll` - Jekyll compatible markdown
+     */
+    MARKDOWN("markdown");
+
+    internal companion object {
+        fun fromType(type: String) = values().find { it.type.equals(type, ignoreCase = true) }
+            ?: throw IllegalArgumentException("Cannot find OutputFormat for type: $type")
+    }
+}

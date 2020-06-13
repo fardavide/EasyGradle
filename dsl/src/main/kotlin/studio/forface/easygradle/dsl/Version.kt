@@ -1,6 +1,6 @@
 @file:Suppress(
     "ReplaceGuardClauseWithFunctionCall",
-    "MagicNumber", "UnderscoreInNumericLiterals",
+    "MagicNumber", "UnderscoresInNumericLiterals",
     "unused", "MemberVisibilityCanBePrivate"
 )
 package studio.forface.easygradle.dsl
@@ -21,8 +21,9 @@ class Version(
 
     constructor(major: Int, minor: Int, patch: Int) : this(major, minor, None, patch)
 
+    override fun toString() = versionName
+
     /** @return the [Int] version code of the App, resolved from [major], [minor], [channel], [patch] and [build] */
-    @Suppress("")
     val versionCode: Int get() {
         // pattern:
         // major minor channel patch build

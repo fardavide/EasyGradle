@@ -37,7 +37,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   }
   ```
 
-* External **versions** declaration ( or default ones set by the library )
+* External **versions** declaration
 
   ```kotlin
   fun initVersions() {
@@ -73,10 +73,6 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   )
   ```
 
-* **Dependencies declaration** DSL
-
-  Check [related file](https://github.com/4face-studi0/EasyGradle/blob/master/dsl/src/main/kotlin/studio/forface/easygradle/dsl/Dependency.kt), to be documented here
-
 * **Android versioning** class for automatically generate `versionName` and `versionCode` from the given *major, minor, channel, patch and build* versions ( see [Version](https://github.com/4face-studi0/EasyGradle/blob/master/dsl-android/src/main/kotlin/studio/forface/easygradle/dsl/android/Version.kt) ) 
 
   It can also be used by following ( avoiding to pass `versionName` and `versionCode` )
@@ -94,34 +90,22 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   ```kotlin
   // build.gradle.kts
   ...
-  dokka() // or `dokkaAndroid()`
+  dokka()
   ```
-
-  * It has default params
-
-  * other params could be declared in `gradle.properties` file ( see [template](https://github.com/4face-studi0/EasyGradle/blob/master/gradle.properties.template) )
-
-  * or inside the block 
-
-    ```kotlin
-    dokka {
-      apiVersion = ...
-      outputDirectory = ...
-      ...
-    }
-    ```
 
 * **Publishing script** for Bintray
 
   ```kotlin
   // build.gradle.kts
   ...
-  publish() // or `publishAndroid()`
+  publish()
   ```
 
   * It has default params
 
   * other params could be declared in `gradle.properties` file ( see [template](https://github.com/4face-studi0/EasyGradle/blob/master/gradle.properties.template) )
+  
+  * or in environment variables
 
   * or inside the block
 
@@ -142,12 +126,12 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   * a default block could be created
 
     ```kotlin
-    val defaultPublishConfig = publishConfig {
+    val defaultPublishConfig = PublishConfig {
       androidVersion = Version(1, 2, Beta, 2, 0)
       ...
     }
     
-    publishAndroid(defaultPublishConfig) {
+    publish(defaultPublishConfig) {
       ...
     }
     ```

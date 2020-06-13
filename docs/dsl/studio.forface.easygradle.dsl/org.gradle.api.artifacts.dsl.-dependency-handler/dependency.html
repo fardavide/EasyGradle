@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>dependency - dsl</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">dsl</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.easygradle.dsl</a>&nbsp;/&nbsp;<a href="index.html">org.gradle.api.artifacts.dsl.DependencyHandler</a>&nbsp;/&nbsp;<a href="./dependency.html">dependency</a><br/>
+<br/>
+<h1>dependency</h1>
+<a name="studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="identifier">DependencyHandler</span><span class="symbol">.</span><span class="identifier">dependency</span><span class="symbol">(</span><span class="identifier" id="studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/group">group</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/groupName">groupName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/module">module</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/moduleSuffix">moduleSuffix</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/version">version</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a></code>
+<p>Build a dependency notation</p>
+<h3>Parameters</h3>
+<p><a name="group"></a>
+<code>group</code> - the partial group of the dependency. e.g. <code> studio.forface </code></p>
+<p><a name="groupName"></a>
+<code>groupName</code> - optional name of the group. e.g. <code> viewstatestore </code> for <code>studio.forface.viewstatestore</code></p>
+<p><a name="module"></a>
+<code>module</code> - module of the dependency, if not set <a href="dependency.html#studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/groupName">groupName</a> will be used. e.g. <code> dagger </code> for <code>com.google.dagger</code></p>
+<p><a name="moduleSuffix"></a>
+<code>moduleSuffix</code> - optional suffix for the <a href="dependency.html#studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/module">module</a>. e.g. <code> ktx </code> for <code>core-ktx</code></p>
+<p><a name="version"></a>
+<code>version</code> - optional version for the dependency</p>
+<h3>Exceptions</h3>
+<p><a name="IllegalArgumentException"></a>
+<code>IllegalArgumentException</code> - if none of <a href="dependency.html#studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/groupName">groupName</a> and <a href="dependency.html#studio.forface.easygradle.dsl$dependency(org.gradle.api.artifacts.dsl.DependencyHandler, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/module">module</a> is set</p>
+<p><strong>Return</strong><br/>
+<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></p>
+</BODY>
+</HTML>

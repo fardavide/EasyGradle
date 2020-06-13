@@ -4,6 +4,7 @@ package studio.forface.easygradle.dsl.android
 
 import com.android.build.gradle.internal.dsl.DefaultConfig
 import studio.forface.easygradle.dsl.*
+import studio.forface.easygradle.internal.writeOnly
 
 /**
  * Set [Version.versionName] and [Version.versionCode] into Android [DefaultConfig]
@@ -15,9 +16,7 @@ android {
     }
 }
  */
-var DefaultConfig.version: Version
-    get() = throw UnsupportedOperationException()
-    set(value) {
-        versionCode = value.versionCode
-        versionName = value.versionName
-    }
+var DefaultConfig.version: Version by writeOnly {
+    versionCode = it.versionCode
+    versionName = it.versionName
+}

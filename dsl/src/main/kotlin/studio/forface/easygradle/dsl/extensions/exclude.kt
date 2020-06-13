@@ -14,11 +14,6 @@ import org.gradle.kotlin.dsl.exclude
 @Suppress("unused") // scoped to `DependencyHandler`
 val DependencyHandler.`any` get() = ANY
 
-fun test() {
-    val a: Dependency = TODO()
-    a.exclude("", "")
-}
-
 fun Dependency.exclude(vararg dependencies: Any) {
     dependencies.forEach {
         when (it) {
