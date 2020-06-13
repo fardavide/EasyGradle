@@ -30,7 +30,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   publish()
   ```
 
-  * It **fetches params from your `Project`'s properties** ( `group`, `name`, `version`, etc or declared in `gradle.properties` file - see [template](https://github.com/4face-studi0/EasyGradle/blob/master/gradle.properties.template) - relative to the module or root )
+  * It **fetches params from your `Project`'s properties** ( `group`, `name`, `version`, etc or declared in `gradle.properties` file - see [template](https://github.com/4face-studi0/EasyGradle/blob/master/gradle.properties) - relative to the module or root )
 
   * or **fetches from environment variables**
 

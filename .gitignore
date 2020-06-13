@@ -41,6 +41,7 @@ captures/
 # Uncomment the following lines if you do not want to check your keystore files in.
 #*.jks
 #*.keystore
+*.hprof
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
@@ -64,5 +65,3 @@ fastlane/readme.md
 .DS_Store
 
 # Credentials
-gradle.properties
-*.hprof

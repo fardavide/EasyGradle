@@ -1,8 +1,7 @@
-package studio.forface.easygradle.dsl.android
+package studio.forface.easygradle.dsl
 
 import org.junit.Test
-import studio.forface.easygradle.dsl.android.Version.Channel.Beta
-import studio.forface.easygradle.dsl.android.Version.Channel.Stable
+import studio.forface.easygradle.dsl.Version.Channel.*
 import kotlin.test.assertEquals
 
 internal class VersionTest {
