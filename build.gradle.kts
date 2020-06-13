@@ -1,4 +1,6 @@
 import io.gitlab.arturbosch.detekt.DetektPlugin
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.io.File
 
 buildscript {
     repositories {
@@ -17,7 +19,7 @@ plugins {
 subprojects {
 
     // Options for Kotlin
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    tasks.withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = "1.8"
             freeCompilerArgs = freeCompilerArgs +
@@ -49,6 +51,7 @@ subprojects {
     // Configure Dokka
     dokka {
         outputFormatType = OutputFormat.MARKDOWN
+        outputDirectory = File(rootDir, "docs${File.separator}${it.name}").path
     }
 
     // Configure Publishing
