@@ -151,6 +151,9 @@ fun DependencyHandler.squareup(groupName: String? = null, module: String? = null
 // endregion
 
 // region subgroups
+fun DependencyHandler.daggerGroup(module: String? = null, moduleSuffix: String? = null, version: String? = null) =
+    google("dagger", module = module, moduleSuffix = moduleSuffix, version = version)
+
 fun DependencyHandler.kotlinx(moduleSuffix: String? = null, version: String? = null) =
     jetbrains("kotlinx", moduleSuffix = moduleSuffix, version = version)
 // endregion
@@ -160,7 +163,7 @@ fun DependencyHandler.coroutines(moduleSuffix: String? = null, version: String =
     kotlinx("coroutines-$moduleSuffix", version)
 
 fun DependencyHandler.dagger(moduleSuffix: String? = null, version: String = `dagger version`) =
-    google("dagger", moduleSuffix = moduleSuffix, version = version)
+    daggerGroup("dagger", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.detekt(moduleSuffix: String, version: String = `detekt version`) =
     dependency("io.gitlab.arturbosch", groupName = "detekt", moduleSuffix = moduleSuffix, version = version)

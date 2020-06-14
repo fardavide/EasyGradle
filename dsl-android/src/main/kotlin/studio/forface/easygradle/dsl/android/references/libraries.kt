@@ -90,6 +90,14 @@ var `robolectric version` by lateinit()
 val DependencyHandler.`dagger-android` get() = dagger("android")
 val DependencyHandler.`dagger-android-support` get() = dagger("android-support")
 val DependencyHandler.`dagger-android-processor` get() = dagger("android-processor")
+
+val DependencyHandler.`hilt-android` get() = hiltAndroid()
+val DependencyHandler.`hilt-android-compiler` get() = hiltAndroid("compiler")
+val DependencyHandler.`hilt-android-testing` get() = hiltAndroid("testing")
+
+val DependencyHandler.`hilt-android-gradle-plugin` get() = hiltAndroid("gradle-plugin")
+
+val `hilt-android version` by lateinit()
 // endregion
 
 // region Square
@@ -120,13 +128,13 @@ var `viewStateStore version` by lateinit()
 
 // region groups
 fun DependencyHandler.android(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        dependency("com.android", groupName, module, moduleSuffix, version)
+    dependency("com.android", groupName, module, moduleSuffix, version)
 
 fun DependencyHandler.googleAndroid(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        google("android.$groupName", module ?: groupName, moduleSuffix, version)
+    google("android.$groupName", module ?: groupName, moduleSuffix, version)
 
 fun DependencyHandler.androidx(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-        dependency("androidx", groupName, module, moduleSuffix, version)
+    dependency("androidx", groupName, module, moduleSuffix, version)
 // endregion
 
 // region subgroups
@@ -135,20 +143,23 @@ fun DependencyHandler.androidx(groupName: String? = null, module: String? = null
 
 // region modules
 fun DependencyHandler.androidxArch(moduleSuffix: String? = null, version: String = `android-arch version`) =
-        androidx("arch.core", "core", moduleSuffix = moduleSuffix, version = version)
+    androidx("arch.core", "core", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.androidxLifecycle(moduleSuffix: String? = null, version: String = `lifecycle version`) =
-        androidx("lifecycle", moduleSuffix = moduleSuffix, version = version)
+    androidx("lifecycle", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.androidxPaging(moduleSuffix: String? = null, version: String = `android-paging version`) =
-        androidx("paging", moduleSuffix = moduleSuffix, version = version)
+    androidx("paging", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.androidxRoom(moduleSuffix: String? = null, version: String = `android-room version`) =
-        androidx("room", moduleSuffix = moduleSuffix, version = version)
+    androidx("room", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.androidxTest(module: String? = null, version: String = `android-test version`) =
-        androidx("test", module, version = version)
+    androidx("test", module, version = version)
 
 fun DependencyHandler.androidxWork(moduleSuffix: String? = null, version: String = `android-work version`) =
-        androidx("work", moduleSuffix = moduleSuffix, version = version)
+    androidx("work", moduleSuffix = moduleSuffix, version = version)
+
+fun DependencyHandler.hiltAndroid(moduleSuffix: String? = null, version: String = `hilt-android version`) =
+    daggerGroup("hilt.android", moduleSuffix = moduleSuffix, version = version)
 // endregion
