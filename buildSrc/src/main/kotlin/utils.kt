@@ -1,3 +1,4 @@
+
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.jvm.javaGetter
@@ -23,7 +24,7 @@ internal fun Any.assertStringNotEmpty(prop: KProperty<String>) {
 
 /** @throws IllegalArgumentException */
 private fun Any.paramNotSet(kclass: KClass<*>, prop: KProperty<*>) =
-    IllegalArgumentException("`${kclass.simpleName}.${prop.name}` has not being set for '$this'")
+        IllegalArgumentException("`${kclass.simpleName}.${prop.name}` has not being set for '$this'")
 
 /**
  * @return [String]
@@ -36,3 +37,5 @@ internal fun String?.useIfNotNull(block: (String) -> String) = this?.let(block) 
  * If receiver [String.isNotBlank] is not null, use it for create another string, else return an empty string
  */
 internal fun String.useIfNotBlank(block: (String) -> String) = this.takeIf { it.isNotBlank() }?.let(block) ?: ""
+
+internal operator fun String.minus(other: String) = this.replace(other, "")

@@ -28,7 +28,7 @@ internal abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
 
     /** @see ReadWriteProperty.getValue */
     override fun getValue(thisRef: Scope, property: KProperty<*>) =
-        backValue ?: prop(property) ?: env(property) ?: default
+            backValue ?: env(property) ?: prop(property) ?: default
 
     /** @see ReadWriteProperty.setValue */
     override fun setValue(thisRef: Scope, property: KProperty<*>, value: PropType) {
@@ -36,7 +36,8 @@ internal abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
     }
 
     private fun prop(property: KProperty<*>): PropType? =
-        project.findProperty(property.actualPropertyName)?.toPropType(property)
+        project.findProperty(property.actualEnvName)?.toPropType(property)
+            ?: project.findProperty(property.actualPropertyName)?.toPropType(property)
 
     private fun env(property: KProperty<*>): PropType? =
         System.getenv(property.actualEnvName)?.toPropType(property)
