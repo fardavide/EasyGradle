@@ -49,14 +49,14 @@ workflows:
     jobs:
       - analyze
       - test
-      - publish
+      - publish:
 #          requires:
 #            - analyze
 #            - test
-#          filters:
+          filters:
             # ignore any commit on any branch by default
-#            branches:
-#              ignore: /.*/
+            branches:
+              ignore: /.*/
             # only act on version tags
-#            tags:
-#              only: /^[0-9](\.[0-9]+)+(\-\w+\-[0-9]+){0,1}$/
+            tags:
+              only: /^[0-9](\.[0-9]+)+(\-\w+\-[0-9]+){0,1}$/
