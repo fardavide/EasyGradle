@@ -21,20 +21,17 @@ val LINES_TO_EXCLUDE = arrayOf(
 )
 
 val sep: String = File.separator
-val INPUT = File("${rootDir.parentFile.path}${sep}dsl${sep}src${sep}main${sep}kotlin${sep}studio${sep}forface${sep}easygradle${sep}dsl")
+val INPUT = File("${rootDir.parentFile.path}${sep}dsl${sep}src${sep}main${sep}kotlin${sep}studio${sep}forface${sep}easygradle")
 val OUTPUT = File("${rootDir.path}${sep}src${sep}main${sep}kotlin")
 
-val matchName = { name: String -> TO_COPY.any { it in name } }
-
-val files = INPUT
-    .listFiles { file, name -> file.isDirectory || matchName(name) }.orEmpty()
-    .flatMap { subFile ->
-        when {
-            subFile.isDirectory -> subFile.listFiles { _, name -> matchName(name) }.orEmpty().toList()
-            matchName(subFile.name) -> listOf(subFile)
-            else -> listOf()
-        }
+fun File.children(): List<File> {
+    return listFiles().orEmpty().flatMap {
+        if (it.isDirectory) it.children()
+        else listOf(it)
     }
+}
+
+val files = INPUT.children().filter { file -> TO_COPY.any { it in file.name } }
 
 println("Copying file: ${files.joinToString { it.path }}")
 
