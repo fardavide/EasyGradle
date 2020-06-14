@@ -41,8 +41,19 @@ jobs:
       - checkout
 
       - run:
-          name: "Publish to Bintray"
+          name: Publish to Bintray
           command: ./gradlew uploadArchives
+
+  testTag:
+
+    docker:
+      - image: circleci/openjdk:8
+
+    steps:
+      - run:
+          name: Testing Workflow with tags
+          command: ECHO "Hello!"
+
 
 workflows:
 
@@ -50,7 +61,7 @@ workflows:
     jobs:
       - analyze
       - test
-      - publish:
+      - testTag:
           requires:
             - analyze
             - test
