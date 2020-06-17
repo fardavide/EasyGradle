@@ -34,8 +34,9 @@ infix fun Any.and(dependency: Any): Any {
 
 /**
  * Apply a set of [dependencies] to exclude from receiver [Dependency]
+ * @return [Dependency]
  */
-fun Dependency.exclude(vararg dependencies: Any) {
+fun Dependency.exclude(vararg dependencies: Any): Dependency {
     dependencies.forEach {
         when (it) {
             is String -> exclude(dependency = it)
@@ -43,14 +44,17 @@ fun Dependency.exclude(vararg dependencies: Any) {
             else -> throw IllegalArgumentException("Impossible to exclude the following: $it")
         }
     }
+    return this
 }
 
 /**
  * Apply a [dependency] to exclude from receiver [Dependency]
+ * @return [Dependency]
  */
-infix fun Dependency.exclude(dependency: Any) {
+infix fun Dependency.exclude(dependency: Any): Dependency {
     val (group, module) = RemoteDependencyParts.from(dependency.excluding())
     (this as ModuleDependency).exclude(group, module)
+    return this
 }
 
 internal fun Any.excluding(): String {
