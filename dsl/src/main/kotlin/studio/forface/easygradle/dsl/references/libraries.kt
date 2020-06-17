@@ -5,6 +5,12 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import studio.forface.easygradle.internal.lateinit
 import studio.forface.easygradle.internal.useIfNotNull
 
+// region 4face
+val DependencyHandler.`assert4k` get() = forface(module = "assert4k") version `assert4k version`
+
+var `assert4k version` by lateinit()
+// endregion
+
 // region Kotlin
 // region StdLib
 val DependencyHandler.`kotlin` get() = kotlin("stdlib")

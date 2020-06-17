@@ -6,6 +6,18 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import studio.forface.easygradle.dsl.*
 import studio.forface.easygradle.internal.lateinit
 
+// region 4face
+val DependencyHandler.`fluentNotifications` get() = forface("fluentnotifications") version `fluentNotifications version`
+var `fluentNotifications version` by lateinit()
+
+val DependencyHandler.`theia` get() = forface("theia") version `theia version`
+var `theia version` by lateinit()
+
+val DependencyHandler.`viewStateStore` get() = forface("viewstatestore") version `viewStateStore version`
+val DependencyHandler.`viewStateStore-paging` get() = forface("viewstatestore", moduleSuffix = "paging") version `viewStateStore version`
+var `viewStateStore version` by lateinit()
+// endregion
+
 // region Jetpack
 
 // region Arch
@@ -111,18 +123,6 @@ var `retrofit-kotlin-serialization version` by lateinit()
 
 val DependencyHandler.`timber` get() = jakeWharton("timber") version `timber version`
 var `timber version` by lateinit()
-// endregion
-
-// region 4face
-val DependencyHandler.`fluentNotifications` get() = forface("fluentnotifications") version `fluentNotifications version`
-var `fluentNotifications version` by lateinit()
-
-val DependencyHandler.`theia` get() = forface("theia") version `theia version`
-var `theia version` by lateinit()
-
-val DependencyHandler.`viewStateStore` get() = forface("viewstatestore") version `viewStateStore version`
-val DependencyHandler.`viewStateStore-paging` get() = forface("viewstatestore", moduleSuffix = "paging") version `viewStateStore version`
-var `viewStateStore version` by lateinit()
 // endregion
 
 
