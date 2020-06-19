@@ -109,7 +109,7 @@ val DependencyHandler.`hilt-android-testing` get() = hiltAndroid("testing")
 
 val DependencyHandler.`hilt-android-gradle-plugin` get() = hiltAndroid("gradle-plugin")
 
-val `hilt-android version` by lateinit()
+var `hilt-android version` by lateinit()
 // endregion
 
 // region Square
