@@ -161,5 +161,5 @@ fun DependencyHandler.androidxWork(moduleSuffix: String? = null, version: String
     androidx("work", moduleSuffix = moduleSuffix, version = version)
 
 fun DependencyHandler.hiltAndroid(moduleSuffix: String? = null, version: String = `hilt-android version`) =
-    daggerGroup("hilt.android", moduleSuffix = moduleSuffix, version = version)
+    daggerGroup("hilt-android", moduleSuffix = moduleSuffix, version = version)
 // endregion
