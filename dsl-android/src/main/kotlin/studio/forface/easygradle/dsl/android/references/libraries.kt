@@ -110,6 +110,13 @@ val DependencyHandler.`hilt-android-testing` get() = hiltAndroid("testing")
 val DependencyHandler.`hilt-android-gradle-plugin` get() = hiltAndroid("gradle-plugin")
 
 var `hilt-android version` by lateinit()
+
+val DependencyHandler.`hilt-androidx-annotations` get() = hiltAndroidx("common")
+val DependencyHandler.`hilt-androidx-compiler` get() = hiltAndroidx("compiler")
+val DependencyHandler.`hilt-androidx-viewModel` get() = hiltAndroidx("lifecycle-viewmodel")
+val DependencyHandler.`hilt-androidx-workManager` get() = hiltAndroidx("work")
+
+var `hilt-androidx version` by lateinit()
 // endregion
 
 // region Square
@@ -162,4 +169,7 @@ fun DependencyHandler.androidxWork(moduleSuffix: String? = null, version: String
 
 fun DependencyHandler.hiltAndroid(moduleSuffix: String? = null, version: String = `hilt-android version`) =
     daggerGroup("hilt-android", moduleSuffix = moduleSuffix, version = version)
+
+fun DependencyHandler.hiltAndroidx(moduleSuffix: String? = null, version: String = `hilt-androidx version`) =
+    androidx("hilt", moduleSuffix = moduleSuffix, version = version)
 // endregion

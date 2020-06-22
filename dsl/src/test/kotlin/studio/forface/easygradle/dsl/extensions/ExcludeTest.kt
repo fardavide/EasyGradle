@@ -1,11 +1,32 @@
 package studio.forface.easygradle.dsl.extensions
 
+import assert4k.*
+import io.mockk.mockk
+import org.gradle.api.artifacts.dsl.DependencyHandler
 import studio.forface.easygradle.dsl.*
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 class ExcludeTest {
+
+    @Test
+    fun `chained excludes work properly`() {
+        with(mockk<DependencyHandler>()) {
+            `sqlDelight version` = "1.0"
+
+            // GIVEN - WHEN
+            val result = (
+                "hello.world:lib:3.0" exclude "another.group" and forface(`any`) and sqlDelight(`any`)
+            ) as ExcludingDependency
+            val stringified = result.excludeNotations.map { it.toString() }
+
+            // THEN
+            assert that result.notation equals "hello.world:lib:3.0"
+            assert that stringified.size equals 3
+            assert that stringified contains "another.group"
+            assert that stringified contains "studio.forface.$any:$any"
+            assert that stringified contains "com.squareup.sqldelight:$any:1.0"
+        }
+    }
 
     @Test
     fun `excluding remove whole module`() {
@@ -17,8 +38,8 @@ class ExcludeTest {
         val (group, module) = RemoteDependencyParts.from(dep.excluding())
 
         // THEN
-        assertEquals("studio.forface.easygradle", group)
-        assertNull(module)
+        assert that group equals "studio.forface.easygradle"
+        assert that module `is` `null`
     }
 
     @Test
@@ -31,8 +52,8 @@ class ExcludeTest {
         val (group, module) = RemoteDependencyParts.from(dep.excluding())
 
         // THEN
-        assertEquals("studio.forface.easygradle", group)
-        assertEquals("dsl", module)
+        assert that group equals "studio.forface.easygradle"
+        assert that module equals "dsl"
     }
 
     @Test
@@ -45,8 +66,8 @@ class ExcludeTest {
         val (group, module) = RemoteDependencyParts.from(dep.excluding())
 
         // THEN
-        assertEquals("studio.forface", group)
-        assertEquals("dsl", module)
+        assert that group equals "studio.forface"
+        assert that module equals "dsl"
     }
 
     @Test
@@ -59,8 +80,8 @@ class ExcludeTest {
         val (group, module) = RemoteDependencyParts.from(dep.excluding())
 
         // THEN
-        assertEquals("studio.forface", group)
-        assertNull(module)
+        assert that group equals "studio.forface"
+        assert that module `is` `null`
     }
 
     @Test
@@ -73,7 +94,7 @@ class ExcludeTest {
         val (group, module) = RemoteDependencyParts.from(dep.excluding())
 
         // THEN
-        assertEquals("studio.forface", group)
-        assertEquals("dsl", module)
+        assert that group equals "studio.forface"
+        assert that module equals "dsl"
     }
 }

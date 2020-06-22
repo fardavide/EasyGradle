@@ -27,9 +27,14 @@ infix fun Any.exclude(dependency: Any): Any =
  * Concatenate exclusion rules
  * @see exclude
  */
-infix fun Any.and(dependency: Any): Any {
+infix fun Any.and(other: Any): Any {
     require(this is ExcludingDependency) { "'exclude' should be called before 'and'" }
-    return ExcludingDependency(notation, listOf(excludeNotations, dependency))
+    return if (other is ExcludingDependency)
+        ExcludingDependency(
+            notation.toString() + other.notation,
+            excludeNotations + other.excludeNotations
+        )
+    else ExcludingDependency(notation, excludeNotations + other)
 }
 
 /**
@@ -79,6 +84,6 @@ internal data class RemoteDependencyParts(val group: String, val module: String?
     }
 }
 
-internal class ExcludingDependency(val notation: Any, val excludeNotations: List<Any>)
+internal data class ExcludingDependency(val notation: Any, val excludeNotations: List<Any>)
 
 internal const val ANY = "\$any$"

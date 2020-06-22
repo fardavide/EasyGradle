@@ -12,6 +12,12 @@ buildscript {
     }
 }
 
+allprojects {
+    repositories {
+        maven("https://dl.bintray.com/4face/4face")
+    }
+}
+
 plugins {
     `detekt`
 }

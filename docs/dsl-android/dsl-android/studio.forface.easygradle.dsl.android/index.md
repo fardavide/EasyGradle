@@ -24,6 +24,8 @@
 | [espresso version](espresso version.md) | `var espresso version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [fluentNotifications version](fluent-notifications version.md) | `var fluentNotifications version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [fragment version](fragment version.md) | `var fragment version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [hilt-android version](hilt-android version.md) | `var hilt-android version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [hilt-androidx version](hilt-androidx version.md) | `var hilt-androidx version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [ktx version](ktx version.md) | `var ktx version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [lifecycle version](lifecycle version.md) | `var lifecycle version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [material version](material version.md) | `var material version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

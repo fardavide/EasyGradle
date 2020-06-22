@@ -22,9 +22,11 @@ dependencies {
 
         // Accessors
         `kotlin`,
-        `serialization`,
+        `serialization`
+    )
 
-        // Test
+    testImplementation(
+        `assert4k`,
         `jUnit`,
         `kotlinTest`,
         `kotlinTestJunit`,

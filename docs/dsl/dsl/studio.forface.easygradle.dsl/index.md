@@ -21,6 +21,7 @@
 
 ### Properties
 
+| [assert4k version](assert4k version.md) | `var assert4k version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [coroutines version](coroutines version.md) | `var coroutines version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [dagger version](dagger version.md) | `var dagger version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [detect-code-analysis version](detect-code-analysis version.md) | `var detect-code-analysis version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

@@ -6,6 +6,7 @@ private object Version {
     const val dokkaGradlePlugin =       "0.10.1"        // Updated: Oct 07, 2019
     const val mavenPublishPlugin =      "0.11.1"        // Released: Mar 31, 2020
 
+    const val assert4k =                "0.2.2"         // Updated: Jun 16, 2020
     const val detekt =                  "1.9.1"         // Updated: May 17, 2020
     const val junit =                   "4.13-beta-3"   // Updated: May 05, 2019
     const val kotlin =                  "1.3.72"        // Updated: Apr 14, 2020
@@ -20,6 +21,7 @@ val DependencyHandler.`kotlin-gradlePlugin` get() = "org.jetbrains.kotlin:kotlin
 val DependencyHandler.`serialization-gradlePlugin` get() = "org.jetbrains.kotlin:kotlin-serialization:${Version.kotlin}"
 val DependencyHandler.`mavenPublish-gradlePlugin` get() = "com.vanniktech:gradle-maven-publish-plugin:${Version.mavenPublishPlugin}"
 
+val DependencyHandler.`assert4k` get() = "studio.forface:assert4k:${Version.assert4k}"
 val DependencyHandler.`detekt-formatting` get() = "io.gitlab.arturbosch.detekt:detekt-formatting:${Version.detekt}"
 val DependencyHandler.`jUnit` get() = "junit:junit:${Version.junit}"
 val DependencyHandler.`kotlin` get() = "org.jetbrains.kotlin:kotlin-stdlib:${Version.kotlin}"
@@ -39,4 +41,7 @@ fun DependencyHandler.api(vararg dependencyNotations: Any) {
 }
 fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
     for (dep in dependencyNotations) add("implementation", dep)
+}
+fun DependencyHandler.testImplementation(vararg dependencyNotations: Any) {
+    for (dep in dependencyNotations) add("testImplementation", dep)
 }
