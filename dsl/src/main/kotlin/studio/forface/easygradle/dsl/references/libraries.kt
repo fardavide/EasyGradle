@@ -77,6 +77,11 @@ var `dagger version` by lateinit()
 // endregion
 
 // region Square
+val DependencyHandler.`assistedInject-annotations-dagger` get() = squareup("inject", "assisted-inject-annotations-dagger2") version `assistedInject version`
+val DependencyHandler.`assistedInject-processor-dagger` get() = squareup("inject", "assisted-inject-processor-dagger2") version `assistedInject version`
+
+var `assistedInject version` by lateinit()
+
 val DependencyHandler.`kotlinPoet` get() = squareup("kotlinpoet") version `kotlinPoet version`
 val DependencyHandler.`kotlinPoet-metadata-specs` get() = squareup("kotlinpoet", moduleSuffix = "metadata-specs") version `kotlinPoet version`
 
