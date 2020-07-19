@@ -11,20 +11,20 @@ import studio.forface.easygradle.internal.useIfNotBlank
 /**
  * Apply publish script to the receiver [Project]
  *
- * Params for [PublishConfig] can be set:
+ * Params for [PublishExtension] can be set:
  * * programmatically
  * * in `gradle.properties`
  * * in Environment variable
- * @see PublishConfig params for names and format
+ * @see PublishExtension params for names and format
  * Objects and lists will respect the JSON standard format
  *
  *
- * @param artifact Optional [PublishConfig.artifact] for the [PublishConfig], this is useful when we have a stored
- *   common [PublishConfig] for the project and we want to apply it for a single module
+ * @param artifact Optional [PublishExtension.artifact] for the [PublishExtension], this is useful when we have a stored
+ *   common [PublishExtension] for the project and we want to apply it for a single module
  *
- * @param config Optional Lambda previously created by [PublishConfig] for have a base setup for [PublishConfig]
+ * @param config Optional Lambda previously created by [PublishExtension] for have a base setup for [PublishExtension]
  *
- * @param block Lambda for setup [PublishConfig]
+ * @param block Lambda for setup [PublishExtension]
  */
 fun Project.publish(
     config: PublishConfigBuilder? = null,
@@ -37,28 +37,32 @@ fun Project.publish(
         validate()
     }
 
-    extra["GROUP"] = c.group
-    extra["POM_ARTIFACT_ID"] = c.artifact
-    extra["VERSION_NAME"] = c.versionName
+    publish(c)
+}
 
-    extra["POM_NAME"] = c.name
-    extra["POM_DESCRIPTION"] = c.description
+internal fun Project.publish(ext: PublishExtension) {
+    extra["GROUP"] = ext.group
+    extra["POM_ARTIFACT_ID"] = ext.artifact
+    extra["VERSION_NAME"] = ext.versionName
+
+    extra["POM_NAME"] = ext.name
+    extra["POM_DESCRIPTION"] = ext.description
 //    extra["POM_INCEPTION_YEAR"] =
 
 //    extra["POM_url"] =
-    extra["POM_SCM_URL"] = c.scmUrl
-    extra["POM_SCM_CONNECTION"] = c.scmConnection.useIfNotBlank { "scm:git:$it" }
-    extra["POM_SCM_DEV_CONNECTION"] = c.scmDevConnection.useIfNotBlank { "scm:git:$it" }
+    extra["POM_SCM_URL"] = ext.scmUrl
+    extra["POM_SCM_CONNECTION"] = ext.scmConnection.useIfNotBlank { "scm:git:$it" }
+    extra["POM_SCM_DEV_CONNECTION"] = ext.scmDevConnection.useIfNotBlank { "scm:git:$it" }
 
     extra["RELEASE_SIGNING_ENABLED"] = false // TODO get from c
 
-    c.lics.firstOrNull()?.let { lic ->
+    ext.lics.firstOrNull()?.let { lic ->
         extra["POM_LICENCE_NAME"] = lic.name
         extra["POM_LICENCE_URL"] = lic.url
         extra["POM_LICENCE_DIST"] = "repo"
     }
 
-    c.devs.firstOrNull()?.let { dev ->
+    ext.devs.firstOrNull()?.let { dev ->
         extra["POM_DEVELOPER_ID"] = dev.id
         extra["POM_DEVELOPER_NAME"] = dev.name
         extra["POM_DEVELOPER_URL"] = dev.email
@@ -69,19 +73,19 @@ fun Project.publish(
     mavenPublish {
         targets.getByName("uploadArchives") {
 
-            releaseRepositoryUrl = c.buildBintrayUrl()
-            repositoryUsername = c.username
-            repositoryPassword = c.apiKey
+            releaseRepositoryUrl = ext.buildBintrayUrl()
+            repositoryUsername = ext.username
+            repositoryPassword = ext.apiKey
         }
     }
 }
 
-var PublishConfig.version: Version
+var PublishExtension.version: Version
     get() = throw UnsupportedOperationException()
     set(value) { versionName = value.versionName }
 
-/** Lambda for build a [PublishConfig] within a [Project] */
-typealias PublishConfigBuilder = PublishConfig.(Project) -> Unit
+/** Lambda for build a [PublishExtension] within a [Project] */
+typealias PublishConfigBuilder = PublishExtension.(Project) -> Unit
 
-internal fun PublishConfigBuilder?.build(project: Project): PublishConfig =
-    PublishConfig(project).apply { this@build?.let { it(project) } }
+internal fun PublishConfigBuilder?.build(project: Project): PublishExtension =
+    PublishExtension(project).apply { this@build?.let { it(project) } }

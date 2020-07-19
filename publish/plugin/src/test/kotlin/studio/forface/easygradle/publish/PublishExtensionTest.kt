@@ -8,7 +8,7 @@ import org.gradle.api.Project
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class PublishConfigTest {
+class PublishExtensionTest {
 
     @Test
     fun `verify generated Bintray url by DSL`() {
