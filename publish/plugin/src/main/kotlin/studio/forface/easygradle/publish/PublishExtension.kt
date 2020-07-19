@@ -12,7 +12,7 @@ import kotlin.reflect.KProperty
 
 /**
  * @return [PublishConfigBuilder]
- * @param block Lambda for setup [PublishConfig]
+ * @param block Lambda for setup [PublishExtension]
  */
 fun PublishConfig(block: PublishConfigBuilder) = block
 
@@ -27,7 +27,7 @@ fun PublishConfig(block: PublishConfigBuilder) = block
  * See gradle.properties.template for more examples
  */
 @Suppress("MemberVisibilityCanBePrivate")
-class PublishConfig internal constructor(project: Project) {
+class PublishExtension internal constructor(project: Project) {
 
     /**
      * Username of Bintray user.
@@ -129,7 +129,7 @@ class PublishConfig internal constructor(project: Project) {
         default: T,
         propertyName: String? = null,
         envName: String? = null
-    ) = object : ConfigReadWriteProperty<PublishConfig, T>(
+    ) = object : ConfigReadWriteProperty<PublishExtension, T>(
         this,
         default,
         propertyName = propertyName,
@@ -139,8 +139,8 @@ class PublishConfig internal constructor(project: Project) {
         override fun String.toList(property: KProperty<*>): T? {
             @Suppress("UNCHECKED_CAST")
             return when (property) {
-                PublishConfig::devs -> Json.parse<Developer>(this) as? T?
-                PublishConfig::lics -> Json.parse<License>(this) as? T?
+                PublishExtension::devs -> Json.parse<Developer>(this) as? T?
+                PublishExtension::lics -> Json.parse<License>(this) as? T?
                 else -> throw AssertionError()
             }
         }
@@ -163,11 +163,11 @@ class PublishConfig internal constructor(project: Project) {
 
     // region Dsl functions
     // region Licenses
-    /** @return [License], use `unaryPlus` for add it to the current [PublishConfig] */
+    /** @return [License], use `unaryPlus` for add it to the current [PublishExtension] */
     @Marker
     fun license(block: License.() -> Unit) = License().apply(block)
 
-    /** Add receiver [License] to [PublishConfig.licenses] */
+    /** Add receiver [License] to [PublishExtension.licenses] */
     @Marker
     operator fun License.unaryPlus() {
         lics.add(this)
@@ -177,24 +177,24 @@ class PublishConfig internal constructor(project: Project) {
     @Marker
     class LicensesBuilder internal constructor()
 
-    /** Add a set of [License]s to the current [PublishConfig] */
+    /** Add a set of [License]s to the current [PublishExtension] */
     @Marker
     fun licenses(block: LicensesBuilder.() -> Unit) {
         LicensesBuilder().apply(block)
     }
 
-    /** Create and add a [License] to the current [PublishConfig] */
+    /** Create and add a [License] to the current [PublishExtension] */
     @Suppress("unused") // Receiver as scope
     @Marker
     fun LicensesBuilder.license(block: License.() -> Unit) = +License().apply(block)
     // endregion
 
     // region Developers
-    /** @return [Developer], use `unaryPlus` for add it to the current [PublishConfig] */
+    /** @return [Developer], use `unaryPlus` for add it to the current [PublishExtension] */
     @Marker
     fun developer(block: Developer.() -> Unit) = Developer().apply(block)
 
-    /** Add receiver [Developer] to [PublishConfig.devs] */
+    /** Add receiver [Developer] to [PublishExtension.devs] */
     @Marker
     operator fun Developer.unaryPlus() {
         devs.add(this)
@@ -204,13 +204,13 @@ class PublishConfig internal constructor(project: Project) {
     @Marker
     class DevelopersBuilder internal constructor()
 
-    /** Create and add a [License] to the current [PublishConfig] */
+    /** Create and add a [License] to the current [PublishExtension] */
     @Marker
     fun developers(block: DevelopersBuilder.() -> Unit) {
         DevelopersBuilder().apply(block)
     }
 
-    /** Add a set of [Developer]s to the current [PublishConfig] */
+    /** Add a set of [Developer]s to the current [PublishExtension] */
     @Suppress("unused") // Receiver as scope
     @Marker
     fun DevelopersBuilder.developer(block: Developer.() -> Unit) = +Developer().apply(block)
