@@ -14,3 +14,5 @@ dependencies {
 
     api(project(":dsl"))
 }
+
+easyPublish {}

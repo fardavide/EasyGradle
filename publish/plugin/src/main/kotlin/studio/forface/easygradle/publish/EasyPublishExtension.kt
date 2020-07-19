@@ -8,11 +8,12 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.provideDelegate
 import studio.forface.easygradle.internal.ConfigReadWriteProperty
 import studio.forface.easygradle.internal.assertStringsNotEmpty
+import javax.inject.Inject
 import kotlin.reflect.KProperty
 
 /**
  * @return [PublishConfigBuilder]
- * @param block Lambda for setup [PublishExtension]
+ * @param block Lambda for setup [EasyPublishExtension]
  */
 fun PublishConfig(block: PublishConfigBuilder) = block
 
@@ -26,8 +27,8 @@ fun PublishConfig(block: PublishConfigBuilder) = block
  * property name name as uppercase snake_case where not specified differently.
  * See gradle.properties.template for more examples
  */
-@Suppress("MemberVisibilityCanBePrivate")
-class PublishExtension internal constructor(project: Project) {
+@Suppress("UnnecessaryAbstractClass", "MemberVisibilityCanBePrivate")
+abstract class EasyPublishExtension @Inject constructor(project: Project) {
 
     /**
      * Username of Bintray user.
@@ -125,11 +126,12 @@ class PublishExtension internal constructor(project: Project) {
     }
 
     @OptIn(UnstableDefault::class)
+    @Suppress("UnusedPrivateMember")
     private operator fun <T : Any> Project.invoke(
         default: T,
         propertyName: String? = null,
         envName: String? = null
-    ) = object : ConfigReadWriteProperty<PublishExtension, T>(
+    ) = object : ConfigReadWriteProperty<EasyPublishExtension, T>(
         this,
         default,
         propertyName = propertyName,
@@ -138,10 +140,14 @@ class PublishExtension internal constructor(project: Project) {
 
         override fun String.toList(property: KProperty<*>): T? {
             @Suppress("UNCHECKED_CAST")
-            return when (property) {
-                PublishExtension::devs -> Json.parse<Developer>(this) as? T?
-                PublishExtension::lics -> Json.parse<License>(this) as? T?
-                else -> throw AssertionError()
+            return try {
+                when (property) {
+                    EasyPublishExtension::devs -> Json.parse<Developer>(this) as? T?
+                    EasyPublishExtension::lics -> Json.parse<License>(this) as? T?
+                    else -> throw AssertionError()
+                }
+            } catch (t: NoClassDefFoundError) { // TODO Could not initialize class kotlinx.serialization.json.Json
+                null
             }
         }
     }
@@ -163,11 +169,11 @@ class PublishExtension internal constructor(project: Project) {
 
     // region Dsl functions
     // region Licenses
-    /** @return [License], use `unaryPlus` for add it to the current [PublishExtension] */
+    /** @return [License], use `unaryPlus` for add it to the current [EasyPublishExtension] */
     @Marker
     fun license(block: License.() -> Unit) = License().apply(block)
 
-    /** Add receiver [License] to [PublishExtension.licenses] */
+    /** Add receiver [License] to [EasyPublishExtension.licenses] */
     @Marker
     operator fun License.unaryPlus() {
         lics.add(this)
@@ -177,24 +183,24 @@ class PublishExtension internal constructor(project: Project) {
     @Marker
     class LicensesBuilder internal constructor()
 
-    /** Add a set of [License]s to the current [PublishExtension] */
+    /** Add a set of [License]s to the current [EasyPublishExtension] */
     @Marker
     fun licenses(block: LicensesBuilder.() -> Unit) {
         LicensesBuilder().apply(block)
     }
 
-    /** Create and add a [License] to the current [PublishExtension] */
+    /** Create and add a [License] to the current [EasyPublishExtension] */
     @Suppress("unused") // Receiver as scope
     @Marker
     fun LicensesBuilder.license(block: License.() -> Unit) = +License().apply(block)
     // endregion
 
     // region Developers
-    /** @return [Developer], use `unaryPlus` for add it to the current [PublishExtension] */
+    /** @return [Developer], use `unaryPlus` for add it to the current [EasyPublishExtension] */
     @Marker
     fun developer(block: Developer.() -> Unit) = Developer().apply(block)
 
-    /** Add receiver [Developer] to [PublishExtension.devs] */
+    /** Add receiver [Developer] to [EasyPublishExtension.devs] */
     @Marker
     operator fun Developer.unaryPlus() {
         devs.add(this)
@@ -204,13 +210,13 @@ class PublishExtension internal constructor(project: Project) {
     @Marker
     class DevelopersBuilder internal constructor()
 
-    /** Create and add a [License] to the current [PublishExtension] */
+    /** Create and add a [License] to the current [EasyPublishExtension] */
     @Marker
     fun developers(block: DevelopersBuilder.() -> Unit) {
         DevelopersBuilder().apply(block)
     }
 
-    /** Add a set of [Developer]s to the current [PublishExtension] */
+    /** Add a set of [Developer]s to the current [EasyPublishExtension] */
     @Suppress("unused") // Receiver as scope
     @Marker
     fun DevelopersBuilder.developer(block: Developer.() -> Unit) = +Developer().apply(block)
