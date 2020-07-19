@@ -16,3 +16,5 @@ dependencies {
     testImplementation("studio.forface:assert4k:0.3.1")
     testImplementation("io.mockk:mockk:1.10.0")
 }
+
+easyPublish {}

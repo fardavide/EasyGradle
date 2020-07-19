@@ -5,10 +5,11 @@ import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.unmockkStatic
 import org.gradle.api.Project
+import studio.forface.easygradle.dsl.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class PublishExtensionTest {
+class EasyPublishExtensionTest {
 
     @Test
     fun `verify generated Bintray url by DSL`() {

@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation(files("../../dsl/base/build/libs/dsl.jar"))
+    implementation("studio.forface.easygradle:dsl:2.0")
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0-1.4-M3")
     implementation("com.vanniktech:gradle-maven-publish-plugin:0.12.0")
@@ -24,11 +24,37 @@ dependencies {
     testImplementation("io.mockk:mockk:1.10.0")
 }
 
+object Plugin {
+    const val id = "studio.forface.easy-publish"
+    const val name = "Easy-publish"
+    const val version = "0.2.1"
+}
+
 gradlePlugin {
     plugins {
-        create("publish") {
-            id = "studio.forface.easy-publish"
-            implementationClass = "studio.forface.easygradle.publish.EasyGradlePublishPlugin"
+        create(Plugin.id) {
+            id = Plugin.id
+            version = Plugin.version
+            implementationClass = "studio.forface.easygradle.publish.EasyPublishPlugin"
         }
     }
+}
+
+pluginBundle {
+    val url = "https://github.com/4face-studi0/EasyGradle"
+    website = url
+    vcsUrl = url
+    description = "Gradle plugin for publish on Bintray"
+    tags = listOf(
+        "Gradle",
+        "plugin",
+        "publish",
+        "Maven",
+        "Bintray",
+        "Kotlin",
+        "Android",
+        "Multiplatform"
+    )
+
+    plugins.getByName(Plugin.id).displayName = Plugin.name
 }

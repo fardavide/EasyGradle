@@ -11,20 +11,20 @@ import studio.forface.easygradle.internal.useIfNotBlank
 /**
  * Apply publish script to the receiver [Project]
  *
- * Params for [PublishExtension] can be set:
+ * Params for [EasyPublishExtension] can be set:
  * * programmatically
  * * in `gradle.properties`
  * * in Environment variable
- * @see PublishExtension params for names and format
+ * @see EasyPublishExtension params for names and format
  * Objects and lists will respect the JSON standard format
  *
  *
- * @param artifact Optional [PublishExtension.artifact] for the [PublishExtension], this is useful when we have a stored
- *   common [PublishExtension] for the project and we want to apply it for a single module
+ * @param artifact Optional [EasyPublishExtension.artifact] for the [EasyPublishExtension], this is useful when we have a stored
+ *   common [EasyPublishExtension] for the project and we want to apply it for a single module
  *
- * @param config Optional Lambda previously created by [PublishExtension] for have a base setup for [PublishExtension]
+ * @param config Optional Lambda previously created by [EasyPublishExtension] for have a base setup for [EasyPublishExtension]
  *
- * @param block Lambda for setup [PublishExtension]
+ * @param block Lambda for setup [EasyPublishExtension]
  */
 fun Project.publish(
     config: PublishConfigBuilder? = null,
@@ -40,7 +40,7 @@ fun Project.publish(
     publish(c)
 }
 
-internal fun Project.publish(ext: PublishExtension) {
+internal fun Project.publish(ext: EasyPublishExtension) {
     extra["GROUP"] = ext.group
     extra["POM_ARTIFACT_ID"] = ext.artifact
     extra["VERSION_NAME"] = ext.versionName
@@ -80,12 +80,12 @@ internal fun Project.publish(ext: PublishExtension) {
     }
 }
 
-var PublishExtension.version: Version
+var EasyPublishExtension.version: Version
     get() = throw UnsupportedOperationException()
     set(value) { versionName = value.versionName }
 
-/** Lambda for build a [PublishExtension] within a [Project] */
-typealias PublishConfigBuilder = PublishExtension.(Project) -> Unit
+/** Lambda for build a [EasyPublishExtension] within a [Project] */
+typealias PublishConfigBuilder = EasyPublishExtension.(Project) -> Unit
 
-internal fun PublishConfigBuilder?.build(project: Project): PublishExtension =
-    PublishExtension(project).apply { this@build?.let { it(project) } }
+internal fun PublishConfigBuilder?.build(project: Project): EasyPublishExtension =
+    object : EasyPublishExtension(project) {}.apply { this@build?.let { it(project) } }
