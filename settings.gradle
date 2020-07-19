@@ -1,4 +1,0 @@
-rootProject.name = 'EasyGradle'
-
-include 'dsl'
-include 'dsl-android'

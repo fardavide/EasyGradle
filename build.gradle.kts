@@ -2,22 +2,6 @@ import io.gitlab.arturbosch.detekt.DetektPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.File
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath(`kotlin-gradlePlugin`)
-        classpath(`serialization-gradlePlugin`)
-    }
-}
-
-allprojects {
-    repositories {
-        maven("https://dl.bintray.com/4face/4face")
-    }
-}
-
 plugins {
     `detekt`
 }
@@ -61,5 +45,5 @@ subprojects {
     }
 
     // Configure Publishing
-    publish()
+//    publish()
 }

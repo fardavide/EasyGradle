@@ -1,6 +1,3 @@
-@file:Suppress("unused")
-
-
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.withType

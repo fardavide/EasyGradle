@@ -6,9 +6,9 @@ buildscript {
         maven("https://kotlin.bintray.com/kotlin-eap")
         jcenter()
     }
-
     dependencies {
         classpath(kotlin("gradle-plugin:$kotlinVersion"))
+        classpath(kotlin("serialization:$kotlinVersion"))
     }
 }
 
