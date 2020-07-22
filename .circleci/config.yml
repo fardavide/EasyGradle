@@ -14,7 +14,7 @@ jobs:
       # Analyze
       - run:
           name: Detekt analysis
-          command: ./gradlew detekt
+          command: ./gradlew -p dsl detekt && ./gradlew -p publish
 
   test:
 
@@ -26,11 +26,15 @@ jobs:
     
       - run:
           name: DSL test
-          command: ./gradlew :dsl:test
+          command: ./gradlew -p dsl :dsl:test
     
       - run:
           name: DSL Android test
-          command: ./gradlew :dsl-android:test
+          command: ./gradlew -p dsl :dsl-android:test
+
+      - run:
+          name: EasyPublish test
+          command: ./gradlew -p publish test
 
   publish:
 
@@ -41,8 +45,8 @@ jobs:
       - checkout
 
       - run:
-          name: "Publish to Bintray"
-          command: ./gradlew uploadArchives
+          name: "Publish DSL to Bintray"
+          command: ./gradlew -p dsl uploadArchives
 
 workflows:
   analyze_test_publish:
