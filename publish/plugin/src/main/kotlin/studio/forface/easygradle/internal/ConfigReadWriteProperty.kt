@@ -29,7 +29,7 @@ abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
 
     /** @see ReadWriteProperty.getValue */
     override fun getValue(thisRef: Scope, property: KProperty<*>) =
-            backValue ?: env(property) ?: prop(property) ?: default
+        backValue ?: env(property) ?: prop(property) ?: default
 
     /** @see ReadWriteProperty.setValue */
     override fun setValue(thisRef: Scope, property: KProperty<*>, value: PropType) {

@@ -1,3 +1,5 @@
+package studio.forface.easygradle.dokka
+
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.withType
@@ -9,7 +11,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
  */
 
 /**
- * Apply studio.forface.easygradle.dsl.dokka script to the given module
+ * Apply dokka script to the given module
  * It will apply the Dokka plugin and setup relative [DokkaTask]
  *
  *
@@ -20,13 +22,13 @@ val dokkaConfig = DokkaConfig {
     outputDirectory = ...
     outputFormat = ...
 }
-dokka(config = dokkaConfig)
+easyDokka(config = dokkaConfig)
  * ```
  *
  *
  * @param block Lambda for setup [DokkaConfig]
  * ```
-dokka {
+easyDokka {
     outputDirectory = ...
     outputFormat = ...
 }
@@ -37,7 +39,7 @@ dokka {
 val baseConfig = DokkaConfig {
     outputDirectory = ...
 }
-dokka(baseConfig) {
+easyDokka(baseConfig) {
     outputFormat = ...
 }
  * ```

@@ -7,8 +7,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath(kotlin("gradle-plugin", kotlinVersion))
-        classpath(kotlin("serialization", kotlinVersion))
+        classpath(kotlin("gradle-plugin:$kotlinVersion"))
+        classpath(kotlin("serialization:$kotlinVersion"))
     }
 }
 
