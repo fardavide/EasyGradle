@@ -1,4 +1,4 @@
-rootProject.name = "EasyGradle-dsl"
+rootProject.name = "DSL+"
 
 include("base")
 include("android")

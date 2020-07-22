@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "EasyGradle-publish"
+rootProject.name = "EasyPublish"
 
 includeBuild("../dsl")
 
