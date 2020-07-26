@@ -1,6 +1,6 @@
 buildscript {
 
-    val kotlinVersion = "1.4-M3"
+    val kotlinVersion = "1.4.0-rc"
 
     repositories {
         maven("https://kotlin.bintray.com/kotlin-eap")
