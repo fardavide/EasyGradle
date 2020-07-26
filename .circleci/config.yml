@@ -62,12 +62,12 @@ workflows:
       - analyze:
           filters:
             tags:
-              only: *
+              only: /.*/
 
       - test:
           filters:
             tags:
-              only: *
+              only: /.*/
 
       - publish_dsl:
           requires:

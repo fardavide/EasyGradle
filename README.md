@@ -1,69 +1,32 @@
 # EasyGradle
 
-**EasyGradle** is a set of utilities for simply the build configuration.
+**EasyGradle** is a set of utilities for simply the Gradle configuration.
+
+It includes:
+
+* **Gradle DSL+**
+* **EasyPublish on Bintray plugin** for Java, Kotlin & Kotlin Multiplatform!
+
+###### Version 1.x includes also ( few ) utils for Dokka which are not included yet in 2.x - it's still need to be evaluated whether a dedicated package for it is worth to be distributed. [1.x readme here](README_1.x.md)
+
+
+
+## DSL+
 
 It's mean to be included in the `buildSrc` module in the following way:
 
 ```kotlin
-api("studio.forface.easygradle:dsl:$easyGradle")
+api("studio.forface.easygradle:dsl:$dslVersion")
 ```
 **or**
 ```kotlin
-api("studio.forface.easygradle:dsl-android:$easyGradle")
+api("studio.forface.easygradle:dsl-android:$dslVersion")
 ```
 
 
 
 ### Features:
 
-
-
-* **Easy publishing** on Bintray ( wraps [maven-publish](https://github.com/vanniktech/gradle-maven-publish-plugin) )
-
-  Support Jvm, Android and Multiplatform
-
-  Only apply to your gradle and use `./gradlew uploadArchives`
-
-  ```kotlin
-  // build.gradle.kts
-  ...
-  publish()
-  ```
-
-  * It **fetches params from your `Project`'s properties** ( `group`, `name`, `version`, etc or declared in `gradle.properties` file - see [template](https://github.com/4face-studi0/EasyGradle/blob/master/gradle.properties) - relative to the module or root )
-
-  * or **fetches from environment variables**
-
-  * or **declared in DSL style**
-
-    ```kotlin
-    publish {
-      artifact = "dsl"
-      developers {
-        developer {
-          name = "Davide"
-          id = "4face-studi0"
-          email = "mail@face.studio"
-        }
-      }
-      ...
-    }
-    ```
-
-  * a default block could be stored and reused
-
-    ```kotlin
-    val config = PublishConfig { project ->
-      version = Version(1, 2, Beta, 2, 0)
-      ...
-    }
-    
-    publish(config) {
-      // optional additional block
-    }
-    ```
-
-  
 
 * **Library** and **Plugin** dependencies ( check docs for full list )
 
@@ -73,13 +36,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
     classpath(`serialization-gradle-plugin`)
     // etc
   }
-  
-  plugins {
-    `android-library`
-    `kotlin-android`
-    // etc
-  }
-  
+
   dependencies {
     implementation(`kotlin-js` version "1.3.50" ) // version is optional
     implementation(`constraint-layout`)
@@ -88,7 +45,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   }
   ```
 
-  
+
 
 * External **versions** declaration
 
@@ -111,7 +68,7 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   }
   ```
 
-  
+
 
 * **Configuration accessors** DSL
 
@@ -140,9 +97,9 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   )
   ```
 
-  
 
-* **versioning**, it is also compatible with Android for automatically generate `versionName` and `versionCode` from the given *major, minor, channel, patch and build* versions ( see [Version](https://github.com/4face-studi0/EasyGradle/blob/master/dsl/src/main/kotlin/studio/forface/easygradle/dsl/Version.kt) ) 
+
+* **versioning**, it is also compatible with Android for automatically generate `versionName` and `versionCode` from the given *major, minor, channel, patch and build* versions ( see [Version](https://github.com/4face-studi0/EasyGradle/blob/master/dsl/src/main/kotlin/studio/forface/easygradle/dsl/Version.kt) )
 
   It can also be used by following ( avoiding to pass `versionName` and `versionCode` )
 
@@ -154,36 +111,86 @@ api("studio.forface.easygradle:dsl-android:$easyGradle")
   }
   ```
 
-  
 
-* **Dokka** builder and extensions ( plugin application is built-in )
 
-  ```kotlin
-  // build.gradle.kts
-  ...
-  dokka()
-  ```
 
-  or
 
-  ```kotlin
-  dokka {
-    // this: DokkaTask
-    outputFormatType = OutputFormat.Markdown
+## EasyPublis plugin for Bintray ( wraps [maven-publish](https://github.com/vanniktech/gradle-maven-publish-plugin) )
+
+Support Jvm, Android and Multiplatform
+
+**Apply with DSL**
+
+```kotlin
+plugins {
+  id("studio.forface.easy-publish") version easyPublishVersion
+}
+```
+
+**Apply with legacy**
+
+```kotlin
+buildscript {
+  repositories {
+    maven {
+      url = uri("https://plugins.gradle.org/m2/")
+    }
   }
-  ```
+  dependencies {
+    classpath("gradle.plugin.EasyGradle-publish:plugin:0.2.1")
+  }
+}
 
-  or, similar to `PublishConfig`
+apply(plugin = "studio.forface.easy-publish")
+```
+
+
+
+### Usage
+
+Configure into your gradle and use `./gradlew uploadArchives`
+
+```kotlin
+// build.gradle.kts
+...
+easyPublish {
+  // optional config
+}
+```
+
+* It **fetches params from your `Project`'s properties** ( `group`, `name`, `version`, etc or declared in `gradle.properties` file - see [template](https://github.com/4face-studi0/EasyGradle/blob/master/gradle.properties) - relative to the module or root )
+
+* or **fetches from environment variables**
+
+* or **declared in DSL style**
 
   ```kotlin
-  val config = DokkaConfig { project ->
+  easyPublish {
+    artifact = "dsl"
+    developers {
+      developer {
+        name = "Davide"
+        id = "4face-studi0"
+        email = "mail@face.studio"
+      }
+    }
     ...
   }
-  
-  dokka(config)
   ```
 
-  
+* a default block could be stored and reused
+
+  ```kotlin
+  val config = PublishConfig { project ->
+    version = Version(1, 2, Beta, 2, 0)
+    ...
+  }
+
+  publish(config) {
+    // optional additional block
+  }
+  ```
+
+
 
 * *More to come*
-
