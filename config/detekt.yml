@@ -507,7 +507,7 @@ style:
     methods: []
   ForbiddenPublicDataClass:
     active: false
-    # ignorePackages: '*.internal,*.internal.*'
+    # ignorePackages: '*.studio.forface.easygradle.internal,*.studio.forface.easygradle.internal.*'
   ForbiddenVoid:
     active: true
     ignoreOverridden: false

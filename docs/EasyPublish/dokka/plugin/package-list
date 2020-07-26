@@ -1,0 +1,5 @@
+$dokka.format:markdown
+$dokka.linkExtension:md
+$dokka.location:studio.forface.easygradle.publish$publish(org.gradle.api.Project, kotlin.Function2((studio.forface.easygradle.publish.EasyPublishExtension, org.gradle.api.Project, kotlin.Unit)), kotlin.String, kotlin.Function2((studio.forface.easygradle.publish.EasyPublishExtension, org.gradle.api.Project, kotlin.Unit)))studio.forface.easygradle.publish/org.gradle.api.-project/publish.md
+studio.forface.easygradle.internal
+studio.forface.easygradle.publish
