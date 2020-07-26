@@ -1,0 +1,11 @@
+[dsl](../../index.md) / [studio.forface.easygradle.dsl](../index.md) / [org.gradle.api.Project](./index.md)
+
+### Extensions for org.gradle.api.Project
+
+| [archivesBaseName](archives-base-name.md) | `var Project.archivesBaseName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?` |
+| [fileLibrary](file-library.md) | `fun Project.fileLibrary(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, extension: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = "", versionSeparator: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = if (version.isNotBlank()) "_" else "", projectDirectoryPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = projectDir.path, subDirectoryPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = "libs"): ConfigurableFileCollection!` |
+| [findProperty](find-property.md) | Get a nullable property of [T](find-property.md#T)`fun <T> Project.findProperty(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): T?` |
+| [isAndroid](is-android.md) | `val Project.isAndroid: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [jar](jar.md) | `fun Project.jar(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, version: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = "", versionSeparator: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = if (version.isNotBlank()) "_" else "", projectDirectoryPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = projectDir.path, subDirectoryPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = "libs"): ConfigurableFileCollection!` |
+| [sourceSets](source-sets.md) | Retrieves the [sourceSets](#) extension`val Project.sourceSets: SourceSetContainer` |
+

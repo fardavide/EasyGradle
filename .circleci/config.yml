@@ -14,7 +14,7 @@ jobs:
       # Analyze
       - run:
           name: Detekt analysis
-          command: ./gradlew -p dsl detekt && ./gradlew -p publish
+          command: ./gradlew -p dsl detekt && ./gradlew -p publish detekt
 
   test:
 
