@@ -11,12 +11,11 @@ jobs:
     steps:
       - checkout
 
-      # Analyze
       - run:
           name: Detekt analysis
-          command: ./gradlew detekt
+          command: ./gradlew -p dsl detekt && ./gradlew -p publish detekt
 
-  test:
+  test_dsl:
 
     docker:
       - image: circleci/openjdk:8
@@ -26,11 +25,23 @@ jobs:
     
       - run:
           name: DSL test
-          command: ./gradlew :dsl:test
+          command: ./gradlew -p dsl :dsl:test
     
       - run:
           name: DSL Android test
-          command: ./gradlew :dsl-android:test
+          command: ./gradlew -p dsl :dsl-android:test
+
+  test_easy-publish:
+
+    docker:
+      - image: circleci/openjdk:8
+
+    steps:
+      - checkout
+
+      - run:
+          name: DSL test
+          command: ./gradlew -p publish :plugin:test
 
   publish_dsl:
 
@@ -64,7 +75,12 @@ workflows:
             tags:
               only: /.*/
 
-      - test:
+      - test_dsl:
+          filters:
+            tags:
+              only: /.*/
+
+      - test_easy-publish:
           filters:
             tags:
               only: /.*/
@@ -72,7 +88,7 @@ workflows:
       - publish_dsl:
           requires:
             - analyze
-            - test
+            - test_dsl
           filters:
             # ignore any commit on any branch by default
             branches:
@@ -84,7 +100,7 @@ workflows:
       - publish_easy-publish:
           requires:
             - analyze
-            - test
+            - test_easy-publish
           filters:
             # ignore any commit on any branch by default
             branches:
