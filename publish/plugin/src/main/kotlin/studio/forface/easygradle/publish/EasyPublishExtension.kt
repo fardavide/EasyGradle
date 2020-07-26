@@ -1,9 +1,8 @@
 package studio.forface.easygradle.publish
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.parse
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.provideDelegate
 import studio.forface.easygradle.internal.ConfigReadWriteProperty
@@ -125,7 +124,6 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
             ";override=$override"
     }
 
-    @OptIn(UnstableDefault::class)
     @Suppress("UnusedPrivateMember")
     private operator fun <T : Any> Project.invoke(
         default: T,
@@ -142,11 +140,14 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
             @Suppress("UNCHECKED_CAST")
             return try {
                 when (property) {
-                    EasyPublishExtension::devs -> Json.parse<Developer>(this) as? T?
-                    EasyPublishExtension::lics -> Json.parse<License>(this) as? T?
+                    EasyPublishExtension::devs ->
+                        Json.decodeFromString(ListSerializer(Developer.serializer()), this) as? T?
+                    EasyPublishExtension::lics ->
+                        Json.decodeFromString(ListSerializer(License.serializer()), this) as? T?
                     else -> throw AssertionError()
                 }
             } catch (t: NoClassDefFoundError) { // TODO Could not initialize class kotlinx.serialization.json.Json
+                logger.warn("Cannot parse ${property.name}: ${t.message}")
                 null
             }
         }

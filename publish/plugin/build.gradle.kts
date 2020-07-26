@@ -16,7 +16,7 @@ repositories {
 dependencies {
     implementation("studio.forface.easygradle:dsl:2.0")
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0-1.4-M3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:1.0-M1-1.4.0-rc-218")
     implementation("com.vanniktech:gradle-maven-publish-plugin:0.12.0")
 
     testImplementation(kotlin("test"))
@@ -27,7 +27,7 @@ dependencies {
 object Plugin {
     const val id = "studio.forface.easy-publish"
     const val name = "Easy-publish"
-    const val version = "0.2.1"
+    const val version = "0.2.3"
 }
 
 gradlePlugin {

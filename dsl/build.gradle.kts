@@ -1,6 +1,7 @@
 buildscript {
 
-    val kotlinVersion = "1.4-M3"
+    val kotlinVersion = "1.4.0-rc"
+    val easyPublishVersion = "0.2.3"
 
     repositories {
         maven("https://kotlin.bintray.com/kotlin-eap")
@@ -10,7 +11,7 @@ buildscript {
 
     dependencies {
         classpath(kotlin("gradle-plugin:$kotlinVersion"))
-        classpath("gradle.plugin.EasyGradle-publish:plugin:0.2.1")
+        classpath("gradle.plugin.EasyPublish:plugin:$easyPublishVersion")
     }
 }
 
