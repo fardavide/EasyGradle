@@ -16,10 +16,10 @@ fun Project.aar(
     projectDirectoryPath: String = projectDir.path,
     subDirectoryPath: String = "libs"
 ) = fileLibrary(
-        projectDirectoryPath = projectDirectoryPath,
-        subDirectoryPath = subDirectoryPath,
-        name = name,
-        versionSeparator = versionSeparator,
-        version = version,
-        extension = "aar"
+    projectDirectoryPath = projectDirectoryPath,
+    subDirectoryPath = subDirectoryPath,
+    name = name,
+    versionSeparator = versionSeparator,
+    version = version,
+    extension = "aar"
 )

@@ -55,8 +55,8 @@ class Version(
         preconditions()
 
         val (suffix, number) =
-                if (build > 0) Build.suffix to buildNumber
-                else channel.suffix to patch
+            if (build > 0) Build.suffix to buildNumber
+            else channel.suffix to patch
         return "$suffix${channelNumberString(number)}"
     }
 
@@ -74,7 +74,7 @@ class Version(
 
     /** @return a [String] representing the number of the version */
     private fun channelNumberString(number: Int) =
-            if (number == 0) "" else if (channel is None) ".$number" else "-$number"
+        if (number == 0) "" else if (channel is None) ".$number" else "-$number"
 
     /**
      * Check the version's numbers are valid.
@@ -87,14 +87,20 @@ class Version(
         }
 
         if (channel is Stable) {
-            if (patch > 0) throw IllegalArgumentException("'Stable channel' can't have a `patch number` greater " +
-                    "than 0, increase the 'minor' for the next build")
-            if (build > 0) throw IllegalArgumentException("'Stable channel' can't have a `build number` greater " +
-                    "than 0, increase the 'minor' for the next build")
+            if (patch > 0) throw IllegalArgumentException(
+                "'Stable channel' can't have a `patch number` greater " +
+                    "than 0, increase the 'minor' for the next build"
+            )
+            if (build > 0) throw IllegalArgumentException(
+                "'Stable channel' can't have a `build number` greater " +
+                    "than 0, increase the 'minor' for the next build"
+            )
         } else {
             if (channel !is None && build < 1 && patch < 1) {
-                throw IllegalArgumentException("A `patch number` greater than 0, is required for " +
-                    "'${channel.suffix.replace("-", "")}' channel")
+                throw IllegalArgumentException(
+                    "A `patch number` greater than 0, is required for " +
+                        "'${channel.suffix.replace("-", "")}' channel"
+                )
             }
         }
     }
