@@ -16,7 +16,7 @@ abstract class WriteOnlyProperty<T, V>(
 
     /** @throws UnsupportedOperationException */
     override fun getValue(thisRef: T, property: KProperty<*>) =
-            throw UnsupportedOperationException("Property '${property.name} doesn't support get method'")
+        throw UnsupportedOperationException("Property '${property.name} doesn't support get method'")
 
     /** @see ReadWriteProperty.setValue */
     override fun setValue(thisRef: T, property: KProperty<*>, value: V) {

@@ -10,9 +10,9 @@ import studio.forface.easygradle.internal.writeOnly
  * E.g.
  * >
 android {
-    defaultConfig {
-        version = Version(1, 0, Stable, 0, 0)
-    }
+ defaultConfig {
+ version = Version(1, 0, Stable, 0, 0)
+ }
 }
  */
 var DefaultConfig.version: Version by writeOnly {

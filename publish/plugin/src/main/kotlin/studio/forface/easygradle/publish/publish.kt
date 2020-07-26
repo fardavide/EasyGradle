@@ -19,10 +19,11 @@ import studio.forface.easygradle.internal.useIfNotBlank
  * Objects and lists will respect the JSON standard format
  *
  *
- * @param artifact Optional [EasyPublishExtension.artifact] for the [EasyPublishExtension], this is useful when we have a stored
- *   common [EasyPublishExtension] for the project and we want to apply it for a single module
+ * @param artifact Optional [EasyPublishExtension.artifact] for the [EasyPublishExtension], this is useful when we have
+ *   a stored common [EasyPublishExtension] for the project and we want to apply it for a single module
  *
- * @param config Optional Lambda previously created by [EasyPublishExtension] for have a base setup for [EasyPublishExtension]
+ * @param config Optional Lambda previously created by [EasyPublishExtension] for have a base setup for
+ *   [EasyPublishExtension]
  *
  * @param block Lambda for setup [EasyPublishExtension]
  */

@@ -136,11 +136,11 @@ fun DependencyHandler.dependency(
     val safeModule = module ?: groupName ?: throw IllegalArgumentException("One of 'groupName' or 'module' is required")
 
     return group +
-            groupName.useIfNotNull { ".$it" } +
-            ":" +
-            safeModule +
-            moduleSuffix.useIfNotNull { "-$it" } +
-            version.useIfNotNull { ":$it" }
+        groupName.useIfNotNull { ".$it" } +
+        ":" +
+        safeModule +
+        moduleSuffix.useIfNotNull { "-$it" } +
+        version.useIfNotNull { ":$it" }
 }
 // endregion
 

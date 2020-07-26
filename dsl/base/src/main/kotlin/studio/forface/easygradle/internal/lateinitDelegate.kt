@@ -19,7 +19,8 @@ fun lateinit() = object : ReadWriteProperty<Any?, String> {
             else "`$this`"
         }
 
-        return VERSION ?: throw UninitializedPropertyAccessException("""
+        return VERSION ?: throw UninitializedPropertyAccessException(
+            """
             |'$propertyName' has not been set, ensure to set it at the start of `buildscript` block of Gradle script.
             |Example:
             |// build.gradle.kts - start of the file
@@ -32,7 +33,8 @@ fun lateinit() = object : ReadWriteProperty<Any?, String> {
             |fun initVersions() {
             |   $propertyName = "1.0" // desired version here
             |}
-            """.trimMargin("|"))
+            """.trimMargin("|")
+        )
     }
 
     override fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
@@ -40,4 +42,5 @@ fun lateinit() = object : ReadWriteProperty<Any?, String> {
     }
 }
 
-private val STD_FIELD_NAME_REGEX = """[0-9_]*[a-zA-Z]+[a-zA-Z0-9_]*""".toRegex()
+private val STD_FIELD_NAME_REGEX =
+    """[0-9_]*[a-zA-Z]+[a-zA-Z0-9_]*""".toRegex()

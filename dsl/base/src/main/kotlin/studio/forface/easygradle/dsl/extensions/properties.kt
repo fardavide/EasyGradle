@@ -30,7 +30,7 @@ fun <T> property(name: String? = null) = object : ReadWriteProperty<Project, T?>
  * Note: Explicit generic declaration might be needed; example: `` findProperty<String?> ``
  */
 @Suppress(
-        "UNCHECKED_CAST", // Cast is checked by safe operator `as?`
-        "EXTENSION_SHADOWED_BY_MEMBER" // Available via explicit generic declaration
+    "UNCHECKED_CAST", // Cast is checked by safe operator `as?`
+    "EXTENSION_SHADOWED_BY_MEMBER" // Available via explicit generic declaration
 )
 fun <T> Project.findProperty(name: String) = findProperty(name) as? T
