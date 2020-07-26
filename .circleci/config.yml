@@ -32,7 +32,7 @@ jobs:
           name: DSL Android test
           command: ./gradlew :dsl-android:test
 
-  publish:
+  publish_dsl:
 
     docker:
       - image: circleci/openjdk:8
@@ -41,22 +41,54 @@ jobs:
       - checkout
 
       - run:
-          name: "Publish to Bintray"
-          command: ./gradlew uploadArchives
+          name: "Publish DSL+ to Bintray"
+          command: ./gradlew -p dsl uploadArchives
+
+  publish_easy-publish:
+
+    docker:
+      - image: circleci/openjdk:8
+
+    steps:
+      - checkout
+
+      - run:
+          name: "Publish EasyPublish to Gradle Central"
+          command: ./gradlew -p publish publishPlugins
 
 workflows:
   analyze_test_publish:
     jobs:
-      - analyze
-      - test
-      - publish:
-#          requires:
-#            - analyze
-#            - test
+      - analyze:
+          filters:
+            tags:
+              only: *
+
+      - test:
+          filters:
+            tags:
+              only: *
+
+      - publish_dsl:
+          requires:
+            - analyze
+            - test
           filters:
             # ignore any commit on any branch by default
             branches:
               ignore: /.*/
             # only act on version tags
             tags:
-              only: /^[0-9](\.[0-9]+)+(\-\w+\-[0-9]+){0,1}$/
+              only: /^dsl-[0-9](\.[0-9]+){1,2}(\-\w+\-[0-9]{1,2}){0,1}$/
+
+      - publish_easy-publish:
+          requires:
+            - analyze
+            - test
+          filters:
+            # ignore any commit on any branch by default
+            branches:
+              ignore: /.*/
+            # only act on version tags
+            tags:
+              only: /^publish-[0-9](\.[0-9]+){1,2}$/
