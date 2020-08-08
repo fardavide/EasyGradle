@@ -14,7 +14,7 @@ dependencies {
     // Test
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
-    testImplementation("studio.forface:assert4k:0.3.1")
+    testImplementation("studio.forface:assert4k:0.5.3")
     testImplementation("io.mockk:mockk:1.10.0")
 }
 
