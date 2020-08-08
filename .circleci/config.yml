@@ -52,8 +52,8 @@ jobs:
       - checkout
 
       - run:
-          name: "Publish DSL+ to Bintray"
-          command: ./gradlew -p dsl uploadArchives
+          name: "Publish DSL+ to Bintray and Gradle Central"
+          command: ./gradlew -p dsl uploadArchives && ./gradlew -p dsl publishPlugins
 
   publish_easy-publish:
 
