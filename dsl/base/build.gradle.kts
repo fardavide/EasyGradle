@@ -40,7 +40,7 @@ pluginBundle {
     val url = "https://github.com/4face-studi0/EasyGradle"
     website = url
     vcsUrl = url
-    description = "Gradle plugin for publish on Bintray"
+    description = "Set of APIs for enrich Gradle DSL"
     tags = listOf(
         "Gradle",
         "plugin",
