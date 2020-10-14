@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
     kotlin("jvm")
     id("java-gradle-plugin")
-    id("com.gradle.plugin-publish") version "0.11.0"
+    id("com.gradle.plugin-publish") version "0.12.0"
 }
 
 repositories {
@@ -23,7 +23,7 @@ dependencies {
 object Plugin {
     const val id = "studio.forface.easygradle"
     const val name = "EasyGradle"
-    const val version = "0.1" // TODO project.version
+    const val version = "0.2" // TODO project.version
 }
 
 gradlePlugin {

@@ -4,19 +4,21 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import studio.forface.easygradle.publish.EasyPublishPlugin
 
 plugins {
-    kotlin("jvm") version "1.4.0-rc" apply false
-    id("org.jetbrains.dokka") version "0.10.1" apply false
+    val kotlinVersion = "1.4.10"
+    kotlin("jvm") version kotlinVersion apply false
+    id("org.jetbrains.dokka") version kotlinVersion apply false
     id("io.gitlab.arturbosch.detekt") version "1.10.0"
-    id("studio.forface.easy-publish") version "0.2.3" apply false
+    id("studio.forface.easy-publish") apply false
 }
 
 subprojects {
     apply<EasyPublishPlugin>()
 
     apply<DokkaPlugin>()
-    tasks.getByName<DokkaTask>("dokka") {
-        outputFormat = "markdown"
-        outputDirectory = File(rootDir.parent, "docs${File.separator}${parent!!.name}${File.separator}$name").path
+    tasks.getByName<DokkaTask>("dokkaJekyll") {
+        outputDirectory.set(
+            File(rootDir.parent, "docs${File.separator}${parent!!.name}${File.separator}$name")
+        )
     }
 
     apply<DetektPlugin>()

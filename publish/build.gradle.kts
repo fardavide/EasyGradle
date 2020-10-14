@@ -3,19 +3,20 @@ import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    val kotlinVersion = "1.4.0-rc"
+    val kotlinVersion = "1.4.10"
 
     kotlin("jvm") version kotlinVersion apply false
     kotlin("plugin.serialization") version kotlinVersion
-    id("org.jetbrains.dokka") version "0.10.1" apply false
+    id("org.jetbrains.dokka") version kotlinVersion apply false
     id("io.gitlab.arturbosch.detekt") version "1.10.0"
 }
 
 subprojects {
     apply<DokkaPlugin>()
-    tasks.getByName<DokkaTask>("dokka") {
-        outputFormat = "markdown"
-        outputDirectory = File(rootDir.parent, "docs${File.separator}${parent!!.name}${File.separator}$name").path
+    tasks.getByName<DokkaTask>("dokkaJekyll") {
+        outputDirectory.set(
+            File(rootDir.parent, "docs${File.separator}${parent!!.name}${File.separator}$name")
+        )
     }
 
     apply<DetektPlugin>()

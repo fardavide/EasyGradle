@@ -8,16 +8,14 @@ plugins {
 
 repositories {
     maven("https://kotlin.bintray.com/kotlinx")
-    maven("https://kotlin.bintray.com/kotlin-eap")
-    maven("https://kotlin.bintray.com/kotlin-dev")
     jcenter()
 }
 
 dependencies {
-    implementation("studio.forface.easygradle:dsl:2.0")
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:1.0-M1-1.4.0-rc-218")
-    implementation("com.vanniktech:gradle-maven-publish-plugin:0.12.0")
+    implementation("studio.forface.easygradle:dsl:2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
+    implementation("com.vanniktech:gradle-maven-publish-plugin:0.13.0")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))

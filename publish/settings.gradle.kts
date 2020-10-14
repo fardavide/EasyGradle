@@ -9,6 +9,5 @@ pluginManagement {
 
 rootProject.name = "EasyPublish"
 
-includeBuild("../dsl")
 
 include("plugin")

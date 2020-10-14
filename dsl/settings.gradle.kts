@@ -9,6 +9,8 @@ pluginManagement {
 
 rootProject.name = "DSL+"
 
+includeBuild("../publish")
+
 include("base")
 include("android")
 
