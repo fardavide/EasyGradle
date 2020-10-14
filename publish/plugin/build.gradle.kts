@@ -25,7 +25,7 @@ dependencies {
 object Plugin {
     const val id = "studio.forface.easy-publish"
     const val name = "Easy-publish"
-    const val version = "0.2.3"
+    const val version = "0.2.4"
 }
 
 gradlePlugin {
