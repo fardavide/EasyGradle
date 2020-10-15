@@ -49,10 +49,15 @@ var `coroutines version` by lateinit()
 // endregion
 
 // region Serialization
-val DependencyHandler.`serialization` get() = serialization("runtime")
-val DependencyHandler.`serialization-common` get() = serialization("runtime-common")
-val DependencyHandler.`serialization-js` get() = serialization("runtime-js")
-val DependencyHandler.`serialization-native` get() = serialization("runtime-native")
+val DependencyHandler.`serialization-json` get() = serialization("json")
+@Deprecated("Use `serialization-json`", ReplaceWith("`serialization-json`"))
+val DependencyHandler.`serialization`: Any get() = `serialization-json`
+@Deprecated("Use `serialization-json`", ReplaceWith("`serialization-json`"))
+val DependencyHandler.`serialization-common`: Any get() = `serialization-json`
+@Deprecated("Use `serialization-json`", ReplaceWith("`serialization-json`"))
+val DependencyHandler.`serialization-js`: Any get() = `serialization-json`
+@Deprecated("Use `serialization-json`", ReplaceWith("`serialization-json`"))
+val DependencyHandler.`serialization-native`: Any get() = `serialization-json`
 
 var `serialization version` by lateinit()
 

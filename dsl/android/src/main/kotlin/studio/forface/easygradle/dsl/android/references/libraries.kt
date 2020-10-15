@@ -1,9 +1,10 @@
 @file:Suppress("unused", "PackageDirectoryMismatch", "MaxLineLength")
 
-package studio.forface.easygradle.dsl
+package studio.forface.easygradle.dsl.android
 
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import studio.forface.easygradle.internal.lateinit
+import studio.forface.easygradle.dsl.*
 
 // region 4face
 val DependencyHandler.`fluentNotifications` get() = forface("fluentnotifications") version `fluentNotifications version`

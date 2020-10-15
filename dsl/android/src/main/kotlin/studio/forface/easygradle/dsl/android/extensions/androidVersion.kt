@@ -1,9 +1,10 @@
 @file:Suppress("unused", "PackageDirectoryMismatch")
 
-package studio.forface.easygradle.dsl
+package studio.forface.easygradle.dsl.android
 
 import com.android.build.gradle.internal.dsl.DefaultConfig
 import studio.forface.easygradle.internal.writeOnly
+import studio.forface.easygradle.dsl.*
 
 /**
  * Set [Version.versionName] and [Version.versionCode] into Android [DefaultConfig]
