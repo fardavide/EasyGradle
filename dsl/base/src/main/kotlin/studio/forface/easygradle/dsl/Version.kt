@@ -11,7 +11,7 @@ import studio.forface.easygradle.dsl.Version.Channel.*
  * Class for libraries and applications versioning. Compatible with Android
  * @author Davide Farella
  */
-class Version(
+data class Version(
     private val major: Int,
     private val minor: Int,
     private val channel: Channel = None,
