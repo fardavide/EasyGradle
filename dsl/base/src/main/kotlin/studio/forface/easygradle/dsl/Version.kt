@@ -45,6 +45,12 @@ data class Version(
     val versionName get() = "$major.$minor$versionNameSuffix"
 
     /**
+     * Compare this [versionCode] with [other]s [versionCode]
+     */
+    operator fun compareTo(other: Version) =
+        versionCode.compareTo(other.versionCode)
+
+    /**
      * @return a [String] suffix for [versionName]. E.g. `-alpha-5`
      *
      * @throws IllegalArgumentException
