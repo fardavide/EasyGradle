@@ -12,11 +12,11 @@ import studio.forface.easygradle.dsl.Version.Channel.*
  * @author Davide Farella
  */
 data class Version(
-    private val major: Int,
-    private val minor: Int,
-    private val channel: Channel = None,
-    private val patch: Int = if (channel is None) 0 else 1,
-    private val build: Int = 0
+    val major: Int,
+    val minor: Int,
+    val channel: Channel = None,
+    val patch: Int = if (channel is None) 0 else 1,
+    val build: Int = 0
 ) {
 
     constructor(major: Int, minor: Int, patch: Int) : this(major, minor, None, patch)
