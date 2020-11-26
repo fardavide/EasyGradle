@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("studio.forface.easygradle:dsl:2.1")
+    implementation("studio.forface.easygradle:dsl:2.7")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
     implementation("com.vanniktech:gradle-maven-publish-plugin:0.13.0")
 

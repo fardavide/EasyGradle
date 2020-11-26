@@ -53,7 +53,7 @@ jobs:
 
       - run:
           name: "Publish DSL+ to Bintray and Gradle Central"
-          command: ./gradlew -p dsl uploadArchives && ./gradlew -p dsl publishPlugins
+          command: ./gradlew -p dsl setupGradleKeys && ./gradlew -p dsl uploadArchives && ./gradlew -p dsl publishPlugins
 
   publish_easy-publish:
 
@@ -65,7 +65,7 @@ jobs:
 
       - run:
           name: "Publish EasyPublish to Gradle Central"
-          command: ./gradlew -p publish publishPlugins
+          command: ./gradlew -p dsl setupGradleKeys && ./gradlew -p publish publishPlugins
 
 workflows:
   analyze_test_publish:
@@ -86,6 +86,8 @@ workflows:
               only: /.*/
 
       - publish_dsl:
+          context:
+            - Bintray
           requires:
             - analyze
             - test_dsl
@@ -98,6 +100,8 @@ workflows:
               only: /^dsl-[0-9](\.[0-9]+){1,2}(\-\w+\-[0-9]{1,2}){0,1}$/
 
       - publish_easy-publish:
+          context:
+            - Bintray
           requires:
             - analyze
             - test_easy-publish

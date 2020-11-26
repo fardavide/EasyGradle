@@ -40,4 +40,11 @@ subprojects {
     }
 }
 
+tasks.create("setupGradleKeys") {
+    doLast {
+        project.extra["gradle.publish.key"] = System.getenv().getValue("GRADLE_PUBLISH_KEY")
+        project.extra["gradle.publish.secret"] = System.getenv().getValue("GRADLE_PUBLISH_SECRET")
+    }
+}
+
 apply(from = "../gradle/repositories.gradle.kts")
