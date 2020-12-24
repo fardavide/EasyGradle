@@ -3,12 +3,20 @@ import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    val kotlinVersion = "1.4.10"
+    val kotlinVersion = "1.4.21"
+    val dokkaVersion = "1.4.10.2" // Dec 16, 2020
 
     kotlin("jvm") version kotlinVersion apply false
     kotlin("plugin.serialization") version kotlinVersion
-    id("org.jetbrains.dokka") version kotlinVersion apply false
+    id("org.jetbrains.dokka") version dokkaVersion apply false
     id("io.gitlab.arturbosch.detekt") version "1.10.0"
+}
+
+allprojects {
+    repositories {
+        maven("https://kotlin.bintray.com/kotlinx")
+        jcenter()
+    }
 }
 
 subprojects {

@@ -6,20 +6,14 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-repositories {
-    maven("https://kotlin.bintray.com/kotlinx")
-    jcenter()
-}
-
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("studio.forface.easygradle:dsl:2.7")
+    implementation("studio.forface.easygradle:dsl:2.8") // Nov 26, 2020
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
     implementation("com.vanniktech:gradle-maven-publish-plugin:0.13.0")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
-    testImplementation("io.mockk:mockk:1.10.0")
+    testImplementation("io.mockk:mockk:1.10.3-jdk8") // Nov 30, 2020
 }
 
 object Plugin {

@@ -8,7 +8,7 @@ plugins {
     kotlin("jvm") version kotlinVersion apply false
     id("org.jetbrains.dokka") version kotlinVersion apply false
     id("io.gitlab.arturbosch.detekt") version "1.10.0"
-    id("studio.forface.easy-publish") apply false
+    id("studio.forface.easy-publish") version "0.2.4" apply false
 }
 
 subprojects {

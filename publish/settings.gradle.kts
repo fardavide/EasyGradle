@@ -9,5 +9,4 @@ pluginManagement {
 
 rootProject.name = "EasyPublish"
 
-
 include("plugin")
