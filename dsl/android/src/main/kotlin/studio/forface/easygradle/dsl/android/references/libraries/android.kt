@@ -9,6 +9,7 @@ import studio.forface.easygradle.internal.lateinit
 var `activity version` by lateinit()
 var `android-annotation version` by lateinit()
 var `android-arch version` by lateinit()
+var `android-compose version` by lateinit()
 var `android-paging version` by lateinit()
 var `android-room version` by lateinit()
 var `android-test version` by lateinit()
@@ -32,11 +33,17 @@ fun androidAnnotation() =
 fun androidArch(module: String) =
     androidx("arch.core", "core", moduleSuffix = module) version `android-arch version`
 
+fun androidCompose(module: String) =
+    androidx("compose.${module.substringBefore("-")}:$module") version `android-compose version`
+
 fun androidKtx() =
     androidx("core", moduleSuffix = "ktx") version `ktx version`
 
 fun androidTest(module: String) =
     androidx("test", module) version `android-test version`
+
+fun androidUi(module: String) =
+    androidx("ui", moduleSuffix = module) version `android-compose version`
 
 fun androidWork(module: String) =
     androidx("work", moduleSuffix = module) version `android-work version`
