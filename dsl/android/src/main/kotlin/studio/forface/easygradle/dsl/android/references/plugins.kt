@@ -10,10 +10,13 @@ import studio.forface.easygradle.dsl.*
  */
 fun PluginDependenciesSpec.android(module: AndroidModule) = id("com.android.${module.string}")
 
-sealed class AndroidModule(val string: String)
+@Suppress("UnnecessaryAbstractClass")
+abstract class AndroidModule(val string: String)
 
-object Application : AndroidModule("application")
-object Library : AndroidModule("library")
+fun PluginDependenciesSpec.androidModule(string: String) = object : AndroidModule(string) {}
 
-object Android : KotlinModule("android")
-object AndroidExtensions : KotlinModule("android-extensions")
+val PluginDependenciesSpec.Application get() = androidModule("application")
+val PluginDependenciesSpec.Library get() = androidModule("library")
+
+val PluginDependenciesSpec.Android get() = kotlinPluginModule("android")
+val PluginDependenciesSpec.AndroidExtensions get() = kotlinPluginModule("android-extensions")
