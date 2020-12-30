@@ -79,8 +79,6 @@ val DependencyHandler.`android-work-testing` get() = androidxWork("testing")
 // endregion
 
 // region other
-@Deprecated(PluginMessage)
-val DependencyHandler.`android-gradle-plugin` get() = android("tools.build", "gradle")
 
 
 @Deprecated(StyleMessage, ReplaceWith("activity()"))
