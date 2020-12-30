@@ -1,20 +1,18 @@
-import studio.forface.easygradle.dsl.`kotlin version`
-import studio.forface.easygradle.dsl.`kotlin-jdk8`
-import studio.forface.easygradle.dsl.implementation
-import studio.forface.easygradle.dsl.version
+import org.gradle.kotlin.dsl.kotlin
+import studio.forface.easygradle.dsl.*
 
 plugins {
     kotlin("jvm")
     id("studio.forface.easy-publish") version "0.2.3"
-    id("studio.forface.easygradle") version "0.1"
+    id("studio.forface.easygradle") version "3.0"
 }
 
 easyPublish {}
 
-`kotlin version` = "1.4.10"
+`kotlin version` = "1.4.21"
 
 dependencies {
     implementation(
-        `kotlin-jdk8`
+        `coroutines-jdk8`
     )
 }

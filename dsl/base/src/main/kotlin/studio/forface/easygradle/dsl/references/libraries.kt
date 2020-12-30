@@ -32,13 +32,13 @@ fun serialization(module: String) =
 var `ktor version` by lateinit()
 
 fun ktorClient(module: String) =
-    ktor("client", module)
+    ktor("client-$module")
 
-fun ktorClientServer(module: String) =
-    ktor("server", module)
+fun ktorServer(module: String) =
+    ktor("server-$module")
 
-fun ktor(module: String, moduleSuffix: String) =
-    dependency("io", groupName = "ktor", module = module, moduleSuffix = moduleSuffix) version `ktor version`
+fun ktor(module: String) =
+    dependency("io", groupName = "ktor", moduleSuffix = module) version `ktor version`
 
 
 var `assistedInject version` by lateinit()
