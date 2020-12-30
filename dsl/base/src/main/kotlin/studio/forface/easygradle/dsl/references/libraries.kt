@@ -98,11 +98,19 @@ fun forface(groupName: String? = null, module: String? = null, moduleSuffix: Str
 fun google(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
     dependency("com.google", groupName, module, moduleSuffix, version)
 
-fun jakeWharton(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-    dependency("com.jakewharton", groupName, module, moduleSuffix, version)
+fun jakeWharton(
+    groupName: String? = null,
+    module: String? = null,
+    moduleSuffix: String? = null,
+    version: String? = null
+) = dependency("com.jakewharton", groupName, module, moduleSuffix, version)
 
-fun jetbrains(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
-    dependency("org.jetbrains", groupName, module, moduleSuffix, version)
+fun jetbrains(
+    groupName: String? = null,
+    module: String? = null,
+    moduleSuffix: String? = null,
+    version: String? = null
+) = dependency("org.jetbrains", groupName, module, moduleSuffix, version)
 
 fun squareup(groupName: String? = null, module: String? = null, moduleSuffix: String? = null, version: String? = null) =
     dependency("com.squareup", groupName, module, moduleSuffix, version)
@@ -115,7 +123,8 @@ fun squareup(groupName: String? = null, module: String? = null, moduleSuffix: St
  *
  * @param group the partial group of the dependency. e.g. `` studio.forface ``
  * @param groupName optional name of the group. e.g. `` viewstatestore `` for `studio.forface.viewstatestore`
- * @param module module of the dependency, if not set [groupName] will be used. e.g. `` dagger `` for `com.google.dagger`
+ * @param module module of the dependency, if not set [groupName] will be used. e.g. `` dagger `` for
+ *  `com.google.dagger`
  * @param moduleSuffix optional suffix for the [module]. e.g. `` ktx `` for `core-ktx`
  * @param version optional version for the dependency
  *
