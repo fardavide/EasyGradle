@@ -23,7 +23,7 @@ dependencies {
 object Plugin {
     const val id = "studio.forface.easygradle"
     const val name = "EasyGradle"
-    const val version = "2.8" // TODO project.version
+    const val version = "3.0" // TODO project.version
 }
 
 gradlePlugin {
