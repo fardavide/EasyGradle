@@ -34,7 +34,7 @@ fun androidArch(module: String) =
     androidx("arch.core", "core", moduleSuffix = module) version `android-arch version`
 
 fun androidCompose(module: String) =
-    androidx("compose.${module.substringBefore("-")}:$module") version `android-compose version`
+    androidx("compose.${module.substringBefore("-")}", module) version `android-compose version`
 
 fun androidKtx() =
     androidx("core", moduleSuffix = "ktx") version `ktx version`
