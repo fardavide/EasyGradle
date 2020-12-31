@@ -14,4 +14,4 @@ fun accompanist(module: String) =
         "dev.chrisbanes",
         groupName = "accompanist",
         moduleSuffix = module
-    ) version `fluentNotifications version`
+    ) version `accompanist version`
