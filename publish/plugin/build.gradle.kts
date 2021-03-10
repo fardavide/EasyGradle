@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
     kotlin("jvm")
     id("java-gradle-plugin")
-    id("com.gradle.plugin-publish") version "0.11.0"
+    id("com.gradle.plugin-publish") version "0.13.0" // Feb 12, 2021
     kotlin("plugin.serialization")
 }
 
