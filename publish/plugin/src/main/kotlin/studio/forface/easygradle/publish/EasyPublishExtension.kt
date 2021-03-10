@@ -104,6 +104,12 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     var publish by project(false, propertyName = "maven.publish")
 
     /**
+     * Whether the signing should be enabled
+     * Default is `true`
+     */
+    var signingEnabled by project(true, propertyName = "signing.enabled")
+
+    /**
      * Key id for signing
      * Property name: `signing.keyId`
      */

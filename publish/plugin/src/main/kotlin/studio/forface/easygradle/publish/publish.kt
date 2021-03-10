@@ -60,7 +60,7 @@ internal fun Project.publish(ext: EasyPublishExtension) {
     extra["signing.password"] = ext.signingPassword
     extra["signing.secretKeyRingFile"] = ext.signingKeyRingFilePath
 
-    extra["RELEASE_SIGNING_ENABLED"] = true
+    extra["RELEASE_SIGNING_ENABLED"] = ext.signingEnabled
 
     ext.lics.firstOrNull()?.let { lic ->
         extra["POM_LICENCE_NAME"] = lic.name
