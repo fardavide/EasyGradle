@@ -32,7 +32,7 @@ class EasyPublishExtensionTest {
             scmUrl = "gitUrl"
 
             username = "User"
-            apiKey = "MY_API_KEY"
+            password = "MY_API_KEY"
         }
 
         // WHEN
@@ -115,7 +115,7 @@ class EasyPublishExtensionTest {
             "https://api.bintray.com/maven/User/MyRepository/my.group:my-package/;publish=0;override=1",
             bintrayUrl
         )
-        assertEquals("MY_API_KEY", config.apiKey)
+        assertEquals("MY_API_KEY", config.password)
 
         unmockkStatic(System::class)
     }

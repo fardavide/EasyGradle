@@ -30,16 +30,27 @@ fun PublishConfig(block: PublishConfigBuilder) = block
 abstract class EasyPublishExtension @Inject constructor(project: Project) {
 
     /**
-     * Username of Bintray user.
-     * Property name: `bintray.user`
+     * Username of Maven repository.
+     * Property name: `maven.user`
      */
-    var username by project("", propertyName = "bintray.user")
+    var username by project("", propertyName = "maven.user")
 
     /**
-     * Api Key of Bintray user.
-     * Property name: `bintray.apikey`
+     * Password of Maven user.
+     * Property name: `maven.password`
      */
-    var apiKey by project("", propertyName = "bintray.apikey")
+    var password by project("", propertyName = "maven.password")
+
+    /**
+     * Staging profile for publications.
+     * Default is [Project.getGroup]
+     * */
+    var stagingProfile by project(project.group.toString())
+
+    /**
+     * Base url of your Nexus instance
+     */
+    var baseUrl by project("", propertyName = "maven.baseUrl")
 
     /** Optional name of the organization */
     var organization by project("")
@@ -57,7 +68,7 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     var artifact by project(project.name)
 
     /**
-     * Name of the project on Bintray.
+     * Name of the project on Maven.
      * Default is `$group:$artifact`
      * Property name: `projectName`
      */
@@ -103,9 +114,9 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     /**
      * Whether the publication must be published
      * Default is `false`
-     * Property name: `bintray.publish`
+     * Property name: `maven.publish`
      */
-    var publish by project(false, propertyName = "bintray.publish")
+    var publish by project(false, propertyName = "maven.publish")
 
     // region internal
     internal val devs: MutableList<Developer> by project(mutableListOf<Developer>(), propertyName = "developers")
@@ -160,7 +171,7 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
             ::group,
             ::versionName,
             ::username,
-            ::apiKey,
+            ::password,
             ::repo,
             ::artifact,
             ::scmUrl
