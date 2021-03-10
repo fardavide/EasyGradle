@@ -49,6 +49,8 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
 
     /**
      * Base url of your Nexus instance
+     * Property name: `maven.baseUrl`
+     * This field is required
      */
     var baseUrl by project("", propertyName = "maven.baseUrl")
 
@@ -105,6 +107,27 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
      */
     var publish by project(false, propertyName = "maven.publish")
 
+    /**
+     * Key id for signing
+     * Property name: `signing.keyId`
+     * This field is required
+     */
+    var signingKeyId by project("", "signing.keyId")
+
+    /**
+     * Password for signing
+     * Property name: `signing.password`
+     * This field is required
+     */
+    var signingPassword by project.required(propertyName = "signing.password")
+
+    /**
+     * KeyRing file path for signing
+     * Property name: `signing.keyRingFilePath`
+     * This field is required
+     */
+    var signingKeyRingFilePath by project("", "signing.keyRingFilePath")
+
     // region internal
     internal val devs: MutableList<Developer> by project(mutableListOf<Developer>(), propertyName = "developers")
     internal val lics: MutableList<License> by project(mutableListOf<License>(), propertyName = "licenses")
@@ -146,9 +169,13 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
             ::versionName,
             ::username,
             ::password,
+            ::baseUrl,
             ::repo,
             ::artifact,
-            ::scmUrl
+            ::scmUrl,
+            ::signingKeyId,
+            ::signingPassword,
+            ::signingKeyRingFilePath
         )
     }
     // endregion
