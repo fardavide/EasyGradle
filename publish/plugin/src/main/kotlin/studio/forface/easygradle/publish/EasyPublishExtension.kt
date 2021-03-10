@@ -52,9 +52,6 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
      */
     var baseUrl by project("", propertyName = "maven.baseUrl")
 
-    /** Optional name of the organization */
-    var organization by project("")
-
     /** Name of the Repository where to publish */
     var repo by project("")
 
@@ -83,9 +80,6 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     /** Optional description of the library */
     var description by project("")
 
-    /** Optional website url of the library */
-    var siteUrl by project("")
-
     /**
      * Scm url of the library
      * Property name: `scm.url`
@@ -105,13 +99,6 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     var scmDevConnection by project("", "scm.devConnection")
 
     /**
-     * Whether the publication must override a pre-existent one
-     * Default is `false`
-     * Property name: `bintray.override`
-     */
-    var override by project(false, propertyName = "bintray.override")
-
-    /**
      * Whether the publication must be published
      * Default is `false`
      * Property name: `maven.publish`
@@ -121,19 +108,6 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     // region internal
     internal val devs: MutableList<Developer> by project(mutableListOf<Developer>(), propertyName = "developers")
     internal val lics: MutableList<License> by project(mutableListOf<License>(), propertyName = "licenses")
-
-    internal fun buildBintrayUrl(): String {
-        val target = organization.takeIf { it.isNotBlank() } ?: username
-        val override = if (override) 1 else 0
-        val publish = if (publish) 1 else 0
-
-        return "https://api.bintray.com/maven/" +
-            "$target/" +
-            "$repo/" +
-            "$name/" +
-            ";publish=$publish" +
-            ";override=$override"
-    }
 
     @Suppress("UnusedPrivateMember")
     private operator fun <T : Any> Project.invoke(
