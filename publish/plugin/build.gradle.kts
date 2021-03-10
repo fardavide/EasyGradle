@@ -6,6 +6,10 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+repositories {
+    maven(url = "https://dl.bintray.com/4face/4face/")
+}
+
 dependencies {
     implementation("studio.forface.easygradle:dsl:2.8") // Nov 26, 2020
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0") // Feb 19, 2021
@@ -13,6 +17,7 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
+    testImplementation("studio.forface:assert4k:0.6") // Jan 21, 2021
     testImplementation("io.mockk:mockk:1.10.6") // Feb 12, 2021
 }
 

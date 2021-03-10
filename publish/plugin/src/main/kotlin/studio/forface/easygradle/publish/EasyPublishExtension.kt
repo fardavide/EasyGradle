@@ -33,38 +33,34 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
      * Username of Maven repository.
      * Property name: `maven.user`
      */
-    var username by project("", propertyName = "maven.user")
+    var username by project.required("", propertyName = "maven.user")
 
     /**
      * Password of Maven user.
      * Property name: `maven.password`
      */
-    var password by project("", propertyName = "maven.password")
+    var password by project.required("", propertyName = "maven.password")
 
     /**
      * Staging profile for publications.
      * Default is [Project.getGroup]
      * */
-    var stagingProfile by project(project.group.toString())
+    var stagingProfile by project.required(project.group.toString())
 
     /**
      * Base url of your Nexus instance
      * Property name: `maven.baseUrl`
-     * This field is required
      */
-    var baseUrl by project("", propertyName = "maven.baseUrl")
-
-    /** Name of the Repository where to publish */
-    var repo by project("")
+    var baseUrl by project.required(propertyName = "maven.baseUrl")
 
     /** Group of the Library */
-    var group by project(project.group.toString())
+    var group by project.required(project.group.toString())
 
     /**
      * Name of the artifact to public.
      * Default is [Project.getName]
      */
-    var artifact by project(project.name)
+    var artifact by project.required(project.name)
 
     /**
      * Name of the project on Maven.
@@ -77,7 +73,7 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
      * Version of the library
      * Property name: `version`
      */
-    var versionName by project(project.version.toString(), "version")
+    var versionName by project.required(project.version.toString(), "version")
 
     /** Optional description of the library */
     var description by project("")
@@ -86,7 +82,7 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
      * Scm url of the library
      * Property name: `scm.url`
      */
-    var scmUrl by project("", "scm.url")
+    var scmUrl by project.required("", "scm.url")
 
     /**
      * Scm connection of the library
@@ -110,23 +106,20 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     /**
      * Key id for signing
      * Property name: `signing.keyId`
-     * This field is required
      */
-    var signingKeyId by project("", "signing.keyId")
+    var signingKeyId by project.required(propertyName = "signing.keyId")
 
     /**
      * Password for signing
      * Property name: `signing.password`
-     * This field is required
      */
     var signingPassword by project.required(propertyName = "signing.password")
 
     /**
      * KeyRing file path for signing
      * Property name: `signing.keyRingFilePath`
-     * This field is required
      */
-    var signingKeyRingFilePath by project("", "signing.keyRingFilePath")
+    var signingKeyRingFilePath by project.required(propertyName = "signing.keyRingFilePath")
 
     // region internal
     internal val devs: MutableList<Developer> by project(mutableListOf<Developer>(), propertyName = "developers")
@@ -161,22 +154,30 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
         }
     }
 
+    private fun Project.required(
+        default: String = "",
+        propertyName: String? = null,
+        envName: String? = null
+    ) = object : ConfigReadWriteProperty<EasyPublishExtension, String>(
+        this,
+        default,
+        propertyName = propertyName,
+        envName = envName
+    ) {
+
+        override fun getValue(thisRef: EasyPublishExtension, property: KProperty<*>): String {
+            val value = super.getValue(thisRef, property)
+            require(value.isNotBlank()) {
+                "${property.name} is required, declare as '${property.actualPropertyName}' in your Gradle " +
+                    "properties, or as '${property.actualEnvName}' in your environment variables"
+            }
+            return value
+        }
+    }
+
     internal fun validate() {
         for (license in lics) license.validate()
         for (developer in devs) developer.validate()
-        assertStringsNotEmpty(
-            ::group,
-            ::versionName,
-            ::username,
-            ::password,
-            ::baseUrl,
-            ::repo,
-            ::artifact,
-            ::scmUrl,
-            ::signingKeyId,
-            ::signingPassword,
-            ::signingKeyRingFilePath
-        )
     }
     // endregion
 
