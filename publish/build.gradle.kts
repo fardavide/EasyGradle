@@ -3,8 +3,8 @@ import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    val kotlinVersion = "1.4.21"
-    val dokkaVersion = "1.4.10.2" // Dec 16, 2020
+    val kotlinVersion = "1.4.31" // Feb 25, 2021
+    val dokkaVersion = "1.4.20" // Feb 23, 2021
 
     kotlin("jvm") version kotlinVersion apply false
     kotlin("plugin.serialization") version kotlinVersion
