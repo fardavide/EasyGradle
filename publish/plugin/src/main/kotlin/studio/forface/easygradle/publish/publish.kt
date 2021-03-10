@@ -56,11 +56,12 @@ internal fun Project.publish(ext: EasyPublishExtension) {
     extra["POM_SCM_DEV_CONNECTION"] = ext.scmDevConnection.useIfNotBlank { "scm:git:$it" }
 
     // signing
-    extra["signing.keyId"] = ext.signingKeyId
-    extra["signing.password"] = ext.signingPassword
-    extra["signing.secretKeyRingFile"] = ext.signingKeyRingFilePath
-
     extra["RELEASE_SIGNING_ENABLED"] = ext.signingEnabled
+    if (ext.signingEnabled) {
+        extra["signing.keyId"] = ext.signingKeyId
+        extra["signing.password"] = ext.signingPassword
+        extra["signing.secretKeyRingFile"] = ext.signingKeyRingFilePath
+    }
 
     ext.lics.firstOrNull()?.let { lic ->
         extra["POM_LICENCE_NAME"] = lic.name
