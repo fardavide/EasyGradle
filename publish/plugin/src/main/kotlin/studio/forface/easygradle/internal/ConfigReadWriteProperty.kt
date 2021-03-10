@@ -16,8 +16,8 @@ abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
     private val envName: String? = null
 ) : ReadWriteProperty<Scope, PropType> {
     private var backValue: PropType? = null
-    private val KProperty<*>.actualPropertyName get() = propertyName ?: "$propertyPrefix$name"
-    private val KProperty<*>.actualEnvName get() = envName ?: actualPropertyName
+    internal val KProperty<*>.actualPropertyName get() = propertyName ?: "$propertyPrefix$name"
+    internal val KProperty<*>.actualEnvName get() = envName ?: actualPropertyName
         .map { char ->
             when {
                 char == ' ' -> "_"

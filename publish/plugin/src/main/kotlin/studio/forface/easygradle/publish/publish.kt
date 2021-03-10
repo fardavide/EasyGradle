@@ -55,7 +55,12 @@ internal fun Project.publish(ext: EasyPublishExtension) {
     extra["POM_SCM_CONNECTION"] = ext.scmConnection.useIfNotBlank { "scm:git:$it" }
     extra["POM_SCM_DEV_CONNECTION"] = ext.scmDevConnection.useIfNotBlank { "scm:git:$it" }
 
-    extra["RELEASE_SIGNING_ENABLED"] = false // TODO get from c
+    // signing
+    extra["signing.keyId"] = ext.signingKeyId
+    extra["signing.password"] = ext.signingPassword
+    extra["signing.secretKeyRingFile"] = ext.signingKeyRingFilePath
+
+    extra["RELEASE_SIGNING_ENABLED"] = true
 
     ext.lics.firstOrNull()?.let { lic ->
         extra["POM_LICENCE_NAME"] = lic.name
@@ -72,11 +77,11 @@ internal fun Project.publish(ext: EasyPublishExtension) {
     apply(plugin = "com.vanniktech.maven.publish")
 
     mavenPublish {
-        targets.getByName("uploadArchives") {
-
-            releaseRepositoryUrl = ext.buildBintrayUrl()
+        nexus {
+            baseUrl = ext.baseUrl
+            stagingProfile = ext.stagingProfile
             repositoryUsername = ext.username
-            repositoryPassword = ext.apiKey
+            repositoryPassword = ext.password
         }
     }
 }

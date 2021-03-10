@@ -30,34 +30,40 @@ fun PublishConfig(block: PublishConfigBuilder) = block
 abstract class EasyPublishExtension @Inject constructor(project: Project) {
 
     /**
-     * Username of Bintray user.
-     * Property name: `bintray.user`
+     * Username of Maven repository.
+     * Property name: `maven.user`
      */
-    var username by project("", propertyName = "bintray.user")
+    var username by project.required("", propertyName = "maven.user")
 
     /**
-     * Api Key of Bintray user.
-     * Property name: `bintray.apikey`
+     * Password of Maven user.
+     * Property name: `maven.password`
      */
-    var apiKey by project("", propertyName = "bintray.apikey")
+    var password by project.required("", propertyName = "maven.password")
 
-    /** Optional name of the organization */
-    var organization by project("")
+    /**
+     * Staging profile for publications.
+     * Default is [Project.getGroup]
+     * */
+    var stagingProfile by project.required(project.group.toString())
 
-    /** Name of the Repository where to publish */
-    var repo by project("")
+    /**
+     * Base url of your Nexus instance
+     * Property name: `maven.baseUrl`
+     */
+    var baseUrl by project.required(propertyName = "maven.baseUrl")
 
     /** Group of the Library */
-    var group by project(project.group.toString())
+    var group by project.required(project.group.toString())
 
     /**
      * Name of the artifact to public.
      * Default is [Project.getName]
      */
-    var artifact by project(project.name)
+    var artifact by project.required(project.name)
 
     /**
-     * Name of the project on Bintray.
+     * Name of the project on Maven.
      * Default is `$group:$artifact`
      * Property name: `projectName`
      */
@@ -67,19 +73,16 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
      * Version of the library
      * Property name: `version`
      */
-    var versionName by project(project.version.toString(), "version")
+    var versionName by project.required(project.version.toString(), "version")
 
     /** Optional description of the library */
     var description by project("")
-
-    /** Optional website url of the library */
-    var siteUrl by project("")
 
     /**
      * Scm url of the library
      * Property name: `scm.url`
      */
-    var scmUrl by project("", "scm.url")
+    var scmUrl by project.required("", "scm.url")
 
     /**
      * Scm connection of the library
@@ -94,35 +97,33 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     var scmDevConnection by project("", "scm.devConnection")
 
     /**
-     * Whether the publication must override a pre-existent one
-     * Default is `false`
-     * Property name: `bintray.override`
-     */
-    var override by project(false, propertyName = "bintray.override")
-
-    /**
      * Whether the publication must be published
      * Default is `false`
-     * Property name: `bintray.publish`
+     * Property name: `maven.publish`
      */
-    var publish by project(false, propertyName = "bintray.publish")
+    var publish by project(false, propertyName = "maven.publish")
+
+    /**
+     * Key id for signing
+     * Property name: `signing.keyId`
+     */
+    var signingKeyId by project.required(propertyName = "signing.keyId")
+
+    /**
+     * Password for signing
+     * Property name: `signing.password`
+     */
+    var signingPassword by project.required(propertyName = "signing.password")
+
+    /**
+     * KeyRing file path for signing
+     * Property name: `signing.keyRingFilePath`
+     */
+    var signingKeyRingFilePath by project.required(propertyName = "signing.keyRingFilePath")
 
     // region internal
     internal val devs: MutableList<Developer> by project(mutableListOf<Developer>(), propertyName = "developers")
     internal val lics: MutableList<License> by project(mutableListOf<License>(), propertyName = "licenses")
-
-    internal fun buildBintrayUrl(): String {
-        val target = organization.takeIf { it.isNotBlank() } ?: username
-        val override = if (override) 1 else 0
-        val publish = if (publish) 1 else 0
-
-        return "https://api.bintray.com/maven/" +
-            "$target/" +
-            "$repo/" +
-            "$name/" +
-            ";publish=$publish" +
-            ";override=$override"
-    }
 
     @Suppress("UnusedPrivateMember")
     private operator fun <T : Any> Project.invoke(
@@ -153,18 +154,30 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
         }
     }
 
+    private fun Project.required(
+        default: String = "",
+        propertyName: String? = null,
+        envName: String? = null
+    ) = object : ConfigReadWriteProperty<EasyPublishExtension, String>(
+        this,
+        default,
+        propertyName = propertyName,
+        envName = envName
+    ) {
+
+        override fun getValue(thisRef: EasyPublishExtension, property: KProperty<*>): String {
+            val value = super.getValue(thisRef, property)
+            require(value.isNotBlank()) {
+                "${property.name} is required, declare as '${property.actualPropertyName}' in your Gradle " +
+                    "properties, or as '${property.actualEnvName}' in your environment variables"
+            }
+            return value
+        }
+    }
+
     internal fun validate() {
         for (license in lics) license.validate()
         for (developer in devs) developer.validate()
-        assertStringsNotEmpty(
-            ::group,
-            ::versionName,
-            ::username,
-            ::apiKey,
-            ::repo,
-            ::artifact,
-            ::scmUrl
-        )
     }
     // endregion
 
