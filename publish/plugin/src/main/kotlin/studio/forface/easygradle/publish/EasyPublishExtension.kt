@@ -6,6 +6,7 @@ import kotlinx.serialization.json.Json
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.provideDelegate
 import studio.forface.easygradle.internal.ConfigReadWriteProperty
+import studio.forface.easygradle.internal.SigningType
 import studio.forface.easygradle.internal.assertStringsNotEmpty
 import javax.inject.Inject
 import kotlin.reflect.KProperty
@@ -109,11 +110,29 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
      */
     var signingEnabled by project(true, propertyName = "signing.enabled")
 
+    internal val signingType
+        get() = when {
+            signingEnabled.not() -> SigningType.None
+            runCatching { signingKeyId }.isSuccess -> SigningType.KeyRingFile
+            runCatching { signingAsciiKey }.isSuccess -> SigningType.AsciiKey
+            else -> {
+                throw IllegalStateException(
+                    "Signing is enabled, but no key id or ascii key is provided"
+                )
+            }
+        }
+
     /**
      * Key id for signing
      * Property name: `signing.keyId`
      */
     var signingKeyId by project.required(propertyName = "signing.keyId")
+
+    /**
+     * Ascii format Key for signing
+     * Property name: `signing.asciiKey`
+     */
+    var signingAsciiKey by project.required(propertyName = "signing.asciiKey")
 
     /**
      * Password for signing

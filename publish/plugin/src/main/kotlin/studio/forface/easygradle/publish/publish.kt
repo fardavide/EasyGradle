@@ -1,10 +1,15 @@
 @file:Suppress("unused")
 package studio.forface.easygradle.publish
 
+import com.vanniktech.maven.publish.MavenPublishPlugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.extra
+import org.gradle.kotlin.dsl.findByType
+import org.gradle.plugins.signing.SigningExtension
+import org.gradle.plugins.signing.SigningPlugin
 import studio.forface.easygradle.dsl.*
+import studio.forface.easygradle.internal.SigningType
 import studio.forface.easygradle.internal.mavenPublish
 import studio.forface.easygradle.internal.useIfNotBlank
 
@@ -57,10 +62,24 @@ internal fun Project.publish(ext: EasyPublishExtension) {
 
     // signing
     extra["RELEASE_SIGNING_ENABLED"] = ext.signingEnabled
-    if (ext.signingEnabled) {
-        extra["signing.keyId"] = ext.signingKeyId
-        extra["signing.password"] = ext.signingPassword
-        extra["signing.secretKeyRingFile"] = ext.signingKeyRingFilePath
+    when (ext.signingType) {
+        SigningType.KeyRingFile -> {
+            extra["signing.keyId"] = ext.signingKeyId
+            extra["signing.password"] = ext.signingPassword
+            extra["signing.secretKeyRingFile"] = ext.signingKeyRingFilePath
+        }
+        SigningType.AsciiKey -> {
+            extra["SIGNING_KEY"] = ext.signingAsciiKey
+            extra["SIGNING_PASSWORD"] = ext.signingPassword
+            plugins.apply(SigningPlugin::class)
+            afterEvaluate {
+                extensions.findByType<SigningExtension>()?.apply {
+                    @Suppress("UnstableApiUsage")
+                    useInMemoryPgpKeys(ext.signingAsciiKey, ext.signingPassword)
+                }
+            }
+        }
+        SigningType.None -> {}
     }
 
     ext.lics.firstOrNull()?.let { lic ->
@@ -75,7 +94,7 @@ internal fun Project.publish(ext: EasyPublishExtension) {
         extra["POM_DEVELOPER_URL"] = dev.email
     }
 
-    apply(plugin = "com.vanniktech.maven.publish")
+    apply(MavenPublishPlugin::class)
 
     mavenPublish {
         nexus {

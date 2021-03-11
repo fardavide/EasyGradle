@@ -15,6 +15,7 @@ abstract class ConfigReadWriteProperty<Scope : Any, PropType : Any>(
     private val propertyPrefix: String = "",
     private val envName: String? = null
 ) : ReadWriteProperty<Scope, PropType> {
+
     private var backValue: PropType? = null
     internal val KProperty<*>.actualPropertyName get() = propertyName ?: "$propertyPrefix$name"
     internal val KProperty<*>.actualEnvName get() = envName ?: actualPropertyName

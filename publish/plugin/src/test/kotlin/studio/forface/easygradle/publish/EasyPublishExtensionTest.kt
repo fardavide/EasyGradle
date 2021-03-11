@@ -57,6 +57,33 @@ class EasyPublishExtensionTest {
     }
 
     @Test
+    fun `no error thrown if correctly signing by asciiKey`() {
+        // GIVEN
+        val config = baseConfig.apply {
+            signingEnabled = true
+            signingAsciiKey = "key"
+            signingPassword = "password"
+        }
+
+        // WHEN - THEN
+        project.publish(config)
+    }
+
+    @Test
+    fun `no error thrown if correctly signing by keyRingFile`() {
+        // GIVEN
+        val config = baseConfig.apply {
+            signingEnabled = true
+            signingKeyId = "key"
+            signingPassword = "password"
+            signingKeyRingFilePath = "/file/path"
+        }
+
+        // WHEN - THEN
+        project.publish(config)
+    }
+
+    @Test
     fun `throw error if baseUrl is not defined`() {
         // GIVEN
         val config = baseConfig.apply {
@@ -70,22 +97,35 @@ class EasyPublishExtensionTest {
     }
 
     @Test
-    fun `throw error if signingKeyId is not defined and signingEnabled is true`() {
+    fun `throw error if no signingKeyId or signingAsciiKey is defined and signingEnabled is true`() {
         // GIVEN
         val config = baseConfig.apply {
             signingEnabled = true
             signingPassword = "password"
-            signingKeyRingFilePath = "some/path"
+            signingKeyRingFilePath = "/file/path"
         }
-        val expectedMessage = "signingKeyId is required, declare as 'signing.keyId' in your Gradle properties, " +
-            "or as 'SIGNING_KEY_ID' in your environment variables"
+        val expectedMessage = "Signing is enabled, but no key id or ascii key is provided"
+
+        // WHEN - THEN
+        assert that fails<IllegalStateException> { project.publish(config) } with expectedMessage
+    }
+
+    @Test
+    fun `throw error if signingPassword is not defined and signing is by asciiKey`() {
+        // GIVEN
+        val config = baseConfig.apply {
+            signingEnabled = true
+            signingAsciiKey = "key"
+        }
+        val expectedMessage = "signingPassword is required, declare as 'signing.password' in your Gradle properties, " +
+            "or as 'SIGNING_PASSWORD' in your environment variables"
 
         // WHEN - THEN
         assert that fails<IllegalArgumentException> { project.publish(config) } with expectedMessage
     }
 
     @Test
-    fun `throw error if signingPassword is not defined and signingEnabled is true`() {
+    fun `throw error if signingPassword is not defined and signing is by keyRingFile`() {
         // GIVEN
         val config = baseConfig.apply {
             signingEnabled = true
@@ -100,7 +140,7 @@ class EasyPublishExtensionTest {
     }
 
     @Test
-    fun `throw error if signingKeyRingFilePath is not defined and signingEnabled is true`() {
+    fun `throw error if signingKeyRingFilePath is not defined and signingEnabled by keyRingFile`() {
         // GIVEN
         val config = baseConfig.apply {
             signingEnabled = true
