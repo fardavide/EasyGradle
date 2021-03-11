@@ -94,7 +94,7 @@ internal fun Project.publish(ext: EasyPublishExtension) {
         extra["POM_DEVELOPER_URL"] = dev.email
     }
 
-    apply(MavenPublishPlugin::class)
+    plugins.apply(MavenPublishPlugin::class)
 
     mavenPublish {
         nexus {
