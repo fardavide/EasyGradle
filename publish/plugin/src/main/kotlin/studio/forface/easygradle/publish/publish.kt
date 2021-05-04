@@ -5,7 +5,7 @@ import com.vanniktech.maven.publish.MavenPublishPlugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.extra
-import org.gradle.kotlin.dsl.findByType
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 import studio.forface.easygradle.dsl.*
@@ -47,15 +47,19 @@ fun Project.publish(
 }
 
 internal fun Project.publish(ext: EasyPublishExtension) {
+
+    // Maven auth
+    extra["mavenCentralRepositoryUsername"] = ext.username
+    extra["mavenCentralRepositoryPassword"] = ext.password
+
     extra["GROUP"] = ext.group
     extra["POM_ARTIFACT_ID"] = ext.artifact
     extra["VERSION_NAME"] = ext.versionName
 
     extra["POM_NAME"] = ext.name
     extra["POM_DESCRIPTION"] = ext.description
-//    extra["POM_INCEPTION_YEAR"] =
 
-//    extra["POM_url"] =
+    extra["POM_URL"] = ext.scmUrl
     extra["POM_SCM_URL"] = ext.scmUrl
     extra["POM_SCM_CONNECTION"] = ext.scmConnection.useIfNotBlank { "scm:git:$it" }
     extra["POM_SCM_DEV_CONNECTION"] = ext.scmDevConnection.useIfNotBlank { "scm:git:$it" }
@@ -72,11 +76,9 @@ internal fun Project.publish(ext: EasyPublishExtension) {
             extra["SIGNING_KEY"] = ext.signingAsciiKey
             extra["SIGNING_PASSWORD"] = ext.signingPassword
             plugins.apply(SigningPlugin::class)
-            afterEvaluate {
-                extensions.findByType<SigningExtension>()?.apply {
-                    @Suppress("UnstableApiUsage")
-                    useInMemoryPgpKeys(ext.signingAsciiKey, ext.signingPassword)
-                }
+            extensions.getByType<SigningExtension>().apply {
+                @Suppress("UnstableApiUsage")
+                useInMemoryPgpKeys(ext.signingAsciiKey, ext.signingPassword)
             }
         }
         SigningType.None -> {}
@@ -97,12 +99,7 @@ internal fun Project.publish(ext: EasyPublishExtension) {
     plugins.apply(MavenPublishPlugin::class)
 
     mavenPublish {
-        nexus {
-            baseUrl = ext.baseUrl
-            stagingProfile = ext.stagingProfile
-            repositoryUsername = ext.username
-            repositoryPassword = ext.password
-        }
+        sonatypeHost = ext.sonatypeHost
     }
 }
 

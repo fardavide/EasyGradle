@@ -1,5 +1,6 @@
 package studio.forface.easygradle.publish
 
+import com.vanniktech.maven.publish.SonatypeHost
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
@@ -43,16 +44,22 @@ abstract class EasyPublishExtension @Inject constructor(project: Project) {
     var password by project.required("", propertyName = "maven.password")
 
     /**
-     * Staging profile for publications.
-     * Default is [Project.getGroup]
-     * */
-    var stagingProfile by project.required(project.group.toString())
+     * Sonatype host
+     * Default is [SonatypeHost.DEFAULT]
+     */
+    var sonatypeHost: SonatypeHost = SonatypeHost.DEFAULT
+        get() =
+            if (sonatypeHostString.equals("S01", ignoreCase = true)) SonatypeHost.S01
+            else field
 
     /**
-     * Base url of your Nexus instance
-     * Property name: `maven.baseUrl`
+     * Root url of Sonatype host
+     * Property name: `sonatypeHost`
+     *
+     * Setting this value will override [sonatypeHost]
+     * Only accepted value is "S01"
      */
-    var baseUrl by project.required(propertyName = "maven.baseUrl")
+    var sonatypeHostString by project("", propertyName = "sonatypeHost")
 
     /** Group of the Library */
     var group by project.required(project.group.toString())

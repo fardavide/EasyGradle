@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
     kotlin("jvm")
     id("java-gradle-plugin")
-    id("com.gradle.plugin-publish") version "0.13.0" // Feb 12, 2021
+    id("com.gradle.plugin-publish") version "0.14.0" // Mar 31, 2021
     kotlin("plugin.serialization")
 }
 
@@ -13,7 +13,7 @@ repositories {
 dependencies {
     implementation("studio.forface.easygradle:dsl:2.8") // Nov 26, 2020
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0") // Feb 19, 2021
-    implementation("com.vanniktech:gradle-maven-publish-plugin:0.14.2") // Feb 14, 2021
+    implementation("com.vanniktech:gradle-maven-publish-plugin:0.15.1") // May 02, 2021
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
@@ -24,7 +24,7 @@ dependencies {
 object Plugin {
     const val id = "studio.forface.easy-publish"
     const val name = "Easy-publish"
-    const val version = "0.3.4"
+    const val version = "0.3.6-build-1"
 }
 
 gradlePlugin {
