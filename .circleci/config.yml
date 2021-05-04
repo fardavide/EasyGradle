@@ -102,6 +102,7 @@ workflows:
       - publish_easy-publish:
           context:
             - Bintray
+            - Maven
           requires:
             - analyze
             - test_easy-publish
