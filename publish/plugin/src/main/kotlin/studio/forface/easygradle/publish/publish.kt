@@ -49,7 +49,9 @@ fun Project.publish(
 internal fun Project.publish(ext: EasyPublishExtension) {
 
     // Maven auth
+    extra["mavenCentralUsername"] = ext.username
     extra["mavenCentralRepositoryUsername"] = ext.username
+    extra["mavenCentralPassword"] = ext.password
     extra["mavenCentralRepositoryPassword"] = ext.password
 
     extra["GROUP"] = ext.group
